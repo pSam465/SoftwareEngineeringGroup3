@@ -5,6 +5,7 @@ $email = $password = $error = "";
 $errEmail = "Please enter an email";
 $errFormat = "Invalid email format";
 $errPassword = "Please enter a password";
+$errInvalid = "Username and password do not match";
 
 function clean_input(&$input)
 {
@@ -59,6 +60,7 @@ else
 				<input type="password" id="password" name="password" value="<?php echo $password?>" / >
 			</div>
 			<input type="submit" value="login" />
+			<br />
 			<?php echo $error ?>
 		</form>
 	</div>
