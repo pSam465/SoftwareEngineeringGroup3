@@ -42,27 +42,33 @@ else
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/bootstrapcss/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/login.css">
 	<title>User Login</title>
 </head>
 <body>
-	<div>
+	<div class="d-flex justify-content-center">
+		<div class="login-box">
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
-			Please login to access the site
 			<div>
-				<label for="email">email</label>
-				<input type="text" id="email" name="email" value="<?php echo $email ?>" />
+				<h3>Please login to access the site</h3>
 			</div>
 			<div>
-				<label for="password">password</label>
-				<input type="password" id="password" name="password" value="<?php echo $password?>" / >
+				<div>
+					<label for="email">email</label>
+					<input type="text" id="email" name="email" value="<?php echo $email ?>" />
+				</div>
+				<div>
+					<label for="password">password</label>
+					<input type="password" id="password" name="password" value="<?php echo $password?>" / >
+				</div>
 			</div>
 			<input type="submit" value="login" />
 			<br />
 			<?php echo $error ?>
 		</form>
+		</div>
 	</div>
 </body>
 </html>
