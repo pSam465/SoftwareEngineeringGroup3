@@ -19,7 +19,8 @@ function check_email($email)
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
 		global $errFormat;
-		echo "$errFormat";
+		global $error;
+		$error = $errFormat;
 	}
 }
 
@@ -64,9 +65,12 @@ else
 					<input type="password" id="password" name="password" value="<?php echo $password?>" / >
 				</div>
 			</div>
+			<div class="error-message">
+				<?php echo $error ?>
+			</div>
 			<input type="submit" value="login" />
 			<br />
-			<?php echo $error ?>
+			
 		</form>
 		</div>
 	</div>
