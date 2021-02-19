@@ -1,0 +1,10 @@
+100,Study Room,Ina Dillard Russel Library,324,1
+101,Lecture Hall,Arts and Science,264,1
+102,Computer Lab,Arts and Science,234,1
+103,Computer Lab,Atkinson,104,1
+104,Lecture Hall,Atkinson,215,1
+105,Study Room,Ina Dillard Russel Library,403,1
+106,Large Lecture Hall,Arts and Science,354,1
+107,Study Room,Ina Dillard Russel Library,234,1
+108,Study Room,Ina Dillard Russel Library,252,1
+109,Study Room,Ina Dillard Russel Library,234,1
