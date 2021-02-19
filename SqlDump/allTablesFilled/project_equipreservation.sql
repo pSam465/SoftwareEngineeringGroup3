@@ -16,30 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `equipment`
+-- Table structure for table `equipreservation`
 --
 
-DROP TABLE IF EXISTS `equipment`;
+DROP TABLE IF EXISTS `equipreservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `equipment` (
-  `equipID` int NOT NULL,
-  `equipType` char(45) NOT NULL,
-  `equipAvailability` tinyint(1) NOT NULL,
-  `equipQuantity` int NOT NULL,
-  `equipName` char(100) NOT NULL,
-  PRIMARY KEY (`equipID`)
+CREATE TABLE `equipreservation` (
+  `eReservationNum` int NOT NULL,
+  `equipID` int DEFAULT NULL,
+  `reservationStart` datetime NOT NULL,
+  `reservationEnd` datetime NOT NULL,
+  `userID` int DEFAULT NULL,
+  PRIMARY KEY (`eReservationNum`),
+  KEY `equipID` (`equipID`),
+  KEY `userID` (`userID`),
+  CONSTRAINT `equipreservation_ibfk_1` FOREIGN KEY (`equipID`) REFERENCES `equipment` (`equipID`),
+  CONSTRAINT `equipreservation_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `equipment`
+-- Dumping data for table `equipreservation`
 --
 
-LOCK TABLES `equipment` WRITE;
-/*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
-INSERT INTO `equipment` VALUES (211,'Laptop',1,10,'Macbook'),(212,'Table',1,5,'Folding Table'),(213,'Projector',1,2,'Projector'),(214,'Laptop',1,10,'Dell XPS'),(215,'Television',1,2,'Sony TV');
-/*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
+LOCK TABLES `equipreservation` WRITE;
+/*!40000 ALTER TABLE `equipreservation` DISABLE KEYS */;
+INSERT INTO `equipreservation` VALUES (140,211,'2021-03-15 09:00:00','2021-03-15 10:30:00',111),(141,213,'2021-03-15 09:00:00','2021-03-15 10:30:00',114),(142,211,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(143,214,'2021-03-15 09:00:00','2021-03-15 10:30:00',112),(144,214,'2021-03-15 09:00:00','2021-03-15 10:30:00',117);
+/*!40000 ALTER TABLE `equipreservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-18 21:06:58
+-- Dump completed on 2021-02-18 23:05:34

@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roomres`
+-- Table structure for table `room`
 --
 
-DROP TABLE IF EXISTS `roomres`;
+DROP TABLE IF EXISTS `room`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roomres` (
-  `roomResNum` int NOT NULL,
+CREATE TABLE `room` (
   `roomID` int NOT NULL,
-  `reservationStart` datetime NOT NULL,
-  `reservationEnd` datetime NOT NULL,
-  `userID` int DEFAULT NULL,
-  PRIMARY KEY (`roomResNum`)
+  `roomType` char(100) NOT NULL,
+  `building` char(100) NOT NULL,
+  `roomNum` int NOT NULL,
+  `roomAvailability` tinyint(1) NOT NULL,
+  PRIMARY KEY (`roomID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roomres`
+-- Dumping data for table `room`
 --
 
-LOCK TABLES `roomres` WRITE;
-/*!40000 ALTER TABLE `roomres` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomres` ENABLE KEYS */;
+LOCK TABLES `room` WRITE;
+/*!40000 ALTER TABLE `room` DISABLE KEYS */;
+INSERT INTO `room` VALUES (100,'Study Room','Ina Dillard Russel Library',324,1),(101,'Lecture Hall','Arts and Science',264,1),(102,'Computer Lab','Arts and Science',234,1),(103,'Computer Lab','Atkinson',104,1),(104,'Lecture Hall','Atkinson',215,1),(105,'Study Room','Ina Dillard Russel Library',403,1),(106,'Large Lecture Hall','Arts and Science',354,1),(107,'Study Room','Ina Dillard Russel Library',234,1),(108,'Study Room','Ina Dillard Russel Library',252,1),(109,'Study Room','Ina Dillard Russel Library',234,1);
+/*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-18 21:06:58
+-- Dump completed on 2021-02-18 23:05:34

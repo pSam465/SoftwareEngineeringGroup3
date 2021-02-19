@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roomres`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `roomres`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roomres` (
-  `roomResNum` int NOT NULL,
-  `roomID` int NOT NULL,
-  `reservationStart` datetime NOT NULL,
-  `reservationEnd` datetime NOT NULL,
-  `userID` int DEFAULT NULL,
-  PRIMARY KEY (`roomResNum`)
+CREATE TABLE `user` (
+  `userID` int NOT NULL,
+  `email` char(100) NOT NULL,
+  `password` char(200) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roomres`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `roomres` WRITE;
-/*!40000 ALTER TABLE `roomres` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roomres` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (110,'fake@email.com','password','student'),(111,'samuel.pittman@bobcats.gcsu.edu','password','admin'),(112,'justin.hentz@bobcats.gcsu.edu','password','admin'),(113,'allan.crassweller@bobcats.gcsu.edu','password','admin'),(114,'trenton.brownlee@bobcats.gcsu.edu','password','admin'),(115,'angelica.jones@bobcats.gcsu.edu','password','admin'),(116,'fake@email.com','password','student'),(117,'fake@email.com','password','student'),(118,'fake@email.com','password','student'),(119,'fake@email.com','password','student');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-18 21:01:52
+-- Dump completed on 2021-02-18 23:05:34

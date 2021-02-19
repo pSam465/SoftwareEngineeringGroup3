@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `room`
+-- Table structure for table `equipment`
 --
 
-DROP TABLE IF EXISTS `room`;
+DROP TABLE IF EXISTS `equipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `room` (
-  `roomID` int NOT NULL,
-  `roomType` char(100) NOT NULL,
-  `building` char(100) NOT NULL,
-  `roomNum` int NOT NULL,
-  `roomAvailability` tinyint(1) NOT NULL,
-  PRIMARY KEY (`roomID`)
+CREATE TABLE `equipment` (
+  `equipID` int NOT NULL,
+  `equipType` char(45) NOT NULL,
+  `equipAvailability` tinyint(1) NOT NULL,
+  `equipQuantity` int NOT NULL,
+  `equipName` char(100) NOT NULL,
+  PRIMARY KEY (`equipID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `room`
+-- Dumping data for table `equipment`
 --
 
-LOCK TABLES `room` WRITE;
-/*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (100,'Study Room','Ina Dillard Russel Library',324,1),(101,'Lecture Hall','Arts and Science',264,1),(102,'Computer Lab','Arts and Science',234,1),(103,'Computer Lab','Atkinson',104,1),(104,'Lecture Hall','Atkinson',215,1),(105,'Study Room','Ina Dillard Russel Library',403,1),(106,'Large Lecture Hall','Arts and Science',354,1),(107,'Study Room','Ina Dillard Russel Library',234,1),(108,'Study Room','Ina Dillard Russel Library',252,1),(109,'Study Room','Ina Dillard Russel Library',234,1);
-/*!40000 ALTER TABLE `room` ENABLE KEYS */;
+LOCK TABLES `equipment` WRITE;
+/*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
+INSERT INTO `equipment` VALUES (211,'Laptop',1,10,'Macbook'),(212,'Table',1,5,'Folding Table'),(213,'Projector',1,2,'Projector'),(214,'Laptop',1,10,'Dell XPS'),(215,'Television',1,2,'Sony TV');
+/*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-18 21:06:58
+-- Dump completed on 2021-02-18 23:05:34

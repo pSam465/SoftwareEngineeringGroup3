@@ -16,29 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `roomreservation`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `roomreservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `userID` int NOT NULL,
-  `email` char(100) NOT NULL,
-  `password` char(200) NOT NULL,
-  `position` varchar(100) NOT NULL,
-  PRIMARY KEY (`userID`)
+CREATE TABLE `roomreservation` (
+  `roomResNum` int NOT NULL,
+  `roomID` int NOT NULL,
+  `reservationStart` datetime NOT NULL,
+  `reservationEnd` datetime NOT NULL,
+  `userID` int DEFAULT NULL,
+  PRIMARY KEY (`roomResNum`),
+  KEY `userID` (`userID`),
+  KEY `roomID` (`roomID`),
+  CONSTRAINT `roomreservation_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  CONSTRAINT `roomreservation_ibfk_2` FOREIGN KEY (`roomID`) REFERENCES `room` (`roomID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `roomreservation`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (110,'fake@email.com','password','student'),(111,'samuel.pittman@bobcats.gcsu.edu','password','admin'),(112,'justin.hentz@bobcats.gcsu.edu','password','admin'),(113,'allan.crassweller@bobcats.gcsu.edu','password','admin'),(114,'trenton.brownlee@bobcats.gcsu.edu','password','admin'),(115,'angelica.jones@bobcats.gcsu.edu','password','admin'),(116,'fake@email.com','password','student'),(117,'fake@email.com','password','student'),(118,'fake@email.com','password','student'),(119,'fake@email.com','password','student');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `roomreservation` WRITE;
+/*!40000 ALTER TABLE `roomreservation` DISABLE KEYS */;
+INSERT INTO `roomreservation` VALUES (151,100,'2021-03-15 08:00:00','2021-03-15 08:30:00',112),(152,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(153,106,'2021-03-15 11:00:00','2021-03-15 12:30:00',111),(154,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(155,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',117);
+/*!40000 ALTER TABLE `roomreservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-18 21:01:52
+-- Dump completed on 2021-02-18 23:05:34
