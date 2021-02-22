@@ -1,5 +1,0 @@
-211,Laptop,1,10,Macbook
-212,Table,1,5,Folding Table
-213,Projector,1,2,Projector
-214,Laptop,1,10,Dell XPS
-215,Television,1,2,Sony TV

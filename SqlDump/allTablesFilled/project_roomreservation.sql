@@ -25,8 +25,11 @@ DROP TABLE IF EXISTS `roomreservation`;
 CREATE TABLE `roomreservation` (
   `roomResNum` int NOT NULL,
   `roomID` int NOT NULL,
-  `reservationStart` datetime NOT NULL,
-  `reservationEnd` datetime NOT NULL,
+  `year` varchar(4) NOT NULL,
+  `month` varchar(2) NOT NULL,
+  `day` varchar(2) NOT NULL,
+  `startHour` varchar(7) NOT NULL,
+  `endHour` varchar(7) NOT NULL,
   `userID` int DEFAULT NULL,
   PRIMARY KEY (`roomResNum`),
   KEY `userID` (`userID`),
@@ -42,7 +45,7 @@ CREATE TABLE `roomreservation` (
 
 LOCK TABLES `roomreservation` WRITE;
 /*!40000 ALTER TABLE `roomreservation` DISABLE KEYS */;
-INSERT INTO `roomreservation` VALUES (151,100,'2021-03-15 08:00:00','2021-03-15 08:30:00',112),(152,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(153,106,'2021-03-15 11:00:00','2021-03-15 12:30:00',111),(154,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(155,103,'2021-03-15 09:00:00','2021-03-15 10:30:00',117);
+INSERT INTO `roomreservation` VALUES (151,100,'2021','03','15','8:00','08:30',112),(152,103,'2021','03','15', '09:00','10:30',116),(153,106,'2021','03','15','11:00','12:30',111),(154,103,'2021','03','15','10:30','11:30',116),(155,103,'2021','03','15', '09:00','10:30',117);
 /*!40000 ALTER TABLE `roomreservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
