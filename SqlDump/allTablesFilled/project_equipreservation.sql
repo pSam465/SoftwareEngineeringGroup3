@@ -25,11 +25,8 @@ DROP TABLE IF EXISTS `equipreservation`;
 CREATE TABLE `equipreservation` (
   `eReservationNum` int NOT NULL,
   `equipID` int DEFAULT NULL,
-  `year` varchar(4) NOT NULL,
-  `month` varchar(2) NOT NULL,
-  `day` varchar(2) NOT NULL,
-  `startHour` varchar(7) NOT NULL,
-  `endHour` varchar(7) NOT NULL,
+  `reservationStart` datetime NOT NULL,
+  `reservationEnd` datetime NOT NULL,
   `userID` int DEFAULT NULL,
   PRIMARY KEY (`eReservationNum`),
   KEY `equipID` (`equipID`),
@@ -45,7 +42,7 @@ CREATE TABLE `equipreservation` (
 
 LOCK TABLES `equipreservation` WRITE;
 /*!40000 ALTER TABLE `equipreservation` DISABLE KEYS */;
-INSERT INTO `equipreservation` VALUES (140,211,'2021','03','15','09:00','10:30',111),(141,213,'2021','03','15', '09:00','10:30',114),(142,211,'2021','03','15','09:00','10:30',116),(143,214,'2021','03','15', '09:00','10:30',112),(144,214,'2021','03','15', '09:00','10:30',117);
+INSERT INTO `equipreservation` VALUES (140,211,'2021-03-15 09:00:00','2021-03-15 10:30:00',111),(141,213,'2021-03-15 09:00:00','2021-03-15 10:30:00',114),(142,211,'2021-03-15 09:00:00','2021-03-15 10:30:00',116),(143,214,'2021-03-15 09:00:00','2021-03-15 10:30:00',112),(144,214,'2021-03-15 09:00:00','2021-03-15 10:30:00',117);
 /*!40000 ALTER TABLE `equipreservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
