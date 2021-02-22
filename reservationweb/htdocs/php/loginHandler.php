@@ -8,7 +8,7 @@ if(!$conn){
 
 $email = $_POST["email"];
 $password = $_POST["password"];
-$query = "SELECT * FROM user WHERE email=\"$email\" AND password=SHA1(\"$password\")";
+$query = "SELECT * FROM user WHERE email=\"$email\" AND password=\"$password\"";
 $result = $conn->query($query);
 if(!$result) die("Error on login. Try again.");
 if(($result->num_rows)>0){

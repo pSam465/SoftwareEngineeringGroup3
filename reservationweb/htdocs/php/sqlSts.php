@@ -4,9 +4,9 @@ function connectDB()
 	//page 236
 	//localhost version
 	$hostname="localhost";
-	$db="reservation system";
-	$pwd="1234";
-	$user="phpUser";
+	$db="project";
+	$pwd="semanager";
+	$user="semanager";
 	//page 273
 	//server version
 	//$hostname = "fdb20.awardspace.net";
