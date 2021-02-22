@@ -26,7 +26,9 @@ CREATE TABLE `user` (
   `userID` int NOT NULL,
   `email` char(100) NOT NULL,
   `password` char(200) NOT NULL,
-  `position` varchar(100) NOT NULL,
+  `position` char(100) NOT NULL,
+  `fName` char(100) NOT NULL,
+  `lName` char(100) NOT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +39,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (110,'fake@email.com','password','student'),(111,'samuel.pittman@bobcats.gcsu.edu','password','admin'),(112,'justin.hentz@bobcats.gcsu.edu','password','admin'),(113,'allan.crassweller@bobcats.gcsu.edu','password','admin'),(114,'trenton.brownlee@bobcats.gcsu.edu','password','admin'),(115,'angelica.jones@bobcats.gcsu.edu','password','admin'),(116,'fake@email.com','password','student'),(117,'fake@email.com','password','student'),(118,'fake@email.com','password','student'),(119,'fake@email.com','password','student');
+INSERT INTO `user` VALUES (110,'fake@email.com','password','student','gregg','turkington'),(111,'samuel.pittman@bobcats.gcsu.edu','password','admin','Samuel','pittman'),(112,'justin.hentz@bobcats.gcsu.edu','password','admin','Justin','hentz'),(113,'allan.crassweller@bobcats.gcsu.edu','password','admin','allan','crassweller'),(114,'trenton.brownlee@bobcats.gcsu.edu','password','admin','trenton','brownlee'),(115,'angelica.jones@bobcats.gcsu.edu','password','admin','Angelica','jones'),(116,'fake@email.com','password','student','fake','namington'),(117,'fake@email.com','password','student','Seth','Douglas'),(118,'fake@email.com','password','student','Tim','hecker'),(119,'fake@email.com','password','student','bob','saltworts');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
