@@ -37,6 +37,8 @@ else
 	$email = $_POST['email'];
 	check_email($email);
 	$password = $_POST['password'];
+
+	//Verify email
 }
 ?>
 
@@ -55,22 +57,22 @@ else
 			<div>
 				<h3>Please login to access the site</h3>
 			</div>
-			<div>
-				<div>
-					<label for="email">email</label>
-					<input type="text" id="email" name="email" value="<?php echo $email ?>" />
-				</div>
-				<div>
+			<div class="form-group">
+				<div class="float-left">
+					<label for="email" class="form-label">email</label>
+				</div>		
+					<input type="text" class="form-control" id="email" name="email" placeholder="Enter email" value="<?php echo $email ?>" />
+			</div>		
+			<div class="form-group">
+				<div class="float-left">
 					<label for="password">password</label>
-					<input type="password" id="password" name="password" value="<?php echo $password?>" / >
 				</div>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
 			</div>
-			<div class="error-message">
+			<div class="error-message m-2">
 				<?php echo $error ?>
 			</div>
-			<input type="submit" value="login" />
-			<br />
-			
+			<input type="submit" class="btn btn-primary btn-block p-2" value="login" />
 		</form>
 		</div>
 	</div>
