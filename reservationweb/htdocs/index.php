@@ -5,5 +5,7 @@
 </head>
 <body>
 <a href="./pages/userlogin.php">User Login</a>
+<p></p>
+<a href="phpmyadmin">PHP Admin</a>
 </body>
 </html>
