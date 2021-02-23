@@ -7,6 +7,8 @@
 	$email=NULL;
 	$timeSlot=NULL;
 	$room = NULL;
+	$displaydate = NULL;
+	$dbDate = NULL;
 	if(isset($_GET['submit']))
 	{
 		$firstName = $_GET['firstName'];
@@ -14,6 +16,9 @@
 		$email = $_GET['emailAddress'];
 		$timeSlot =  $_GET['time'];
 		$room = $_GET['loc'];
+		$displaydate = $_GET['date'];
+		$dbDate = $_GET['hiddenDate'];
+		$roomNumber = $_GET['dataRoomNum'];
 		if($firstName == NULL || $lastName == NULL || $email == NULL ||$timeSlot == NULL)
 		{
 			$nullEntryPresent = true;
@@ -71,36 +76,65 @@
   		<div class="centerContainedOutput">
 		    <h1>
 		    	<?php
-			    	if($nullEntryPresent != true)
+		    		$breakUpTime = explode("-", $timeSlot);
+			    	$dataConnect = connectDB();
+			    	$dbDateStart = $dbDate." ".$breakUpTime[0];
+			    	$dbDateEnd = $dbDate." ".$breakUpTime[1];
+			    	
+
+			    	$checkEmail = "SELECT COUNT(1)
+			    					FROM user
+			    					WHERE email = \"$email\"";
+			    	$emailResult = $dataConnect->query($checkEmail);
+			    	$emailResultArr = $emailResult->fetch_assoc();
+			    	
+			    	$checkUserID = "SELECT COUNT(1)
+			    				  FROM user
+			    				  WHERE email = \"$email\" ";
+			    	$checkUserIDResult = $dataConnect->query($checkUserID);
+			    	$checkUserIDArray = $checkUserIDResult->fetch_assoc();
+			    	$idExists = false;
+			    	if($checkUserIDArray['COUNT(1)'] == 1)
 			    	{
-				    	echo "You, $firstName $lastName, have a reservation at $timeSlot\n";
-				    	echo "for a $room";
-				    	echo "<br>";
-				    }
-				    else
-				    {
-				    	echo "Please ensure all forms are filled out!";
-				    }
+			    		$idExists = true;
+			    	}
 
-				    $connect = connectDB();
-					
-			    /*$insertUserData = "INSERT INTO user (email,time) VALUES ('$email','$timeSlot')";
-
-				if($connect->query($insertUserData) == TRUE)
-				{
-					echo "<br>";
-					echo "Thank you!";
-				}
-				else
-				{
-					echo "data insertion failed";
-					echo "<br>";
-					echo "Error: " .$insertUserData."<br>".$connect->error;
-				}
-		    	*/?>
-
-		    	<form action="roomRes.php">
-		    		<input style = "margin: 100px; border: 3px solid black;" type="submit" value="Back to form">
+			    	$getUserID = "SELECT userID
+			    				  FROM user
+			    				  WHERE email = \"$email\"";
+			    	$getUserIDResult = $dataConnect->query($getUserID);
+			    	$getUserIDArray = $getUserIDResult->fetch_assoc();
+			    	$userID = $getUserIDArray['userID'];
+			    	
+			    	
+					if($emailResultArr['COUNT(1)'] == 1)
+					{
+						if($nullEntryPresent != true)
+						{
+							if($idExists == true)
+							{
+							echo "You, $firstName $lastName, have a reservation at $timeSlot on $displaydate\n";
+							echo "for a $room";
+							echo "<br>";
+	
+								$insertReservationQ = "INSERT INTO `roomreservation`(`roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES ($roomNumber,'$dbDateStart','$dbDateEnd',$userID)";
+								$dataConnect->query($insertReservationQ);
+							}
+						}
+						else
+						{
+							echo "Please ensure all forms are filled out!";
+						}
+							echo "<br>";
+							echo "Thank you!";
+						}
+					else
+					{
+						echo "Account not found. Check email and resubmit";
+					}
+				    ?>
+		    	<form action="roomDisplay.php">
+		    		<input style = "margin: 10vh; border: 1px solid black;" type="submit" value="Back to form">
 		    	</form>
 	    	</h1>
     	</div>

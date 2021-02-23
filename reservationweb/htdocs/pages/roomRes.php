@@ -64,8 +64,9 @@
                 $roomSelected = $_GET['roomType'];
                 $location  = $_GET['building'];
                 $numOfLocation = $_GET['roomNum'];
+                $roomIdent = $_GET['roomIdent'];
               }
-            echo "<label for=\"roomSel\" class = \"redFont\">Room Selected: $roomSelected $location $numOfLocation</label>";
+              echo "<label for=\"roomSel\" class = \"redFont\">Room Selected: $roomSelected $location $numOfLocation</label>";
             ?>
             <br>
             <label for="fName">First Name:</label>
@@ -73,10 +74,19 @@
             <label for="lastName">Last Name:</label>
             <input type="text" name="lastName" style="width: 310px;"><br><br>
             <label for="email">Email:</label>
-            <input type="text" name="emailAddress" style="width: 340px;"><br><br>
+            <input type="text" name="emailAddress" style="width: 340px;"><br>
             <!--This is the section for the drop down input
                   that will be sent to a page called
                   roomResData.php--->
+            <?php
+              date_default_timezone_set('EST');
+              $displayDate = date('m-d-Y');
+              $dbDate = date('Y-m-d');
+              echo "
+                <label for=\"Date\";>Date: $displayDate</label> 
+                <br>
+                <input type=\"hidden\" name=\"date\" value=\"$displayDate\">";
+            ?>
             <label for="TimeSlot">Choose a time:</label>
             <select name = "time" id="times">
               <option value="8:00AM-9:00AM">8:00AM-9:00AM</option>
@@ -93,13 +103,15 @@
               <option value="8:00PM-9:00PM">8:00PM-9:00PM</option>
               <option value="9:00PM-10:00PM">9:00PM-10:00PM</option>
               <option value="10:00PM-11:00PM">10:00PM-11:00PM</option>
-              <option value="11:00PM-12:00PM">11:00PM-12:00PM</option>
+              <option value="11:00PM-12:00AM">11:00PM-12:00AM</option>
             </select><br><br>
             <input type="submit" name="submit" value="Submit"><br><br>
             <?php
               echo "
               <form action=\"roomResData.php\">
                 <input type=\"hidden\" name=\"loc\" value=\"$roomSelected\">
+                <input type = \"hidden\" name = \"dataRoomNum\" value = \"$roomIdent\">
+                 <input type = \"hidden\" name = \"hiddenDate\" value = \"$dbDate\">
               </form>";
             ?>
           </form>

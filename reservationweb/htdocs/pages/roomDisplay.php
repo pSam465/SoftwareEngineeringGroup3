@@ -54,9 +54,11 @@ tr
         <div class="centerContainedOutput">
         <?php
           include_once('connect.php');
+          
           $connect = connectDB();
           $query = "SELECT * FROM `room`";
           $result = $connect->query($query);
+          
           if(!$result)
           {
             echo "query is incorrect";
@@ -110,6 +112,8 @@ tr
                           <td>$available[$i]</td>
 
                           <td><input type=\"submit\" name=\"roomSelection\" value=\"Select\"></td>
+
+                          <input type=\"hidden\" id=\"roomNum\" name=\"roomIdent\"value =\"$roomID[$i]\">
 
                           <input type=\"hidden\" id=\"roomNum\" name=\"roomNum\"value =\"$roomNum[$i]\">
 
