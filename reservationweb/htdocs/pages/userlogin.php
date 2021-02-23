@@ -44,7 +44,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			//session.start();
 			setcookie("name", 1, time()+86400*30);
 			//$_SESSION['user'] = "user";
-			header("Location: ../pages/dummyLogin.php");
+			$query = "SELECT position FROM user WHERE email=\"$email\" AND password=\"$password\"";
+			$result = $conn->query($query);
+			if($result == "admin")
+			{
+				header("Location: ../pages/dummyLogin.php");
+			}
+			else
+			{
+				header("Location: ../pages/dummyLogin2.php");
+			}
+			//header("Location: ../pages/dummyLogin.php");
 		}
 		else
 		{
