@@ -1,66 +1,126 @@
 <?php
+require_once("../php/sqlSts.php");
 
 $email = $password = $error = "";
 
 $errEmail = "Please enter an email";
 $errFormat = "Invalid email format";
 $errPassword = "Please enter a password";
+$errInvalid = "Username and password do not match";
 
-function clean_input(&$input)
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+	if(empty($_POST['email']))
+	{
+		$error = $errEmail;
+	}	
+	else if(empty($_POST['password']))
+	{
+		$email = clean_input($_POST['email']);
+		$error = $errPassword;
+	}
+	else
+	{
+		$email = clean_input($_POST['email']);
+		$password = clean_input($_POST['password']);
+
+		check_email($email);
+	}
+
+	if(empty($error))
+	{
+		$conn = connectDB();
+		if(!$conn)
+		{
+			exit("Unable to connect to DB");
+		}
+
+		$query = "SELECT * FROM user WHERE email=\"$email\" AND password=\"$password\"";
+		$result = $conn->query($query);
+		if(!$result) die("Error on login. Try again.");
+		if(($result->num_rows)>0)
+		{
+			//begin session
+			//session.start();
+			setcookie("name", 1, time()+86400*30);
+			//$_SESSION['user'] = "user";
+			$query = "SELECT position FROM user WHERE email=\"$email\" AND password=\"$password\"";
+			$result = $conn->query($query);
+			if($result == "admin")
+			{
+				header("Location: ../pages/dummyLogin.php");
+			}
+			else
+			{
+				header("Location: ../pages/dummyLogin2.php");
+			}
+		}
+		else
+		{
+			$error = $errInvalid;
+		}
+	}
+}
+
+function clean_input($input)
 {
 	$input = trim($input);
 	$input = stripslashes($input);
 	$input = htmlspecialchars($input);
+
+	return $input;
 }
 
 function check_email($email)
 {
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-	{
+	{		
 		global $errFormat;
-		echo "$errFormat";
+		global $error;
+		$error = $errFormat;
 	}
 }
 
-if(empty($_POST['email']))
-{
-	$error = $errEmail;
-}	
-else if(empty($_POST['password']))
-{
-	$error = $errPassword;
-}
-else
-{
-	$email = $_POST['email'];
-	check_email($email);
-	$password = $_POST['password'];
-}
 ?>
 
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/bootstrapcss/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/login.css">
 	<title>User Login</title>
 </head>
 <body>
-	<div>
-		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
-			Please login to access the site
+	<div class="d-flex justify-content-center">
+		<div class="login-box">
+		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
 			<div>
-				<label for="email">email</label>
-				<input type="text" id="email" name="email" value="<?php echo $email ?>" />
+				<h3>Please login to access the site</h3>
 			</div>
-			<div>
-				<label for="password">password</label>
-				<input type="password" id="password" name="password" value="<?php echo $password?>" / >
+			<div class="form-group">
+				<div class="float-left">
+					<label for="email" class="form-label">email</label>
+				</div>		
+					<input type="text" class="form-control" id="email" name="email" placeholder="Enter email" value="<?php echo $email ?>" />
+			</div>		
+			<div class="form-group">
+				<div class="float-left">
+					<label for="password">password</label>
+				</div>
+					<input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
 			</div>
-			<input type="submit" value="login" />
-			<?php echo $error ?>
+			<?php
+			if(!empty($error))
+			{
+				echo "<div class=\"error-message m-2\">";
+				echo $error;
+				echo "</div>";
+			}
+			?>
+			<input type="submit" class="btn btn-primary btn-block p-2" value="login" />
 		</form>
+		</div>
 	</div>
 </body>
 </html>
