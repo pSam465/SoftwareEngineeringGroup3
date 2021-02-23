@@ -54,7 +54,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			{
 				header("Location: ../pages/dummyLogin2.php");
 			}
-			//header("Location: ../pages/dummyLogin.php");
 		}
 		else
 		{
