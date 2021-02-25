@@ -1,0 +1,20 @@
+div.login-box
+{
+	background-color: rgb(28 79 156);
+	color: white;
+	border-radius: 8px;
+	padding: 8vh 5vw;
+	margin: 5vh 5vw;
+	text-align: center;
+}
+
+div.error-message
+{
+	background-color: rgba(255, 0, 5, .7);
+	border-radius: 2px;
+}
+
+div.align-left
+{
+	text-align: left;
+}

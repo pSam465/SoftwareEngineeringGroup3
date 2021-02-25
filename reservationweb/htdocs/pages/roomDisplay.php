@@ -10,53 +10,124 @@
 
     <title>Room's Available to Reserve</title>
   </head>
+<style>
+.centerForm
+{
+  text-align: center;
+  margin: auto;
+}
+
+body
+{
+  background-color: #1C4F9C;
+}
+tr
+{
+  border:2px solid #1C5438;
+
+}
+.containOutput
+{
+  margin: auto;
+  width: 30%;
+}
+.centerContainedOutput
+{
+  margin: 1vh;
+  border: 5px solid #1C5438;
+  padding: 10px;
+  background-color: white;
+  width: 550px;
+  height: auto;
+  text-align: center;
+}
+</style>
+  
+  <?php
+    include_once('default.php');
+    defaultHeader();
+  ?>
+
   <body>
-    <?php
-    include_once("connect.php");
-      $connect = connectDB();
-      $query = "SELECT * FROM `rooms`";
-      $result = $connect->query($query);
-      if(!$result)
-      {
-        echo "query is incorrect";
-        die("fatal error");
-        echo "<br>";
-      }
-
-          $roomType = array();
-          $roomID = array();
-
-          $numRowsQuery = $connect->query("SELECT COUNT(*) FROM rooms");
-          $numRowsArr = $numRowsQuery->fetch_assoc();
-
+    <div class="centerForm" style="text-align: center;">
+      <div class="containOutput">
+        <div class="centerContainedOutput">
+        <?php
+          include_once('connect.php');
           
-
-          $numRows =$numRowsArr['COUNT(*)'];
-          for ($i=0; $i < $numRows; $i++)
+          $connect = connectDB();
+          $query = "SELECT * FROM `room`";
+          $result = $connect->query($query);
+          
+          if(!$result)
           {
-            $row = $result->fetch_assoc(); 
-            array_push($roomType, $row["roomID"]);
-            array_push($roomID, $row["roomType"]);
-          }
-
-          for($i = 0; $i < sizeof($roomID);$i++)
-          {
-            echo $roomType[$i]." ".$roomID[$i];
+            echo "query is incorrect";
+            die("fatal error");
             echo "<br>";
           }
-          $result->free();
 
+              $roomType = array();
+              $roomID = array();
+              $building = array();
+              $roomNum = array();
+              $available = array();
+
+              $numRowsQuery = $connect->query("SELECT COUNT(*) FROM room");
+              $numRowsArr = $numRowsQuery->fetch_assoc();
+
+              
+
+              $numRows =$numRowsArr['COUNT(*)'];
+              for ($i=0; $i < $numRows; $i++)
+              {
+                $row = $result->fetch_assoc(); 
+                array_push($roomID, $row["roomID"]);
+                array_push($roomType, $row["roomType"]);
+                array_push($building,$row["building"]);
+                array_push($roomNum,$row["roomNum"]);
+                array_push($available,$row["roomAvailability"]);
+              }
+
+              echo "
+              <table style=\"width:100%;\" >
+                      <tr>
+                        <th>Room Type</th>
+                        <th>Building</th>
+                        <th>Room Number</th>
+                        <th>Availability</th>
+                        <th>Select</th>
+                      </tr>";
+              for($i = 0; $i <sizeof($roomID);$i++)
+              {
+                  echo"
+                      <tr>
+                        <form action=\"roomRes.php\">
+
+                          <td>$roomType[$i]</td>
+
+                          <td>$building[$i]</td>
+
+                          <td>$roomNum[$i]</td>
+
+                          <td>$available[$i]</td>
+
+                          <td><input type=\"submit\" name=\"roomSelection\" value=\"Select\"></td>
+
+                          <input type=\"hidden\" id=\"roomNum\" name=\"roomIdent\"value =\"$roomID[$i]\">
+
+                          <input type=\"hidden\" id=\"roomNum\" name=\"roomNum\"value =\"$roomNum[$i]\">
+
+                          <input type=\"hidden\" id=\"roomType\" name=\"roomType\"value =\"$roomType[$i]\">
+
+                          <input type=\"hidden\" id=\"building\" name=\"building\"value =\"$building[$i]\">
+                        </form>
+                      </tr>";
+              }
+              echo "</table>";
+              $result->free();
     ?>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-    -->
+    </div>
+  </div>
+</div>
   </body>
 </html>
