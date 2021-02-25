@@ -1,18 +1,24 @@
 <?php
-	include_once ("connect.php");
+	include_once ('connect.php');
 
 	$nullEntryPresent = false;
 	$firstName =NULL;
 	$lastName =NULL ;
 	$email=NULL;
 	$timeSlot=NULL;
-	$room = "Room Test";
+	$room = NULL;
+	$displaydate = NULL;
+	$dbDate = NULL;
 	if(isset($_GET['submit']))
 	{
 		$firstName = $_GET['firstName'];
 		$lastName = $_GET['lastName'];
 		$email = $_GET['emailAddress'];
 		$timeSlot =  $_GET['time'];
+		$room = $_GET['loc'];
+		$displaydate = $_GET['date'];
+		$dbDate = $_GET['hiddenDate'];
+		$roomNumber = $_GET['dataRoomNum'];
 		if($firstName == NULL || $lastName == NULL || $email == NULL ||$timeSlot == NULL)
 		{
 			$nullEntryPresent = true;
@@ -30,7 +36,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <title>Confirmation</title>
+  <title>Confirmation</title>
   </head>
 
   <style type="text/css">
@@ -38,53 +44,100 @@
   	{
   		text-align: center;
   	}
+
+  	body
+  	{
+  		background-color: #1C4F9C;
+  	}
+  	.containOutput
+  	{
+		margin: auto;
+		width: 30%;
+  	}
+  	.centerContainedOutput
+  	{
+  		margin: 10px;
+  		border: 5px solid #1C5438;
+  		padding: 10px;
+  		background-color: white;
+  		width: 550px;
+  		height: 550px;
+  		text-align: center;
+  	}
   </style>
+
+  <?php
+    include_once('default.php');
+    defaultHeader();
+  ?>
+
   <body>
-    <h1>
-    	<?php
-	    	if($nullEntryPresent != true)
-	    	{
-		    	echo "You, $firstName $lastName, have a reservation at $timeSlot\n";
-		    	echo "for a $room";
-		    }
-		    else
-		    {
-		    	echo "Please ensure all forms are filled out!";
-		    }
+  	<div class ="containOutput">
+  		<div class="centerContainedOutput">
+		    <h1>
+		    	<?php
+		    		$breakUpTime = explode("-", $timeSlot);
+			    	$dataConnect = connectDB();
+			    	$dbDateStart = $dbDate." ".$breakUpTime[0];
+			    	$dbDateEnd = $dbDate." ".$breakUpTime[1];
+			    	
 
-		    $connect = connectDB();
-			
-	    $insertUserData = "INSERT INTO userdata (firstName,lastName,email,time) VALUES ('$firstName','$lastName','$email','$timeSlot')";
+			    	$checkEmail = "SELECT COUNT(1)
+			    					FROM user
+			    					WHERE email = \"$email\"";
+			    	$emailResult = $dataConnect->query($checkEmail);
+			    	$emailResultArr = $emailResult->fetch_assoc();
+			    	
+			    	$checkUserID = "SELECT COUNT(1)
+			    				  FROM user
+			    				  WHERE email = \"$email\" ";
+			    	$checkUserIDResult = $dataConnect->query($checkUserID);
+			    	$checkUserIDArray = $checkUserIDResult->fetch_assoc();
+			    	$idExists = false;
+			    	if($checkUserIDArray['COUNT(1)'] == 1)
+			    	{
+			    		$idExists = true;
+			    	}
 
-		if($connect->query($insertUserData) == TRUE)
-		{
-			echo "DATA inserted";
-		}
-		else
-		{
-			echo "data insertion failed";
-			echo "<br>";
-			echo "Error: " .$insertUserData."<br>".$connect->error;
-		}
-    	?>
-
-
-
-
-    	<form action="roomRes.php">
-    		<input type="submit" value="Back to form">
-    	</form>
-    </h1>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-    -->
+			    	$getUserID = "SELECT userID
+			    				  FROM user
+			    				  WHERE email = \"$email\"";
+			    	$getUserIDResult = $dataConnect->query($getUserID);
+			    	$getUserIDArray = $getUserIDResult->fetch_assoc();
+			    	$userID = $getUserIDArray['userID'];
+			    	
+			    	
+					if($emailResultArr['COUNT(1)'] == 1)
+					{
+						if($nullEntryPresent != true)
+						{
+							if($idExists == true)
+							{
+							echo "You, $firstName $lastName, have a reservation at $timeSlot on $displaydate\n";
+							echo "for a $room";
+							echo "<br>";
+	
+								$insertReservationQ = "INSERT INTO `roomreservation`(`roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES ($roomNumber,'$dbDateStart','$dbDateEnd',$userID)";
+								$dataConnect->query($insertReservationQ);
+							}
+						}
+						else
+						{
+							echo "Please ensure all forms are filled out!";
+						}
+							echo "<br>";
+							echo "Thank you!";
+						}
+					else
+					{
+						echo "Account not found. Check email and resubmit";
+					}
+				    ?>
+		    	<form action="roomDisplay.php">
+		    		<input style = "margin: 10vh; border: 1px solid black;" type="submit" value="Back to form">
+		    	</form>
+	    	</h1>
+    	</div>
+    </div>
   </body>
 </html>
