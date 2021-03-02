@@ -1,5 +1,5 @@
 <?php
-	include_once ('connect.php');
+	include_once ('../php/connect.php');
 
 	$nullEntryPresent = false;
 	$firstName =NULL;
@@ -67,9 +67,9 @@
   </style>
 
   <?php
-    include_once('default.php');
+    include_once('../php/default.php');
     defaultHeader();
-    include_once('connect.php');
+    //include_once('connect.php');
 	$connectDB = connectDB();
 	$dateFromRoomID = "SELECT DISTINCT reservationStart
 	                       FROM roomreservation

@@ -43,7 +43,7 @@
     }
   </style>  
   <?php
-    include_once('default.php');
+    include_once('../php/default.php');
     defaultHeader();
     $roomSelected = "";
     $location = "";
