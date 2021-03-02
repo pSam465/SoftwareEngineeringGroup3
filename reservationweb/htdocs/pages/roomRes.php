@@ -43,7 +43,8 @@
     }
   </style>  
   <?php
-    include_once('default.php');
+    include_once('../php/default.php');
+    require_once('../php/checksession.php');
     defaultHeader();
     $roomSelected = "";
     $location = "";

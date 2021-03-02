@@ -44,7 +44,8 @@ tr
 </style>
   
   <?php
-    include_once('default.php');
+    include_once('../php/default.php');
+    require_once('../php/checksession.php');
     defaultHeader();
   ?>
 
@@ -53,7 +54,7 @@ tr
       <div class="containOutput">
         <div class="centerContainedOutput">
         <?php
-          include_once('connect.php');
+          include_once('../php/connect.php');
           
           $connect = connectDB();
           $query = "SELECT * FROM `room`";
