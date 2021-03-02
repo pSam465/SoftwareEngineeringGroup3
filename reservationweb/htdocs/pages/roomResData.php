@@ -83,8 +83,12 @@
 	{
 		$dbDateFormat= $explodedDate[1]."-".$explodedDate[2]."-".$explodedDate[0];
 	}
-	$roomTaken = "default";
-	if(isset($_GET["submit"]))
+	else
+	{
+		$dbDateFormat = "no time in DB";
+	}
+	$roomTaken = false;
+	if(isset($_GET["submit"]) && $dbDateFormat[0] != NULL)
 	{
 		$isTimeTaken = $_GET['time'];
 		$brokeDownTime = explode("-",$isTimeTaken);
