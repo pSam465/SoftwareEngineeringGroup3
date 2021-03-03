@@ -1,5 +1,5 @@
 <?php
-require_once("../php/sqlSts.php");
+require_once("../php/connect.php");
 
 $email = $password = $error = "";
 
@@ -48,11 +48,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			$result = $conn->query($query);
 			if($result == "admin")
 			{
-				header("Location: ../pages/dummyLogin.php");
+				header("Location: ../pages/adminmain.php");
 			}
 			else
 			{
-				header("Location: ../pages/dummyLogin2.php");
+				header("Location: ../pages/roomDisplay.php");
 			}
 		}
 		else

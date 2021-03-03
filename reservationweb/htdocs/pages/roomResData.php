@@ -1,5 +1,6 @@
 <?php
-	include_once ('connect.php');
+	include_once ('../php/connect.php');
+	require_once('../php/checksession.php');
 
 	$nullEntryPresent = false;
 	$firstName =NULL;
