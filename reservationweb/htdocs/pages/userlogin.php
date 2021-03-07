@@ -1,6 +1,7 @@
 <?php
 require_once("../php/connect.php");
-
+include_once("../php/default.php");
+defaultHeader();
 $email = $password = $error = "";
 
 $errEmail = "Please enter an email";
@@ -46,13 +47,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			//$_SESSION['user'] = "user";
 			$query = "SELECT position FROM user WHERE email=\"$email\" AND password=\"$password\"";
 			$result = $conn->query($query);
-			if($result == "admin")
+			if($result == "student")
 			{
-				header("Location: ../pages/adminmain.php");
+				header("Location: ../pages/roomDisplay.php");
 			}
 			else
 			{
-				header("Location: ../pages/roomDisplay.php");
+				header("Location: ../pages/adminmain.php");
 			}
 		}
 		else
