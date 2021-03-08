@@ -2,7 +2,10 @@
 session_start();
 require_once("../php/sqlSts.php");
 
-require_once("../php/connect.php");
+if(isset($_SESSION['valid']))
+{
+	header("Location:../index.php");
+}
 
 $email = $password = $error = "";
 
@@ -60,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			}
 			else
 			{
-				header("Location: ../pages/roomDisplay.php");
+				header("Location: ../index.php");
 			}
 
 			$conn->close();
