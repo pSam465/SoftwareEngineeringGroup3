@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once("../php/sqlSts.php");
 
 $email = $password = $error = "";
@@ -35,18 +37,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			exit("Unable to connect to DB");
 		}
 
-		$query = "SELECT * FROM user WHERE email=\"$email\" AND password=\"$password\"";
+		$query = "SELECT * FROM user WHERE email='$email' AND password=SHA1('{$password}')";
 		$result = $conn->query($query);
 		if(!$result) die("Error on login. Try again.");
 		if(($result->num_rows)>0)
 		{
 			//begin session
 			//session.start();
-			setcookie("name", 1, time()+86400*30);
+			//setcookie("name", 1, time()+86400*30);
 			//$_SESSION['user'] = "user";
-			$query = "SELECT position FROM user WHERE email=\"$email\" AND password=\"$password\"";
+			$row = $result->fetch_array(MYSQLI_ASSOC);
+
+			$_SESSION['valid'] = true;
+			$_SESSION['email'] = $row['email'];
+
+			//$query = "SELECT position FROM user WHERE email='$email' AND password=SHA1('{$password}')";
 			$result = $conn->query($query);
-			if($result == "admin")
+			if($row['position'] == "admin")
 			{
 				header("Location: ../pages/dummyLogin.php");
 			}
@@ -54,6 +61,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			{
 				header("Location: ../pages/dummyLogin2.php");
 			}
+
+			$conn->close();
 		}
 		else
 		{

@@ -1,5 +1,9 @@
 <?php
 require_once("../php/sqlSts.php");
+require_once("../php/session.php");
+
+checksession();
+
 $email = $password = $error = "";
 
 $errEmail = "Please enter an email";
