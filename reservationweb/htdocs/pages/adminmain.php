@@ -1,5 +1,5 @@
 <?php
-//include_once('../php/checksession.php');						//currently commented out due to not having access to checksecion.php
+include_once('../php/checksession.php');						//currently commented out due to not having access to checksecion.php
 include_once("../php/default.php")
 ?>
 <!DOCTYPE html>
