@@ -1,7 +1,7 @@
 <?php
-	include_once ('../php/connect.php');
-	//require_once('../php/checksession.php');
-	include_once('../php/default.php');
+	  include_once ('../php/connect.php');
+    require_once('../php/checksession.php');
+	  include_once('../php/default.php');
     defaultHeader();
 
 	$nullEntryPresent = false;
@@ -68,7 +68,39 @@
   		text-align: center;
   	}
   </style>
+  <?php
+    include_once('../php/default.php');
+    defaultHeader();
+    //include_once('connect.php');
+	$connectDB = connectDB();
+	$dateFromRoomID = "SELECT DISTINCT reservationStart
+	                       FROM roomreservation
+	                       WHERE roomID = $roomNumber";
+	$dateCheckResult = $connectDB->query($dateFromRoomID);
+	$dateCheckResultArray = $dateCheckResult->fetch_assoc();
+	$temp = str_replace(" ","-",$dateCheckResultArray['reservationStart']);
+	$explodedDate = explode("-",$temp);
 
+	if($explodedDate[0] != NULL)
+	{
+		$dbDateFormat= $explodedDate[1]."-".$explodedDate[2]."-".$explodedDate[0];
+	}
+	else
+	{
+		$dbDateFormat = "no time in DB";
+	}
+	$roomTaken = false;
+	if(isset($_GET["submit"]) && $dbDateFormat[0] != NULL)
+	{
+		$isTimeTaken = $_GET['time'];
+		$brokeDownTime = explode("-",$isTimeTaken);
+		if(strcmp($dbDateFormat,$displaydate) == 0)
+		{
+	  		if($brokeDownTime[0] == $explodedDate[3])
+	    		$roomTaken = true;
+		}
+	}
+  ?>
   <body>
   	<div class ="containOutput">
   		<div class="centerContainedOutput">
@@ -78,8 +110,6 @@
 			    	$dataConnect = connectDB();
 			    	$dbDateStart = $dbDate." ".$breakUpTime[0];
 			    	$dbDateEnd = $dbDate." ".$breakUpTime[1];
-			    	
-
 			    	$checkEmail = "SELECT COUNT(1)
 			    					FROM user
 			    					WHERE email = \"$email\"";
@@ -105,7 +135,7 @@
 			    	$userID = $getUserIDArray['userID'];
 			    	
 			    	
-					if($emailResultArr['COUNT(1)'] == 1)
+					if($emailResultArr['COUNT(1)'] == 1 && $roomTaken != true)
 					{
 						if($nullEntryPresent != true)
 						{
@@ -126,6 +156,10 @@
 							echo "<br>";
 							echo "Thank you!";
 						}
+					else if($roomTaken == true)
+					{
+						echo "The Room is already reserved at the time you selected, please select another time.";
+					}
 					else
 					{
 						echo "Account not found. Check email and resubmit";

@@ -44,7 +44,7 @@
   </style>  
   <?php
     include_once('../php/default.php');
-    //require_once('../php/checksession.php');
+    require_once('../php/checksession.php');
     defaultHeader();
     $roomSelected = "";
     $location = "";
@@ -90,24 +90,26 @@
             ?>
             <label for="TimeSlot">Choose a time:</label>
             <select name = "time" id="times">
-              <option value="8:00AM-9:00AM">8:00AM-9:00AM</option>
-              <option value="9:00AM-10:00AM">9:00AM-10:00AM</option>
-              <option value="10:00AM-11:00AM">10:00AM-11:00AM</option>
-              <option value="11:00AM-12:00PM">11:00AM-12:00PM</option>
-              <option value="1:00PM-2:00PM">12:00PM-1:00PM</option>
-              <option value="1:00PM-2:00PM">1:00PM-2:00PM</option>
-              <option value="2:00PM-3:00PM">2:00PM-3:00PM</option>
-              <option value="3:00PM-4:00PM">3:00PM-4:00PM</option>
-              <option value="5:00PM-6:00PM">5:00PM-6:00PM</option>
-              <option value="6:00PM-7:00PM">6:00PM-7:00PM</option>
-              <option value="7:00PM-8:00PM">7:00PM-8:00PM</option>
-              <option value="8:00PM-9:00PM">8:00PM-9:00PM</option>
-              <option value="9:00PM-10:00PM">9:00PM-10:00PM</option>
-              <option value="10:00PM-11:00PM">10:00PM-11:00PM</option>
-              <option value="11:00PM-12:00AM">11:00PM-12:00AM</option>
+              <option value="08:00:00-09:00:00">8:00AM-9:00AM</option>
+              <option value="09:00:00-10:00:00">9:00AM-10:00AM</option>
+              <option value="10:00:00-11:00:00">10:00AM-11:00AM</option>
+              <option value="11:00:00-12:00:00">11:00AM-12:00PM</option>
+              <option value="12:00:00-13:00:00">12:00PM-1:00PM</option>
+              <option value="13:00:00-14:00:00">1:00PM-2:00PM</option>
+              <option value="14:00:00-15:00:00">2:00PM-3:00PM</option>
+              <option value="15:00:00-16:00:00">3:00PM-4:00PM</option>
+              <option value="16:00:00-17:00:00">4:00PM-5:00PM</option>
+              <option value="17:00:00-18:00:00">5:00PM-6:00PM</option>
+              <option value="18:00:00-19:00:00">6:00PM-7:00PM</option>
+              <option value="19:00:00-20:00:00">7:00PM-8:00PM</option>
+              <option value="20:00:00-21:00:00">8:00PM-9:00PM</option>
+              <option value="21:00:00-22:00:00">9:00PM-10:00PM</option>
+              <option value="22:00:00-23:00:00">10:00PM-11:00AM</option>
             </select><br><br>
             <input type="submit" name="submit" value="Submit"><br><br>
+            
             <?php
+              echo "<br>";
               echo "
               <form action=\"roomResData.php\">
                 <input type=\"hidden\" name=\"loc\" value=\"$roomSelected\">

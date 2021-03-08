@@ -45,7 +45,6 @@ tr
   
   <?php
     include_once('../php/default.php');
-    require_once('../php/checksession.php');
     defaultHeader();
   ?>
 
@@ -67,13 +66,13 @@ tr
             echo "<br>";
           }
 
-              $roomType = array();
+              $RoomID = array();
               $roomID = array();
               $building = array();
               $roomNum = array();
               $available = array();
 
-              $numRowsQuery = $connect->query("SELECT COUNT(*) FROM room");
+              $numRowsQuery = $connect->query("SELECT COUNT(*) FROM roomreservation");
               $numRowsArr = $numRowsQuery->fetch_assoc();
 
               
