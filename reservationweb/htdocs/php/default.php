@@ -13,8 +13,19 @@
 		}
 		</style>
 
-		<header><img src=\"schoolLogo.jpg\" alt=\"GCSU logo\" width=\"300\" height=\"110\" style = \"margin:1vh 42.5vw\" </header>
+		<header><a href=\"../index.php\"><img src=\"../images/schoolLogo.jpg\" alt=\"GCSU logo\" width=\"300\" height=\"110\" style = \"margin:1vh 42.5vw\"</header></a>
 
+		";
+	}
+	function defaultBody()
+	{
+		echo "
+		<style>
+			body
+			{
+				background-color:#1C4F9C;
+			}
+		</style>
 		";
 	}
 ?>

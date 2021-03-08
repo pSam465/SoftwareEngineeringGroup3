@@ -45,6 +45,7 @@ tr
   
   <?php
     include_once('../php/default.php');
+    require_once('../php/checksession.php');
     defaultHeader();
   ?>
 

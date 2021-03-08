@@ -1,5 +1,8 @@
 <?php
-	include_once ('../php/connect.php');
+	  include_once ('../php/connect.php');
+    require_once('../php/checksession.php');
+	  include_once('../php/default.php');
+    defaultHeader();
 
 	$nullEntryPresent = false;
 	$firstName =NULL;
@@ -65,7 +68,6 @@
   		text-align: center;
   	}
   </style>
-
   <?php
     include_once('../php/default.php');
     defaultHeader();
