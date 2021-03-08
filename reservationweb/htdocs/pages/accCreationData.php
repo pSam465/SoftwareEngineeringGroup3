@@ -63,7 +63,7 @@ if(isset($_POST['submit']))
 			<h1>
 				<?php 
 			 		$conn = connectDB();
-			 		$insert = "INSERT INTO `user` (`userID`, `email`, `password`, `position`, `fName`, `lName`) VALUES ($userID, '$email', '$password', '$position', '$firstName', '$lastName')";
+			 		$insert = "INSERT INTO `user` (`userID`, `email`, `password`, `position`, `fName`, `lName`) VALUES ($userID, '$email', SHA1('{$password}'), '$position', '$firstName', '$lastName')";
 			 		$conn->query($insert);
 
 			 		echo "$position account for $firstName $lastName has been created with email, $email, and password, $password.";
