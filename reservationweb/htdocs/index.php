@@ -25,14 +25,14 @@ require_once("./php/checksession.php");
     		
   			<div class="row align-items-center">
     			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" nclick="document.location='default.asp'">Reservation a Room</button>
+    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='./pages/roomDisplay.php'">Reservation a Room</button>
     			</div>
     			<div class="w-100"></div>
     			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" nclick="document.location='default.asp'">Reservation Equipment</button>
+    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='default.asp'">Reservation Equipment</button>
     			<div class="w-100"></div>
     			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" nclick="document.location='default.asp'">Account</button>
+    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='default.asp'">Account</button>
     			</div>
     		
   			</div>

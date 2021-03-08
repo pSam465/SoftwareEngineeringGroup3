@@ -17,4 +17,15 @@
 
 		";
 	}
+	function defaultBody()
+	{
+		echo "
+		<style>
+			body
+			{
+				background-color:#1C4F9C;
+			}
+		</style>
+		";
+	}
 ?>
