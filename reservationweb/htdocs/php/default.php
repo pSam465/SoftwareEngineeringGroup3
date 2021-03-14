@@ -13,8 +13,6 @@
 		}
 		</style>
 
-		<header><img src=\"../images/schoolLogo.jpg\" alt=\"GCSU logo\" width=\"300\" height=\"110\" style = \"margin:1vh 42.5vw\" </header>
-
-		";
+		<header><a href=\"../index.php\"> <img src=\"../images/schoolLogo.jpg\" alt=\"GCSU logo\" width=\"300\" height=\"110\" style = \"margin:1vh 42.5vw\"></a></header> ";
 	}
 ?>
