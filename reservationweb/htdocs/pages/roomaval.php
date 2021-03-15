@@ -17,8 +17,7 @@
 		if($rows>0)
 		{
 			echo<<<_END
-			<div class="container">
-			<table class="table table-fixed">
+			<table class="table table-striped table-fixed">
 			<thead><th scope="col">Room</th><thead>
 			<tbody>
 			_END;
@@ -33,7 +32,7 @@
 				</tr>
 				_END;
 			}
-			echo "</tbody></table></div>";
+			echo "</tbody></table>";
 		}
 		else
 		{
@@ -55,21 +54,40 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col d-flex justify-content-center content-block">
+			<div class="col-sm d-flex justify-content-center content-block">
+				<div class="container scrollable">
 				<?php
 					$askrooms = "SELECT * FROM `room`";
 					showrooms($askrooms);
 				?>
+				</div>
 			</div>
-			<div class="col">
+			<div class="col-sm">
 				<div class="row">
 					<div class="col d-flex justify-content-center content-block">
-						test a
+						<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
+							<div>
+								<h3>Select a Date</h3>
+							</div>
+							<div class="form-group">
+								<input type="date" class="form-control" id="date" name="date" value="<?php echo getdate() ?>" />
+							</div>		
+						</form>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col d-flex justify-content-center content-block">
-						test b
+						<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
+							<div>
+								<h3>Select a Time</h3>
+							</div>
+							<div class="form-group">
+								Start<input type="time" class="form-control" id="starttime" name="starttime" value="<?php echo gettimeofday() ?>" />
+							</div>
+							<div class="form-group">
+								End<input type="time" class="form-control" id="endtime" name="endtime" value="<?php echo gettimeofday() ?>" />
+							</div>	
+						</form>
 					</div>
 				</div>
 			</div>
