@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../php/sqlSts.php");
+require_once("../php/connect.php");
 
 if(isset($_SESSION['valid']))
 {
