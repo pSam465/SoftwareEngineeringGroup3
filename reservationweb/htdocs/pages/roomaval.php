@@ -54,42 +54,54 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm d-flex justify-content-center content-block">
-				<div class="container scrollable">
-				<?php
-					$askrooms = "SELECT * FROM `room`";
-					showrooms($askrooms);
-				?>
+			<div class="col-md content-block">
+				<div class="row">
+					<div class="col-sm d-flex justify-content-center">
+						<input type="text" type="form-control" name="roomsearch" id="roomsearch" placeholder="Search for a room" style="width: 100%;">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm d-flex justify-content-center">
+					<div class="container scrollable">
+					<?php
+						$askrooms = "SELECT * FROM `room`";
+						showrooms($askrooms);
+					?>
+					</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-sm">
+			<div class="col-md">
+				<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
 				<div class="row">
 					<div class="col d-flex justify-content-center content-block">
-						<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
-							<div>
-								<h3>Select a Date</h3>
-							</div>
-							<div class="form-group">
-								<input type="date" class="form-control" id="date" name="date" value="<?php echo getdate() ?>" />
-							</div>		
-						</form>
+						<div class="align-self-center">
+							<h3>Select a Date</h3>
+						</div>
+						<div class="form-group">
+							<input type="date" class="form-control" id="date" name="date" value="<?php echo getdate() ?>" />
+						</div>		
 					</div>
 				</div>
 				<div class="row">
 					<div class="col d-flex justify-content-center content-block">
-						<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
-							<div>
-								<h3>Select a Time</h3>
-							</div>
-							<div class="form-group">
-								Start<input type="time" class="form-control" id="starttime" name="starttime" value="<?php echo gettimeofday() ?>" />
-							</div>
-							<div class="form-group">
-								End<input type="time" class="form-control" id="endtime" name="endtime" value="<?php echo gettimeofday() ?>" />
-							</div>	
-						</form>
+						<div class="align-self-center">
+							<h3>Select a Time</h3>
+						</div>
+						<div class="form-group">
+							Start<input type="time" class="form-control" id="starttime" name="starttime" value="<?php echo gettimeofday() ?>" />
+						</div>
+						<div class="form-group">
+							End<input type="time" class="form-control" id="endtime" name="endtime" value="<?php echo gettimeofday() ?>" />
+						</div>	
 					</div>
 				</div>
+				<div class="row">
+					<div class="col d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Find Avalible Rooms</button>
+					</div>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>
