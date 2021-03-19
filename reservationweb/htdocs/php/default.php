@@ -1,19 +1,27 @@
 <?php
 	function defaultHeader()
 	{
-		echo "
+		echo<<<_END
 		<style>
 		header
 		{
 			background-color:#1C5438;
-			width: 101%;
-			height: 135px;
+			width: 100%;
 			margin: 0;
 			padding:0;
 		}
+		div
+		{
+			padding: 1vh;
+		}
 		</style>
 
-		<header><a href=\"../index.php\"> <img src=\"../images/schoolLogo.jpg\" alt=\"GCSU logo\" width=\"300\" height=\"110\" style = \"margin:1vh 42.5vw\"></a></header> ";
+		<header>
+			<div class="d-flex justify-content-center">
+			<a href="../index.php"> <img src="../images/schoolLogo.jpg" alt="GCSU logo" width="300" height="110"> </a>
+			</div>
+		</header>
+		_END;
 	}
 	function defaultBody()
 	{
