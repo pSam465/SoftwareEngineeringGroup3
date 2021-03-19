@@ -75,7 +75,7 @@ function generatequery()
 	{
 		$startdate = $date." ".$starttime.":00";
 		$enddate = $date." ".$endtime.":00";
-		$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '2021-03-15 $startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart) ";
+		$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '$startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart);";
 	}
 	return $query;
 }
