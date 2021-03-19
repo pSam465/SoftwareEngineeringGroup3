@@ -1,7 +1,7 @@
 <?php
 include_once('../php/default.php');
 require_once('../php/checksession.php');
-require_once("../php/sqlSts.php");
+require_once("../php/connect.php");
 defaultHeader();
 
 $date = $starttime = $endtime = $askquery = "";
