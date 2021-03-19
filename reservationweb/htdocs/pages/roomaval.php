@@ -34,30 +34,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 function showrooms()
 {
-	$query = generatequery(); 
-	$conn = connectDB();
-	if(!$conn)
+	$query = generatequery();
+	if(!empty($query))
 	{
-		exit("Unable to connect to DB");
-	}
-	$result = $conn->query($query);
-	if(!$result) die("Error.");
-	$rows=$result->num_rows;
-	if($rows>0)
-	{
-		echo "<tbody>";
-		for($i=0; $i<$rows; $i++)
+		$conn = connectDB();
+		if(!$conn)
 		{
-			$row = $result->fetch_array(MYSQLI_ASSOC);
-			$room = $row['building'] . " " . $row['roomNum'];
-
-			echo<<<_END
-			<tr>
-			<td>$room</td>
-			</tr>
-			_END;
+			exit("Unable to connect to DB");
 		}
-		echo "</tbody>";
+		$result = $conn->query($query);
+		if(!$result) die("Error.");
+		$rows=$result->num_rows;
+		if($rows>0)
+		{
+			echo "<tbody>";
+			for($i=0; $i<$rows; $i++)
+			{
+				$row = $result->fetch_array(MYSQLI_ASSOC);
+				$room = $row['building'] . " " . $row['roomNum'];
+
+				echo<<<_END
+				<tr>
+				<td>$room</td>
+				</tr>
+				_END;
+			}
+			echo "</tbody>";
+		}
 	}
 }
 
@@ -66,10 +69,14 @@ function generatequery()
 	global $date;
 	global $starttime;
 	global $endtime;
+	$query = "";
 
-	$startdate = $date." ".$starttime.":00";
-	$enddate = $date." ".$endtime.":00";
-	$query = "SELECT * FROM room JOIN roomreservation ON room.roomID=roomreservation.roomID WHERE NOT '$startdate' <= roomreservation.reservationEnd OR NOT '$enddate' >= roomreservation.reservationStart;";
+	if(!(empty($date) && empty($starttime) && empty($endtime)))
+	{
+		$startdate = $date." ".$starttime.":00";
+		$enddate = $date." ".$endtime.":00";
+		$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '2021-03-15 $startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart) ";
+	}
 	return $query;
 }
 ?>
