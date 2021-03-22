@@ -15,7 +15,6 @@
 			padding: 1vh;
 		}
 		</style>
-
 		<header>
 			<div class="d-flex justify-content-center">
 			<a href="../index.php"> <img src="../images/schoolLogo.jpg" alt="GCSU logo" width="300" height="110"> </a>
