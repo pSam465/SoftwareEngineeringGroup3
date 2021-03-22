@@ -1,7 +1,7 @@
 <?php
-	  include_once ('../php/connect.php');
-    require_once('../php/checksession.php');
-	  include_once('../php/default.php');
+	include_once ('../php/connect.php');
+   	require_once('../php/checksession.php');
+	include_once('../php/default.php');
     defaultHeader();
 
 	$nullEntryPresent = false;
@@ -173,3 +173,10 @@
     </div>
   </body>
 </html>
+
+<?php
+	function sendEmail($sendTo)
+	{
+		mail($sendTo,"Test","testing");
+	}
+?>
