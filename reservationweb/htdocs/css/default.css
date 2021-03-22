@@ -1,0 +1,32 @@
+div .centerForm
+{
+  text-align: center;
+  margin: auto;
+}
+div .body
+{
+  background-color: #1C4F9C;
+}
+div .containOutput
+{
+  margin: auto;
+  width: 30%;
+}
+div .centerContainedOutput
+{
+  margin: 1vh;
+  border: 5px solid #1C5438;
+  padding: 1vh;
+  background-color: white;
+  width: 550px;
+  height: 550px;
+  text-align: center;
+}
+
+div .header
+{
+	background-color:#1C5438;
+	width: 100%;
+	margin: 0;
+	padding:0;
+}

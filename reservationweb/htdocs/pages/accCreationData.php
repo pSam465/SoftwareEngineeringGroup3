@@ -29,34 +29,9 @@ if(isset($_POST['submit']))
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
 	<title>Account Confirmation</title>
 </head>
-<style type="text/css">
-  	.centerConf
-  	{
-  		text-align: center;
-  	}
-
-  	body
-  	{
-  		background-color: #1C4F9C;
-  	}
-  	.containOutput
-  	{
-		margin: auto;
-		width: 30%;
-  	}
-  	.centerContainedOutput
-  	{
-  		margin: 10px;
-  		border: 5px solid #1C5438;
-  		padding: 10px;
-  		background-color: white;
-  		width: 550px;
-  		height: 550px;
-  		text-align: center;
-  	}
-</style>
 <body>
 	<div class="containOutput">
 		<div class="centerContainedOutput">

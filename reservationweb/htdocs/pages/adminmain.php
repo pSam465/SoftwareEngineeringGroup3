@@ -15,7 +15,7 @@ include_once("../php/default.php")
 	<title>Admin Home Page</title>
 </head>
 <style>
-	.buttonGroup .button
+	.button
 	{
 		display: block;
 		width: 250px;
@@ -24,10 +24,10 @@ include_once("../php/default.php")
 		background-color: #1C5438;
 		color: white;						/*font color*/
 		font-size: 16px;
-		cursor: pointer;
 		text-align: center;
 		float: left;
 		margin: 20px;
+		cursor: pointer;
 	}
 	.container
 	{

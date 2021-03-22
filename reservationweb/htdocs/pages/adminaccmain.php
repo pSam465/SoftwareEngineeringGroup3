@@ -1,7 +1,7 @@
 <?php
 require_once("../php/connect.php");
 include_once("../php/default.php");
-//include_once('../php/checksession.php');					//currently commented out due to not having access to checksession
+include_once('../php/checksession.php');
 defaultHeader();
 defaultBody();
 ?>
@@ -9,6 +9,7 @@ defaultBody();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
 	<title>Account Management</title>
 </head>
 <style>
