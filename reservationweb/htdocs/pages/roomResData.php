@@ -1,7 +1,7 @@
 <?php
-	  include_once ('../php/connect.php');
-    require_once('../php/checksession.php');
-	  include_once('../php/default.php');
+	include_once ('../php/connect.php');
+   	require_once('../php/checksession.php');
+	include_once('../php/default.php');
     defaultHeader();
 
 	$nullEntryPresent = false;
@@ -38,7 +38,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="../css/default.css">
   <title>Confirmation</title>
   </head>
 
@@ -173,3 +173,10 @@
     </div>
   </body>
 </html>
+
+<?php
+	function sendEmail($sendTo)
+	{
+		mail($sendTo,"Test","testing");
+	}
+?>

@@ -40,33 +40,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			exit("Unable to connect to DB");
 		}
-
-		$query = "SELECT * FROM user WHERE email='$email' AND password=SHA1('{$password}')";
+		$query = "SELECT salt FROM user WHERE email='$email'";
 		$result = $conn->query($query);
 		if(!$result) die("Error on login. Try again.");
-		if(($result->num_rows)>0)
+		if($result->num_rows>0)
 		{
-			//begin session
-			//session.start();
-			//setcookie("name", 1, time()+86400*30);
-			//$_SESSION['user'] = "user";
 			$row = $result->fetch_array(MYSQLI_ASSOC);
+			$saltedPass = $password.$row['salt'];
 
-			$_SESSION['valid'] = true;
-			$_SESSION['email'] = $row['email'];
-
-			//$query = "SELECT position FROM user WHERE email='$email' AND password=SHA1('{$password}')";
+			$query = "SELECT * FROM user WHERE email='$email' AND password=SHA1('{$saltedPass}')";
 			$result = $conn->query($query);
-			if($row['position'] == "admin")
+			if(!$result) die("Error on login. Try again.");
+			if(($result->num_rows)>0)
 			{
-				header("Location: ../pages/adminmain.php");
-			}
-			else
-			{
-				header("Location: ../index.php");
-			}
+				$row = $result->fetch_array(MYSQLI_ASSOC);
 
-			$conn->close();
+				$_SESSION['valid'] = true;
+				$_SESSION['email'] = $row['email'];
+
+				$result = $conn->query($query);
+				if($row['position'] == "admin")
+				{
+					header("Location: ../pages/adminmain.php");
+				}
+				else
+				{
+					header("Location: ../index.php");
+				}
+
+				$conn->close();
+			}
 		}
 		else
 		{

@@ -1,0 +1,17 @@
+div.content-block
+{
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+table
+{
+	border: none;
+	border-collapse: collapse;
+}
+
+.scrollable
+{
+	height: 80vh;
+	overflow: auto;
+}

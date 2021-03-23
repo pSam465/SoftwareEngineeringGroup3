@@ -1,5 +1,5 @@
 <?php
-//require_once("../php/checksession.php")
+require_once("../php/checksession.php");
 include_once("../php/default.php");
 defaultHeader();
 defaultBody();
@@ -8,35 +8,9 @@ defaultBody();
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
 	<title>Account Creation</title>
 </head>
-<style>
-	.centerForm
-    {
-      text-align: center;
-      margin: auto;
-    }
-
-    body
-    {
-      background-color: #1C4F9C;
-    }
-    .containOutput
-    {
-      margin: auto;
-      width: 30%;
-    }
-    .centerContainedOutput
-    {
-      margin: 1vh;
-      border: 5px solid #1C5438;
-      padding: 1vh;
-      background-color: white;
-      width: 550px;
-      height: 550px;
-      text-align: center;
-    }
-</style>
 <body>
 	<div class="centerForm">
 		<div class="containOutput">

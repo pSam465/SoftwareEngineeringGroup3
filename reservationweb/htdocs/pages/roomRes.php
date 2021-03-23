@@ -7,35 +7,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="../css/default.css">
     <title>Room Reservation</title>
   </head>
 
   <style>
-    .centerForm
-    {
-      text-align: center;
-      margin: auto;
-    }
-
     body
     {
       background-color: #1C4F9C;
-    }
-    .containOutput
-    {
-      margin: auto;
-      width: 30%;
-    }
-    .centerContainedOutput
-    {
-      margin: 1vh;
-      border: 5px solid #1C5438;
-      padding: 1vh;
-      background-color: white;
-      width: 550px;
-      height: 550px;
-      text-align: center;
     }
     .redFont
     {

@@ -1,14 +1,17 @@
 <?php
 require_once("../php/connect.php");
 include_once("../php/default.php");
-//include_once('../php/checksession.php');					//currently commented out due to not having access to checksession
+include_once('../php/checksession.php');
+
 defaultHeader();
 defaultBody();
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
 	<title>Account Management</title>
 </head>
 <style>
@@ -36,6 +39,7 @@ defaultBody();
 	  height: auto;
 	  text-align: center;
 	}
+	
 </style>
 <body>
 	<div class="centerForm">
@@ -94,7 +98,7 @@ defaultBody();
 						{
 							echo"
 	                      <tr style=\"text-align:center\">
-	                        <form action=\"\">
+	                        <form action=\"./accDeletion.php\" method = \"post\">
 
 	                          <td>$userID[$i]</td>
 
@@ -108,7 +112,7 @@ defaultBody();
 
 	                          <td><input type=\"submit\" name=\"accountManage\" value=\"Select\"></td>
 
-	                          <td><input type=\"checkbox\" id=\"$userID[$i]\" name=\"userID[$i]\"><td>
+	                          <td><input type=\"checkbox\" value=\"$userID[$i]\" name=\"idInput[]\"><td>
 
 	                          <input type=\"hidden\" id=\"userID\" name=\"userID\"value =\"$userID[$i]\">
 
@@ -119,16 +123,24 @@ defaultBody();
 	                          <input type=\"hidden\" id=\"fName\" name=\"fName\"value =\"$fName[$i]\">
 
 	                          <input type=\"hidden\" id=\"lName\" name=\"lName\"value =\"$lName[$i]\">
-	                        </form>
+
 	                      </tr>";
+
 						}
+						echo" <input type=\"submit\"  onclick=\"location.href='./accDeletion.php'\"   value= \"Delete selected Accounts\" name =\"formSubmit\" >
+	                        </form>";
+						
+
 					}
 				?>
 				
 			</div>
 			
+				 
 		</div>
 		
 	</div>
+
 </body>
+
 </html>

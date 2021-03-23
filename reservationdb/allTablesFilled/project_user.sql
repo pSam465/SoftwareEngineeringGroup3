@@ -1,55 +1,69 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: project
--- ------------------------------------------------------
--- Server version	8.0.23
+-- Host: 127.0.0.1
+-- Generation Time: Mar 14, 2021 at 06:07 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `project`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userID` int NOT NULL,
+  `userID` int(11) NOT NULL,
   `email` char(100) NOT NULL,
   `password` char(200) NOT NULL,
+  `salt` varchar(100) NOT NULL,
   `position` char(100) NOT NULL,
   `fName` char(100) NOT NULL,
-  `lName` char(100) NOT NULL,
-  PRIMARY KEY (`userID`)
+  `lName` char(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (110,'fake@email.com','password','student','gregg','turkington'),(111,'samuel.pittman@bobcats.gcsu.edu','password','admin','Samuel','pittman'),(112,'justin.hentz@bobcats.gcsu.edu','password','admin','Justin','hentz'),(113,'allan.crassweller@bobcats.gcsu.edu','password','admin','allan','crassweller'),(114,'trenton.brownlee@bobcats.gcsu.edu','password','admin','trenton','brownlee'),(115,'angelica.jones@bobcats.gcsu.edu','password','admin','Angelica','jones'),(116,'fake@email.com','password','student','fake','namington'),(117,'fake@email.com','password','student','Seth','Douglas'),(118,'fake@email.com','password','student','Tim','hecker'),(119,'fake@email.com','password','student','bob','saltworts');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `user` (`userID`, `email`, `password`, `salt`, `position`, `fName`, `lName`) VALUES
+(110, 'fake@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'student', 'gregg', 'turkington'),
+(111, 'samuel.pittman@bobcats.gcsu.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'admin', 'Samuel', 'pittman'),
+(112, 'justin.hentz@bobcats.gcsu.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'admin', 'Justin', 'hentz'),
+(113, 'allan.crassweller@bobcats.gcsu.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'admin', 'allan', 'crassweller'),
+(114, 'trenton.brownlee@bobcats.gcsu.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'admin', 'trenton', 'brownlee'),
+(115, 'angelica.jones@bobcats.gcsu.edu', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'admin', 'Angelica', 'jones'),
+(116, 'fake@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'student', 'fake', 'namington'),
+(117, 'fake@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'student', 'Seth', 'Douglas'),
+(118, 'fake@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'student', 'Tim', 'hecker'),
+(119, 'fake@email.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '', 'student', 'bob', 'saltworts');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`userID`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-02-18 23:05:34
