@@ -1,4 +1,4 @@
-<?php
+	<?php
 include_once('../php/default.php');
 require_once('../php/checksession.php');
 require_once("../php/connect.php");
@@ -47,7 +47,7 @@ function showrooms()
 		$rows=$result->num_rows;
 		if($rows>0)
 		{
-			echo "<tbody>";
+			echo "<tbody id=\"tablebody\">";
 			for($i=0; $i<$rows; $i++)
 			{
 				$row = $result->fetch_array(MYSQLI_ASSOC);
@@ -97,13 +97,13 @@ function generatequery()
 			<div class="col-md content-block">
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">	
-						<input type="text" type="form-control" name="roomsearch" id="roomsearch" placeholder="Search for a room" style="width: 100%;">
+						<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for a room" style="width: 100%;" onkeyup="searchtable(this)">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">
 					<div class="container scrollable">
-						<table class="table table-hover table-fixed" id="roomtable">
+						<table class="table table-hover table-fixed" id="filtertable">
 							<thead><th scope="col">Room</th><thead>
 							<?php
 								showrooms();
@@ -157,4 +157,5 @@ function generatequery()
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="../javascript/search.js"></script>
 </html>
