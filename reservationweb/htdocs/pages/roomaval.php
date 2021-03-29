@@ -150,7 +150,7 @@ function generatequery()
 				</form>
 				<div class="row">
 					<div class="col d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary btn-lg btn-block">Reserve Room</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
 					</div>
 				</div>
 			</div>
