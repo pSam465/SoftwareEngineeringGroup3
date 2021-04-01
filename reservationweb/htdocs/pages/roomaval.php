@@ -52,10 +52,11 @@ function showrooms()
 			{
 				$row = $result->fetch_array(MYSQLI_ASSOC);
 				$room = $row['building'] . " " . $row['roomNum'];
-
+				$id = "element".$row['roomID'];
 				echo<<<_END
-				<tr>
+				<tr id="$id" onclick="selectElement($id)">
 				<td>$room</td>
+				<td>$id</td>
 				</tr>
 				_END;
 			}
@@ -158,4 +159,12 @@ function generatequery()
 	</div>
 </body>
 <script type="text/javascript" src="../javascript/search.js"></script>
+<script type="text/javascript">
+	
+function selectElement(id)
+{
+	document.write(id.id);
+}
+
+</script>
 </html>
