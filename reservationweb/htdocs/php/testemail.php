@@ -1,5 +1,5 @@
 <?php
-	$address = "trentbrownlee@gmail.com";
+	$address = "trenton.brownlee@bobcats.gcsu.edu";
 	$message = "test";
 	$subject = "test";
 	$from = "From: reservations@irissoln.com";
