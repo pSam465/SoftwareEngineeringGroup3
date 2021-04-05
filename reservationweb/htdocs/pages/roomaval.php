@@ -1,4 +1,4 @@
-	<?php
+<?php
 include_once('../php/default.php');
 require_once('../php/checksession.php');
 require_once("../php/connect.php");
@@ -43,7 +43,7 @@ function showrooms()
 			exit("Unable to connect to DB");
 		}
 		$result = $conn->query($query);
-		if(!$result) die("Error.");
+			if(!$result) die("Error.");
 		$rows=$result->num_rows;
 		if($rows>0)
 		{
@@ -54,9 +54,8 @@ function showrooms()
 				$room = $row['building'] . " " . $row['roomNum'];
 				$id = "element".$row['roomID'];
 				echo<<<_END
-				<tr id="$id" onclick="selectElement($id)">
+				<tr class="selectablerow" id="$id" value="$room">
 				<td>$room</td>
-				<td>$id</td>
 				</tr>
 				_END;
 			}
@@ -89,7 +88,7 @@ function generatequery()
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/reserve.css">
-
+	
 	<title>Room Reservation</title>
 </head>
 <body>
@@ -104,7 +103,7 @@ function generatequery()
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">
 					<div class="container scrollable">
-						<table class="table table-hover table-fixed" id="filtertable">
+						<table class="table table-hover table-fixed selectabletable" id="filtertable">
 							<thead><th scope="col">Room</th><thead>
 							<?php
 								showrooms();
@@ -158,13 +157,18 @@ function generatequery()
 		</div>
 	</div>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../javascript/search.js"></script>
+
 <script type="text/javascript">
 	
-function selectElement(id)
-{
-	document.write(id.id);
-}
+$(document).ready(function(){
+	$(".selectabletable").on('click', '.selectablerow', function(event){
+		$(this).addClass('table-info');
+		$(this).siblings().removeClass('table-info');
+	});
+});
 
 </script>
 </html>
