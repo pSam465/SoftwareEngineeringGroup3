@@ -52,10 +52,11 @@ function showrooms()
 			{
 				$row = $result->fetch_array(MYSQLI_ASSOC);
 				$room = $row['building'] . " " . $row['roomNum'];
-				$id = "element".$row['roomID'];
+				$id = $row['roomID'];
 				echo<<<_END
-				<tr class="selectablerow" id="$id" value="$room">
+				<tr class="selectablerow">
 				<td>$room</td>
+				<td hidden id="roomid">$id</td>
 				</tr>
 				_END;
 			}
@@ -147,8 +148,12 @@ function generatequery()
 					</div>
 				</div>
 				</div>
-				</form>
+				</form action="" method="POST">
 				<div class="row">
+					<input name="date" value="<?php echo $date ?>">
+					<input name="starttime" value="<?php echo $starttime ?>">
+					<input name="endtime" value="<?php echo $endtime ?>">
+					<input id="roomval" name="roomval">
 					<div class="col d-flex justify-content-center">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">Reserve Room</button>
 					</div>
@@ -165,7 +170,16 @@ function generatequery()
 	
 $(document).ready(function(){
 	$(".selectabletable").on('click', '.selectablerow', function(event){
-		$(this).addClass('table-info');
+		if($(this).hasClass('table-info'))
+		{
+			$(this).removeClass('table-info');
+			$("#roomval").val(null);
+		}
+		else
+		{
+			$(this).addClass('table-info');
+			$("#roomval").val($("#roomid", this).html());
+		}
 		$(this).siblings().removeClass('table-info');
 	});
 });
