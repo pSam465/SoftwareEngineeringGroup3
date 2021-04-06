@@ -4,28 +4,30 @@ require_once('../php/checksession.php');
 require_once("../php/connect.php");
 defaultHeader();
 
-$room = $starttime = $endtime = $repeattype = $endrepeat = "";
+$room = $date = $starttime = $endtime = $repeattype = $endrepeat = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	global $room;
+	global $date;
 	global $starttime;
 	global $endtime;
 
 	if(isset($_POST['room']))
 	{
 		$room = $_POST['room'];
-		echo $room;
+	}
+	if(isset($_POST['date']))
+	{
+		$date = $_POST['date'];
 	}
 	if(isset($_POST['starttime']))
 	{
 		$starttime = $_POST['starttime'];
-		echo $starttime;
 	}
 	if(isset($_POST['endtime']))
 	{
 		$endtime = $_POST['endtime'];
-		echo $endtime;
 	}
 }
 
@@ -48,18 +50,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			<div>
 				<h3>Reservation Details</h3>
 					<div>
-						<p><h5>Room: </h5><?php echo $room; ?></p>
+						<span><h5>Room: </h5><?php echo $room; ?></span>
+						<p><h5>Date: </h5><?php echo $date; ?></p>
 						<p><h5>Start Time: </h5><?php echo $starttime; ?></p>
 						<p><h5>End Time: </h5><?php echo $endtime; ?></p>
 					</div>
 			</div>
 		</div>
 		<div class="col-sm content-block m-2">
-			<form method="POST" action="../php/formsubmit" autocomplete="off" >
+			<form method="POST" action="../php/formsubmit.php" autocomplete="off" >
 			<div class="form-group">
 				<h4>Repeat Event</h4>
 				<div>
-					<select class="form-control" id="repeattype" onchange="checkSelected()">
+					<select class="form-control" id="repeattype" name="repeattype" onchange="checkSelected()">
 						<option value="0">Do not repeat</option>
 						<option value="1">Repeat Daily</option>
 						<option value="2">Repeat Weekly</option>
@@ -68,12 +71,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					</select>
 					<div id="repeatcal" style="display:none;">
 						<h5>Repeat Until:</h5>
-						<input type="date" class="form-control" id="repeatend" name="repeatend" />
+						<input type="date" class="form-control" name="enddate" />
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary btn-lg btn-block form-control mt-3">Reserve Room</button>
 			</div>
 				<input type="hidden" name="room" value="<?php global $room; echo $room; ?>">
+				<input type="hidden" name="date" value="<?php global $date; echo $date; ?>">
 				<input type="hidden" name="starttime" value="<?php global $starttime; echo $starttime; ?>">
 				<input type="hidden" name="endtime" value="<?php global $endtime; echo $endtime; ?>">
 			</form>

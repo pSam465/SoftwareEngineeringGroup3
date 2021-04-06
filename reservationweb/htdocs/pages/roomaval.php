@@ -148,15 +148,17 @@ function generatequery()
 					</div>
 				</div>
 				</div>
-				</form action="" method="POST">
+				</form>
 				<div class="row">
-					<input name="date" value="<?php echo $date ?>">
-					<input name="starttime" value="<?php echo $starttime ?>">
-					<input name="endtime" value="<?php echo $endtime ?>">
-					<input id="roomval" name="roomval">
-					<div class="col d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
-					</div>
+					<form  action="../pages/resdetails.php" method="POST">
+						<input name="date" value="<?php echo $date ?>">
+						<input name="starttime" value="<?php echo $starttime ?>">
+						<input name="endtime" value="<?php echo $endtime ?>">
+						<input id="roomval" name="room">
+						<div class="col d-flex justify-content-center">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
