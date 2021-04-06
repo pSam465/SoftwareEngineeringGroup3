@@ -1,4 +1,4 @@
-	<?php
+<?php
 include_once('../php/default.php');
 require_once('../php/checksession.php');
 require_once("../php/connect.php");
@@ -43,7 +43,7 @@ function showrooms()
 			exit("Unable to connect to DB");
 		}
 		$result = $conn->query($query);
-		if(!$result) die("Error.");
+			if(!$result) die("Error.");
 		$rows=$result->num_rows;
 		if($rows>0)
 		{
@@ -52,10 +52,11 @@ function showrooms()
 			{
 				$row = $result->fetch_array(MYSQLI_ASSOC);
 				$room = $row['building'] . " " . $row['roomNum'];
-
+				$id = $row['roomID'];
 				echo<<<_END
-				<tr>
+				<tr class="selectablerow">
 				<td>$room</td>
+				<td hidden id="roomid">$id</td>
 				</tr>
 				_END;
 			}
@@ -88,7 +89,7 @@ function generatequery()
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/reserve.css">
-
+	
 	<title>Room Reservation</title>
 </head>
 <body>
@@ -103,7 +104,7 @@ function generatequery()
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">
 					<div class="container scrollable">
-						<table class="table table-hover table-fixed" id="filtertable">
+						<table class="table table-hover table-fixed selectabletable" id="filtertable">
 							<thead><th scope="col">Room</th><thead>
 							<?php
 								showrooms();
@@ -148,14 +149,43 @@ function generatequery()
 				</div>
 				</div>
 				</form>
-				<div class="row">
-					<div class="col d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary btn-lg btn-block">Reserve Room</button>
+				<form  action="../pages/resdetails.php" method="POST">
+					<div class="row">
+					
+						<input hidden name="date" value="<?php echo $date ?>">
+						<input hidden name="starttime" value="<?php echo $starttime ?>">
+						<input hidden name="endtime" value="<?php echo $endtime ?>">
+						<input hidden id="roomval" name="room">
+						<div class="col d-flex justify-content-center">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../javascript/search.js"></script>
+
+<script type="text/javascript">
+	
+$(document).ready(function(){
+	$(".selectabletable").on('click', '.selectablerow', function(event){
+		if($(this).hasClass('table-info'))
+		{
+			$(this).removeClass('table-info');
+			$("#roomval").val(null);
+		}
+		else
+		{
+			$(this).addClass('table-info');
+			$("#roomval").val($("#roomid", this).html());
+		}
+		$(this).siblings().removeClass('table-info');
+	});
+});
+
+</script>
 </html>
