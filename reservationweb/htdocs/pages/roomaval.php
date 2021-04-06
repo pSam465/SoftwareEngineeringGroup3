@@ -151,7 +151,6 @@ function generatequery()
 				</form>
 				<form  action="../pages/resdetails.php" method="POST">
 					<div class="row">
-					
 						<input hidden name="date" value="<?php echo $date ?>">
 						<input hidden name="starttime" value="<?php echo $starttime ?>">
 						<input hidden name="endtime" value="<?php echo $endtime ?>">
