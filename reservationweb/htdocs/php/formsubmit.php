@@ -3,7 +3,7 @@ include_once('../php/default.php');
 require_once('../php/checksession.php');
 require_once("../php/connect.php");
 
-$room = $starttime = $endtime =  $startdate = $enddate = $repeattype = "";
+$room = $starttime = $endtime =  $startdate = $enddate = $repeattype = $uid = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	global $startdate;
 	global $enddate;
 	global $repeattype;
+	global $uid;
 
 	if(isset($_POST['room']))
 	{
@@ -38,6 +39,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$enddate = $_POST['enddate'];
 	}
+	if(isset($_SESSION['uid']))
+	{
+		$uid = $_SESSION['uid'];
+	}
 
 	$conn = connectDB();
 	if(!$conn)
@@ -47,14 +52,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 	echo "reserving from: ".$startdate." to: ".$enddate;
 	
-	reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn);
+	reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn, $uid);
 }
 else
 {
 	header("location:../index.php");
 }
 
-function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomid, $conn)
+function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomid, $conn, $uid)
 {
 	$repeatnum = $repeatinterval = "";
 	$sd = date_create($startdate);
@@ -89,9 +94,10 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 		$reservestart = $date->format('y-m-d')." ".$starttime.":00";
 		$reserveend = $date->format('y-m-d')." ".$endtime.":00";
 
+
 		if(checkifavailable($reservestart, $reserveend, $roomid, $conn))
 		{
-			$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$roomid', '$reservestart', '$reserveend', '0')"; //REPLACE UID
+			$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$roomid', '$reservestart', '$reserveend', '$uid')"; //REPLACE UID
 			$result = $conn->query($query);
 			echo "<br />Room reserved on ".$date->format('y-m-d');
 		}

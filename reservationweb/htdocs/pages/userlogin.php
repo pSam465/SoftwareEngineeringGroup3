@@ -57,6 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 
 				$_SESSION['valid'] = true;
 				$_SESSION['email'] = $row['email'];
+				$_SESSION['uid'] = $row['userID'];
 
 				$result = $conn->query($query);
 				if($row['position'] == "admin")

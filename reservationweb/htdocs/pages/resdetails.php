@@ -4,7 +4,7 @@ require_once('../php/checksession.php');
 require_once("../php/connect.php");
 defaultHeader();
 
-$room = $date = $starttime = $endtime = $repeattype = $endrepeat = "";
+$room = $date = $starttime = $endtime = $repeattype = $endrepeat = $roominfo = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -16,6 +16,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(isset($_POST['room']))
 	{
 		$room = $_POST['room'];
+
+		$conn = connectDB();
+		$query = "SELECT * FROM `room` WHERE roomID = $room;";
+		$result = $conn->query($query);
+		if(!$result) die("Could not get room details");
+		if(($result->num_rows)>0)
+		{
+			$row = $result->fetch_array(MYSQLI_ASSOC);
+			$roominfo = $row['building']." ".$row['roomNum'];
+		}
 	}
 	if(isset($_POST['date']))
 	{
@@ -50,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			<div>
 				<h3>Reservation Details</h3>
 					<div>
-						<span><h5>Room: </h5><?php echo $room; ?></span>
+						<span><h5>Room: </h5><?php echo $roominfo; ?></span>
 						<p><h5>Date: </h5><?php echo $date; ?></p>
 						<p><h5>Start Time: </h5><?php echo $starttime; ?></p>
 						<p><h5>End Time: </h5><?php echo $endtime; ?></p>
