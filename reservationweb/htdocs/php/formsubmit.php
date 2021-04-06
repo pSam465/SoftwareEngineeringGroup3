@@ -29,7 +29,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(isset($_POST['date']))
 	{
 		$startdate = $_POST['date'];
-		echo $startdate;
 	}
 	if(isset($_POST['repeattype']))
 	{
@@ -38,7 +37,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(isset($_POST['enddate']))
 	{
 		$enddate = $_POST['enddate'];
-		echo $enddate;
 	}
 
 	$conn = connectDB();
@@ -47,15 +45,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		exit("Unable to connect to DB");
 	}
 
-	if($repeattype==0)
-	{
-
-	}
-	else
-	{
-		//$isaval = checkifavailable($starttime, $endtime, $room, $conn);
-		reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn);
-	}
+	echo "reserving from: ".$startdate." to: ".$enddate;
+	
+	reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn);
 }
 else
 {
@@ -88,44 +80,41 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 			$repeatnum = $timediff->format('%y');
 			break;
 	}
-	echo $repeatnum;
+
 	for($i=0;$i<=$repeatnum;$i++)
 	{
 		$date = date_create($startdate);
 		$interval = $i.$repeatinterval;
 		date_add($date, date_interval_create_from_date_string($interval));
-		echo "<br />".$date->format('y-m-d');
 		$reservestart = $date->format('y-m-d')." ".$starttime.":00";
 		$reserveend = $date->format('y-m-d')." ".$endtime.":00";
 
-		if(checkifavailable($starttime, $endtime, $roomid, $conn))
+		if(checkifavailable($reservestart, $reserveend, $roomid, $conn))
 		{
 			$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$roomid', '$reservestart', '$reserveend', '0')"; //REPLACE UID
 			$result = $conn->query($query);
+			echo "<br />Room reserved on ".$date->format('y-m-d');
 		}
 		else
 		{
-			echo "Room not available on $reservestart";
+			echo "<br />Room not available on ".$date->format('y-m-d');
 		}
 	}
 }
 
 function checkifavailable($stime, $etime, $roomid, $conn)
 {
-	$query = "SELECT * FROM `roomreservation` WHERE roomID = $roomid AND '$stime' >= reservationStart AND '$etime' >= reservationEnd";
-	
+	$query = "SELECT * FROM `roomreservation` WHERE roomID = $roomid AND '$stime' >= reservationStart AND '$etime' <= reservationEnd";
 	$result = $conn->query($query);
 	if(!$result) die("Error.");
 	
 	$rows=$result->num_rows;
 	if($rows>0)
 	{
-		echo "not available";
 		return false;
 	}
 	else
 	{
-		echo "is available";
 		return true;
 	}
 }
