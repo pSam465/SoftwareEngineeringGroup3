@@ -49,15 +49,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		exit("Unable to connect to DB");
 	}
-
-	echo "reserving from: ".$startdate." to: ".$enddate;
 	
 	reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn, $uid);
+	sendToConf($room,$starttime,$endtime,$startdate,$enddate,$repeattype);
+
+	//header('Location:../pages/conf.php');
 }
-else
+/*else
 {
-	header("location:../index.php");
-}
+	header('Location:../index.php');
+}*/
 
 function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomid, $conn, $uid)
 {
@@ -129,4 +130,20 @@ function checkifavailable($stime, $etime, $roomid, $conn)
 	}
 }
 
+function sendToConf($r,$st,$et,$sd,$ed,$rt)
+{
+	echo "
+	<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
+
+		<input type = \"hidden\" name = \"room1\" value = \"$r\">
+		<input type = \"hidden\" name = \"start\" value = \"$st\">
+		<input type = \"hidden\" name = \"end\" value = \"$et\">
+		<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
+		<input type = \"hidden\" name = \"edate\" value = \"$ed\">
+		<input type = \"hidden\" name = \"rep\" value = \"$rt\">
+	</form>
+	<script type = \"text/javascript\">
+		document.getElementById('form1').submit();
+	  </script>";
+}
 ?>
