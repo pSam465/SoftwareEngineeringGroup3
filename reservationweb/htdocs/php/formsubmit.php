@@ -68,6 +68,10 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 
 	switch($repeattype)
 	{
+		case 0:
+			$repeatinterval = " days";
+			$repeatnum = 0;
+			break;
 		case 1:
 			$repeatinterval = " days";
 			$repeatnum = $timediff->format('%a');
