@@ -19,15 +19,15 @@ defaultHeader();
 	<div class="container-fluid ">
 		<div class="row" id="subnav md">
 			<div class="col-md-2 content-block">
-				<h5 class="links">Reservation Management</h5>
+				<h5 class="links" style="cursor: pointer;">Reservation Management</h5>
 				<div class="hideable">
-					<p onclick="loadcontent('../pages/roomaval.php')">Sub Links</p>
-					<p onclick="loadcontent('../pages/removeres.php')">Remove Reservations</p>
+					<p onclick="loadcontent('../pages/roomaval.php')" style="cursor: pointer;">Sub Links</p>
+					<p onclick="loadcontent('../pages/removeres.php')" style="cursor: pointer;">Remove Reservations</p>
 				</div>
-				<h5 class="links">User Management</h5>
+				<h5 class="links" style="cursor: pointer;">User Management</h5>
 				<div class="hideable">
-					<p onclick="loadcontent('../pages/roomaval.php')">Sub Links</p>
-					<p onclick="loadcontent('../pages/removeres.php')">Sub Links</p>
+					<p onclick="loadcontent('../pages/roomaval.php')" style="cursor: pointer;">Sub Links</p>
+					<p onclick="loadcontent('../pages/removeres.php')" style="cursor: pointer;">Sub Links</p>
 				</div>
 			</div>
 			<div class="col-md content-block">
