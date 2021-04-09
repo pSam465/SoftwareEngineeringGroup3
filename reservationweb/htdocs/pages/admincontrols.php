@@ -17,20 +17,20 @@ defaultHeader();
 </head>
 <body>
 	<div class="container-fluid ">
-		<div class="row content-block">
-			<nav>
-				Links
-				<button onclick ="loadcontent()">Test</button>
-			</nav>
-		</div>
-		<div class="row" id="subnav">
-			<div class="col col-sm-2 content-block">
-				Sub Links
-				Sub Links
-				Sub Links
-				Sub Links
+		<div class="row" id="subnav md">
+			<div class="col-md-2 content-block">
+				<h5 class="links">Reservation Management</h5>
+				<div class="hideable">
+					<p onclick="loadcontent('../pages/roomaval.php')">Sub Links</p>
+					<p onclick="loadcontent('../pages/removeres.php')">Remove Reservations</p>
+				</div>
+				<h5 class="links">User Management</h5>
+				<div class="hideable">
+					<p onclick="loadcontent('../pages/roomaval.php')">Sub Links</p>
+					<p onclick="loadcontent('../pages/removeres.php')">Sub Links</p>
+				</div>
 			</div>
-			<div class="col content-block">
+			<div class="col-md content-block">
 				<div id="content-display">
 					
 				</div>
@@ -39,13 +39,18 @@ defaultHeader();
 	</div>
 </body>
 
-<script type="text/javascript">
-function updatesubnav()
-{
-	var subnav = document.getElementById("subnav");
-}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-function loadcontent()
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".links").on("click", function(){
+		$(this).next().toggle(400);
+	});
+});
+</script>
+
+<script type="text/javascript">
+function loadcontent(url)
 {
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function()
@@ -55,7 +60,7 @@ function loadcontent()
 			document.getElementById("content-display").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", "../pages/roomaval.php", true);
+	xhttp.open("GET", url, true);
 	xhttp.send();
 }
 </script>
