@@ -12,7 +12,7 @@ function validatedate(id)
 {
 	var res = id.value;
 
-	var resDate = new Date(res+"Z");
+	var resDate = new Date(res);
 	var currentDate = new Date();
 	
 	var message = document.getElementById("datemsg");

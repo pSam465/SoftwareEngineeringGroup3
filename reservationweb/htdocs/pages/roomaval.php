@@ -123,7 +123,8 @@ function generatequery()
 							<h3>Select a Date</h3>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" />
+							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" onblur="validatedate(this)" />
+							<p id="datemsg" class="text-danger"></p>
 						</div>
 					</div>
 				</div>
@@ -149,7 +150,7 @@ function generatequery()
 				</div>
 				</div>
 				</form>
-				<form  action="../pages/resdetails.php" method="POST">
+				<form  action="../pages/resdetails.php" method="POST" onsubmit="return validatereservation(this)">
 					<div class="row">
 						<input hidden name="date" value="<?php echo $date ?>">
 						<input hidden name="starttime" value="<?php echo $starttime ?>">
@@ -167,6 +168,7 @@ function generatequery()
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../javascript/search.js"></script>
+<script type="text/javascript" src="../javascript/validation.js"></script>
 
 <script type="text/javascript">
 	
