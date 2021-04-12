@@ -32,7 +32,7 @@ require_once("./php/checksession.php");
     				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='default.asp'">Reserve Equipment</button>
     			<div class="w-100"></div>
     			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='default.asp'">Account Details</button>
+    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='./pages/userCancelRes.php'">Account Details</button>
     			</div>
     		
   			</div>

@@ -120,6 +120,8 @@
 							</p>
 							<p>An email has been sent confirming this reservation.</p>
 						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 1:
 						$repeat = "daily";
@@ -129,6 +131,8 @@
 							</p>
 							<p>An email has been sent confirming this reservation.</p>
 						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 2:
 						$repeat = "weekly";
@@ -138,6 +142,8 @@
 							</p>
 							<p>An email has been sent confirming this reservation.</p>
 						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 3:
 						$repeat = "monthly";
@@ -147,6 +153,8 @@
 							</p>
 							<p>An email has been sent confirming this reservation.</p>
 						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 4:
 						$repeat = "yearly";
@@ -156,10 +164,10 @@
 							</p>
 							<p>An Email Has Been Sent Confirming This Reservation.</p>
 						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 				}
-				mail($user,"Reservation Confirmation",
-					"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum","From: reservations@irissoln.com");
 			?>
 			<button id ="butt" type="button" class="btn btn-success" style="margin: 0;margin-left:20vw;position: relative;">Return to Home Page</button>
 		</div>
