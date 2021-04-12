@@ -2,12 +2,15 @@
 require_once("../php/connect.php");
 include_once("../php/default.php");
 require_once("../php/checksession.php");
+defaultHeader();
 $roomRN = "";
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/reserve.css">
 	<title>Reservation Removal</title>
 </head>
 <style>
@@ -16,9 +19,13 @@ $roomRN = "";
 		font-size: 24px;
 		color: black;
 	}
+	body
+	{
+		background-color: #1C4F9C;
+	}
 	.showForm
 	{
-		width: 50%;
+		width: 60vw;
 		height:auto;
 		text-align: center;
 		background-color: white;
@@ -32,9 +39,9 @@ $roomRN = "";
 	
 </style>
 <body>
-	<div class="showForm"><h1>Remove A Reservation</h1>
+	<div class="showForm"><h1>Cancel A Reservation</h1>
 		<?php
-			removeReservation();
+			removeUserReservation();
 		?>
 	</div>
 </body>
@@ -42,22 +49,29 @@ $roomRN = "";
 </html>
 
 <?php
-function removeReservation()
+function removeUserReservation()
 {
 		$conn = connectDB();
-		$numRowsQuery = $conn->query("SELECT * FROM roomreservation");
+		$un = $_SESSION['email'];
+
+		$getIDQ = $conn->query("SELECT `userID` FROM `user` WHERE `email`=\"$un\"") or die($conn->error);
+		$getIDA = $getIDQ->fetch_assoc();
+		$getID = $getIDA['userID'];
+		
+
+		$numRowsQuery = $conn->query("SELECT * FROM roomreservation where userID = \"$getID\"") or die($conn->error);
+
 		
 		$numRows = $numRowsQuery->num_rows;
-		echo "<form action=\"removehandle.php\" method=\"POST\">
+		echo "
+		<form action=\"userRemoveHandle.php\" method=\"POST\">
 		<table class = \"table\" style=\"width:100%; text-align:left;\">
 				 <thead>
 				    <tr>
 				      <th scope=\"col\">Select</th>
 				      <th scope=\"col\">Reservation Number</th>
-				      <th scope=\"col\">Room ID</th>
 				      <th scope=\"col\">Start Time</th>
 				      <th scope=\"col\">End Time</th>
-				      <th scope=\"col\">User ID</th>
 				    </tr>
 				  </thead>
 				  <tbody>";
@@ -65,20 +79,16 @@ function removeReservation()
 		{
 			$numRowsArr = $numRowsQuery->fetch_assoc();
 			$roomRN = $numRowsArr['roomResNum'];
-			$roomID = $numRowsArr['roomID'];
 			$st = $numRowsArr['reservationStart'];
 			$et = $numRowsArr['reservationEnd'];
-			$uID= $numRowsArr['userID'];
 
 			echo"<tr>
 			  <td>
 			  	<input type=\"checkbox\" name=\"remove[]\" value = \"$roomRN\"></input>
 			  </td>
 		      <td>$roomRN</td>
-		      <td>$roomID</td>
 		      <td>$st</td>
 		      <td>$et</td>
-		      <td>$uID</td>
 		    </tr>
 		    </form>";
 		}
@@ -86,9 +96,7 @@ function removeReservation()
 		</table>";
 		echo "
 		<div class=\"positonRemoveButton\">
-				<button type=\"submit\" style = \"font-weight: bold;\" name = \"removeThese\">Remove Reservation(s) From DB</button>
-		</div>
-		</form>";
-
+				<button type=\"submit\" style = \"font-weight: bold;\" name = \"removeThese\">Cancel Reservation(s)</button>
+		</div>";
 }
 ?>

@@ -1,6 +1,7 @@
 <?php
 	require_once('../php/default.php');
 	require_once('../php/checksession.php');
+	require_once("../php/connect.php");
 	defaultHeader();
 ?>
 
@@ -23,14 +24,158 @@
 	.whiteBG
 	{
 		background-color: white;
+		width: 50vw;
+		margin-top: 1vh;
+		margin-left: 25%;
+		height:20%;
 	}
 </style>
 <body>
 	<div class="body">
+		<div class = "whiteBG">
+			<h1 style="text-align: center;">Your Room Is Reserved</h1>
+			<?php
+				$conn = connectDB();
+				$roomID = $_POST['room1'];
+				$startTiempo = $_POST['start'];
+				$endTiempo = $_POST['end'];
+				$startDate = $_POST['sdate'];
+				$endDate = $_POST['edate'];
+				$rpType = $_POST['rep'];
+				$user = $_SESSION['email'];
+				$repeat = null;
 
-		<?php
-			var_dump($_POST);
-		?>
+				$findRoomType = "SELECT `roomType`,`roomNum` FROM `room` WHERE roomID = $roomID";
+				$result = $conn->query($findRoomType);
+				$outputResult = $result->fetch_assoc();
+				$output = $outputResult['roomType'];
+
+				$roomNum = $outputResult['roomNum'];
+				$output = strtolower($output);
+
+
+				$americanizedDate = date("m-d-Y",strtotime($startDate));
+				$endDate = date("m-d-Y",strtotime($endDate));
+
+				$explodeTime = explode(":", $startTiempo);
+				$explodeTime2 = explode(":", $endTiempo);
+
+				if(intval($explodeTime[0],10) >= 12)
+				{
+					if(intval($explodeTime[0],10) == 12)
+					{
+						$startTiempo = "12".":".$explodeTime[1]."PM";
+					}
+					else
+					{
+						$dec = intval($explodeTime[0],10) - 12;
+						$startTiempo = $dec.":".$explodeTime[1]."PM";
+					}
+				}
+				else if(intval($explodeTime[0],10) < 12)
+				{
+					if(intval($explodeTime[0],10) == 0)
+					{
+						$startTiempo = "12".":".$explodeTime[1]."AM";
+					}
+					else
+					{
+						$dec = intval($explodeTime[0],10);
+						$startTiempo = $dec.":".$explodeTime[1]."AM";
+					}
+				}
+
+				if(intval($explodeTime2[0],10) >= 12)
+				{
+					if(intval($explodeTime2[0],10) == 12)
+					{
+						$endTiempo = "12".":".$explodeTime2[1]."PM";
+					}
+					else
+					{
+						$dec = intval($explodeTime2[0],10) - 12;
+						$endTiempo = $dec.":".$explodeTime2[1]."PM";
+					}
+				}
+				else if(intval($explodeTime2[0],10) < 12)
+				{
+					if(intval($explodeTime2[0],10) == 0)
+					{
+						$endTiempo = "12".":".$explodeTime2[1]."AM";
+					}
+					else
+					{
+						$dec = intval($explodeTime2[0],10);
+						$endTiempo = $dec.":".$explodeTime2[1]."AM";
+					}
+				}
+				
+				switch ($rpType) 
+				{
+					case 0:
+						$repeat = "daily";
+						echo "<div>
+							<p>The $output is reserved under 
+								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.
+							</p>
+							<p>An email has been sent confirming this reservation.</p>
+						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
+						break;
+					case 1:
+						$repeat = "daily";
+						echo "<div>
+							<p>The $output is reserved under 
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+							</p>
+							<p>An email has been sent confirming this reservation.</p>
+						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
+						break;
+					case 2:
+						$repeat = "weekly";
+						echo "<div>
+							<p>The $output is reserved under 
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+							</p>
+							<p>An email has been sent confirming this reservation.</p>
+						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
+						break;
+					case 3:
+						$repeat = "monthly";
+						echo "<div>
+							<p>The $output is reserved under 
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+							</p>
+							<p>An email has been sent confirming this reservation.</p>
+						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
+						break;
+					case 4:
+						$repeat = "yearly";
+						echo "<div>
+							<p>The $output is reserved under 
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+							</p>
+							<p>An Email Has Been Sent Confirming This Reservation.</p>
+						</div>";
+						mail($user,"Reservation Confirmation",
+							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
+						break;
+				}
+			?>
+			<button id ="butt" type="button" class="btn btn-success" style="margin: 0;margin-left:20vw;position: relative;">Return to Home Page</button>
+		</div>
 	</div>
 </body>
+<script type="text/javascript">
+    document.getElementById("butt").onclick = function () {
+        location.href = "../index.php";
+    };
+</script>
 </html>

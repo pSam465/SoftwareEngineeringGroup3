@@ -104,11 +104,11 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 		{
 			$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$roomid', '$reservestart', '$reserveend', '$uid')"; //REPLACE UID
 			$result = $conn->query($query);
-			echo "<br />Room reserved on ".$date->format('y-m-d');
+			//echo "<br />Room reserved on ".$date->format('y-m-d');
 		}
 		else
 		{
-			echo "<br />Room not available on ".$date->format('y-m-d');
+			//echo "<br />Room not available on ".$date->format('y-m-d');
 		}
 	}
 }
