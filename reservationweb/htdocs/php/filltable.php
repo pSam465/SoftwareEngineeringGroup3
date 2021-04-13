@@ -1,64 +1,68 @@
 <?php
 require_once("../php/connect.php");
 
-$date = $starttime = $endtime = $askquery = "";
-
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-	global $date;
-	global $starttime;
-	global $endtime;
-	global $askquery;
-	
-	//Set all of the submitted variales
-	if(!empty($_POST['date']))
-	{
-		$date = $_POST['date'];
-	}
-	if(!empty($_POST['starttime']))
-	{
-		$starttime = $_POST['starttime'];
-	}
-	if(!empty($_POST['endtime']))
-	{
-		$endtime = $_POST['endtime'];
-	}
-	if(!empty($_POST['askquery']))
-	{
-		$askquery = $_POST['askquery'];
-	}
-}
+showrooms();
 
 function showrooms()
 {
-	$query = generatequery();
-	if(!empty($query))
+	if($_SERVER["REQUEST_METHOD"] == "GET")
 	{
-		$conn = connectDB();
-		if(!$conn)
+		$date = $starttime = $endtime = "";
+		if(!empty($_GET['date']))
 		{
-			exit("Unable to connect to DB");
+			$date = $_GET['date'];
 		}
-		$result = $conn->query($query);
-			if(!$result) die("Error.");
-		$rows=$result->num_rows;
-		if($rows>0)
+		if(!empty($_GET['starttime']))
 		{
-			echo "<tbody id=\"tablebody\">";
-			for($i=0; $i<$rows; $i++)
+			$starttime = $_GET['starttime'];
+		}
+		if(!empty($_GET['endtime']))
+		{
+			$endtime = $_GET['endtime'];
+		}
+
+		$query = generatequery($date, $starttime, $endtime);
+		if(!empty($query))
+		{
+			$conn = connectDB();
+			if(!$conn)
 			{
-				$row = $result->fetch_array(MYSQLI_ASSOC);
-				$room = $row['building'] . " " . $row['roomNum'];
-				$id = $row['roomID'];
-				echo<<<_END
-				<tr class="selectablerow">
-				<td>$room</td>
-				<td hidden id="roomid">$id</td>
-				</tr>
-				_END;
+				exit("Unable to connect to DB");
 			}
-			echo "</tbody>";
+			$result = $conn->query($query);
+				if(!$result) die("Error.");
+			$rows=$result->num_rows;
+			if($rows>0)
+			{
+				echo "<tbody id=\"tablebody\">";
+				for($i=0; $i<$rows; $i++)
+				{
+					$row = $result->fetch_array(MYSQLI_ASSOC);
+					$room = $row['building'] . " " . $row['roomNum'];
+					$id = $row['roomID'];
+					echo<<<_END
+					<tr class="selectablerow">
+					<td>$room</td>
+					<td hidden id="roomid">$id</td>
+					</tr>
+					_END;
+				}
+				echo "</tbody>";
+			}
 		}
 	}
+}
+
+function generatequery($date, $starttime, $endtime)
+{
+	$query = "";
+
+	if(!(empty($date) && empty($starttime) && empty($endtime)))
+	{
+		$startdate = $date." ".$starttime.":00";
+		$enddate = $date." ".$endtime.":00";
+		$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '$startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart);";
+	}
+	return $query;
 }
 ?>

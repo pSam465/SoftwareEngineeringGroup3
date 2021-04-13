@@ -1,9 +1,13 @@
 function validatereservation(form)
 {
+	var resDate = document.getElementById("date");
 	var stime = document.getElementById("starttime");
 	var etime = document.getElementById("endtime");
-	
-	var resDate = document.getElementById("date")
+
+	//Set the values of the submission
+	document.getElementById("datesubmit").value = resDate.value;
+	document.getElementById("starttimesubmit").value = stime.value;
+	document.getElementById("endtimesubmit").value = etime.value;
 
 	if(validatetimes(stime, etime) && validatedate(resDate))
 	{
@@ -21,9 +25,20 @@ function validatetimes(sid, eid)
 	var etime = eid.value;
 	var message = document.getElementById("timemsg");
 
-	message.innerHTML = "start: " + stime + " end: " + etime;
-	
-	return false;
+	var isValid = false;
+
+	if(stime >= etime)
+	{
+		message.innerHTML = "Start time must occur before the end time";
+		return false;
+	}
+	else
+	{
+		message.innerHTML = ""
+		isValid = true;
+	}
+
+	return isValid;
 }
 
 function validatedate(id)
