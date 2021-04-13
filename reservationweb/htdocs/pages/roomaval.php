@@ -115,7 +115,7 @@ function generatequery()
 				</div>
 			</div>
 			<div class="col-md">
-				<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
+				<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" onsubmit="return validatereservation(this)">
 				<div class="content-block">
 				<div class="row">
 					<div class="col d-flex justify-content-center">
@@ -189,4 +189,21 @@ $(document).ready(function(){
 });
 
 </script>
+
+<script type="text/javascript">
+function updateTable()
+{
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+			document.getElementById("filtertable").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", url, true);
+	xhttp.send();
+}
+</script>
+
 </html>
