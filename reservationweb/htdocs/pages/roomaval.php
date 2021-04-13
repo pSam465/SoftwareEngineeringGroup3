@@ -57,6 +57,7 @@ function showrooms()
 				<tr class="selectablerow">
 				<td>$room</td>
 				<td hidden id="roomid">$id</td>
+				<input type="button> value="Room Information" id="roomInfoPop">
 				</tr>
 				_END;
 			}
@@ -184,6 +185,14 @@ $(document).ready(function(){
 		}
 		$(this).siblings().removeClass('table-info');
 	});
+});
+
+</script>
+
+<script type="text/javascript">
+
+$("#roomInfoPop").click(function(){
+	alert("Button was clicked.")
 });
 
 </script>
