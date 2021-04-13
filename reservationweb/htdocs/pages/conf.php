@@ -27,7 +27,7 @@
 		width: 50vw;
 		margin-top: 1vh;
 		margin-left: 25%;
-		height:20%;
+		height:auto;
 	}
 </style>
 <body>
@@ -116,7 +116,7 @@
 						$repeat = "daily";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum. An Email Has Been Sent Confirming This Reservation.
+								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
 						mail($user,"Reservation Confirmation",
@@ -126,7 +126,7 @@
 						$repeat = "daily";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum. An Email Has Been Sent Confirming This Reservation.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
 						mail($user,"Reservation Confirmation",
@@ -136,7 +136,7 @@
 						$repeat = "weekly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.An Email Has Been Sent Confirming This Reservation.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br>An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
 						mail($user,"Reservation Confirmation",
@@ -146,7 +146,7 @@
 						$repeat = "monthly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum. An Email Has Been Sent Confirming This Reservation.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
 						mail($user,"Reservation Confirmation",
@@ -156,7 +156,7 @@
 						$repeat = "yearly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum. An Email Has Been Sent Confirming This Reservation.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
 						mail($user,"Reservation Confirmation",
