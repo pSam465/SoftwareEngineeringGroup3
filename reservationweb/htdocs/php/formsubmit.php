@@ -132,9 +132,37 @@ function checkifavailable($stime, $etime, $roomid, $conn)
 
 function sendToConf($r,$st,$et,$sd,$ed,$rt)
 {
+	$repeating = 0;
+	$conn = connectDB();
+	$user = $_SESSION['email'];
+	$result = $conn->query("SELECT `roomNum`,`roomType` FROM `room` WHERE roomID = $r");
+	$outputResult = $result->fetch_assoc();
+	$output = $outputResult['roomNum'];
+	$roomSelected = $outputResult['roomType'];
+
+	echo $output;
+
+	switch ($rt) 
+	{
+		case 0:
+			$repeating = " Never";
+			break;
+		case 1:
+			$repeating = " Daily";
+			break;
+		case 2:
+			$repeating = " Weekly";
+			break;
+		case 3:
+			$repeating = " Monthly";
+			break;
+		case 4:
+			$repeating = " Yearly";
+			break;
+	}
+
 	echo "
 	<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
-
 		<input type = \"hidden\" name = \"room1\" value = \"$r\">
 		<input type = \"hidden\" name = \"start\" value = \"$st\">
 		<input type = \"hidden\" name = \"end\" value = \"$et\">
@@ -145,5 +173,8 @@ function sendToConf($r,$st,$et,$sd,$ed,$rt)
 	<script type = \"text/javascript\">
 		document.getElementById('form1').submit();
 	  </script>";
+
+	  mail($user,"Reservation Confirmation",
+			"Room Type: $roomSelected\nDate: $sd\nTime: $st-$et\nRoom Number: $output\nRepeating:$repeating","From: reservations@irissoln.com");
 }
 ?>
