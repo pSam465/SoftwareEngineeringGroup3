@@ -116,45 +116,40 @@
 						$repeat = "daily";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.
+								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
-							<p>An email has been sent confirming this reservation.</p>
 						</div>";
 						break;
 					case 1:
 						$repeat = "daily";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
-							<p>An email has been sent confirming this reservation.</p>
 						</div>";
 						break;
 					case 2:
 						$repeat = "weekly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br>An Email Has Been Sent Confirming This Reservation.
 							</p>
-							<p>An email has been sent confirming this reservation.</p>
 						</div>";
 						break;
 					case 3:
 						$repeat = "monthly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
-							<p>An email has been sent confirming this reservation.</p>
 						</div>";
 						break;
 					case 4:
 						$repeat = "yearly";
 						echo "<div>
 							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.
+								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
-							<p>An Email Has Been Sent Confirming This Reservation.</p>
 						</div>";
 						break;
 				}
