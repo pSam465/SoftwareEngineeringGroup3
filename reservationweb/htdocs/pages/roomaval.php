@@ -6,6 +6,7 @@ defaultHeader();
 
 $date = $starttime = $endtime = $askquery = "";
 
+
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	global $date;
@@ -81,6 +82,7 @@ function generatequery()
 	}
 	return $query;
 }
+
 ?>
 
 <html lang="en">
@@ -107,57 +109,62 @@ function generatequery()
 					<div class="container scrollable">
 						<table class="table table-hover table-fixed selectabletable" id="filtertable">
 							<thead><th scope="col">Room</th><thead>
-							<?php
-								showrooms();
-							?>
 						</table>
 					</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md">
-				<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off" />
 				<div class="content-block">
-				<div class="row">
+				<div class="row m-0">
 					<div class="col d-flex justify-content-center">
 						<div class="align-self-center">
 							<h3>Select a Date</h3>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" />
+							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" onblur="validatedate(this)" />
 						</div>
 					</div>
 				</div>
+				<div class="row m-0 p-0">
+					<div class="col d-flex justify-content-center">
+						<p id="datemsg" class="text-danger"></p>
+					</div>
+				</div>
 				<hr class="rounded">
-				<div class="row">
+				<div class="row m-0">
 					<div class="col d-flex justify-content-center">
 						<div class="align-self-center">
 							<h3>Select a Time</h3>
 						</div>
 						<div class="form-group">	
-							Start<input type="time" class="form-control" id="starttime" name="starttime" value="<?php echo $starttime ?>" />
+							Start<input type="time" class="form-control" id="starttime" name="starttime" />
 						</div>
 						<div class="form-group">
-							End<input type="time" class="form-control" id="endtime" name="endtime" value="<?php echo $endtime ?>" />
+							End<input type="time" class="form-control" id="endtime" name="endtime" />
 						</div>
+					</div>
+				</div>
+				<div class="row m-0 p-0">
+					<div class="col d-flex justify-content-center">
+						<p id="timemsg" class="text-danger"></p>
 					</div>
 				</div>
 				<hr class="rounded">
 				<div class="row">
 					<div class="col d-flex justify-content-center">
-						<button type="submit" class="btn btn-outline-info btn-lg btn-block">Find a Room</button>
+						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForRooms()">Find a Room</button>
 					</div>
 				</div>
 				</div>
-				</form>
-				<form  action="../pages/resdetails.php" method="POST">
+				<form  action="../pages/resdetails.php" method="POST" onsubmit="return validatereservation(this)">
 					<div class="row">
-						<input hidden name="date" value="<?php echo $date ?>">
-						<input hidden name="starttime" value="<?php echo $starttime ?>">
-						<input hidden name="endtime" value="<?php echo $endtime ?>">
-						<input hidden id="roomval" name="room">
+						<input hidden name="date" id="datesubmit">
+						<input hidden name="starttime" id="starttimesubmit">
+						<input hidden name="endtime" id="endtimesubmit">
+						<input hidden name="room" id="roomval">
 						<div class="col d-flex justify-content-center">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
+							<button type="submit" id="submitbtn" class="btn btn-primary btn-lg btn-block" disabled>Apply for Room</button>
 						</div>
 					</div>
 				</form>
@@ -168,9 +175,9 @@ function generatequery()
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="../javascript/search.js"></script>
+<script type="text/javascript" src="../javascript/validation.js"></script>
 
 <script type="text/javascript">
-	
 $(document).ready(function(){
 	$(".selectabletable").on('click', '.selectablerow', function(event){
 		if($(this).hasClass('table-info'))
@@ -184,16 +191,45 @@ $(document).ready(function(){
 			$("#roomval").val($("#roomid", this).html());
 		}
 		$(this).siblings().removeClass('table-info');
+		$("#submitbtn").removeAttr("disabled");
 	});
 });
+</script>
 
+<script type="text/javascript">
+function lookForRooms()
+{
+	if(validatereservation(this))
+	{
+		updateTable();
+	}
+}
+
+function updateTable()
+{
+	var date = document.getElementById("date");
+	var starttime = document.getElementById("starttime");
+	var endtime = document.getElementById("endtime");
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+			document.getElementById("filtertable").innerHTML = this.responseText;
+		}
+	};
+	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}`, true);
+	xhttp.send();
+}
 </script>
 
 <script type="text/javascript">
 
-$("#roomInfoBtn").on('click', function() {
+$(".roomInfoBtn").on('click', function() {
 	alert("Button was clicked.")
 });
 
 </script>
+
 </html>
