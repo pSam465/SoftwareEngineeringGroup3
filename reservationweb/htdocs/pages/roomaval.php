@@ -75,7 +75,7 @@ $date = $starttime = $endtime = $askquery = "";
 				<hr class="rounded">
 				<div class="row">
 					<div class="col d-flex justify-content-center">
-						<button class="btn btn-outline-info btn-lg btn-block" onclick="updateTable();validatereservation(this)">Find a Room</button>
+						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForRooms()">Find a Room</button>
 					</div>
 				</div>
 				</div>
@@ -84,9 +84,9 @@ $date = $starttime = $endtime = $askquery = "";
 						<input hidden name="date" id="datesubmit">
 						<input hidden name="starttime" id="starttimesubmit">
 						<input hidden name="endtime" id="endtimesubmit">
-						<input hidden id="roomval" name="room">
+						<input hidden name="room" id="roomval">
 						<div class="col d-flex justify-content-center">
-							<button type="submit" class="btn btn-primary btn-lg btn-block">Apply for Room</button>
+							<button type="submit" id="submitbtn" class="btn btn-primary btn-lg btn-block" disabled>Apply for Room</button>
 						</div>
 					</div>
 				</form>
@@ -100,7 +100,6 @@ $date = $starttime = $endtime = $askquery = "";
 <script type="text/javascript" src="../javascript/validation.js"></script>
 
 <script type="text/javascript">
-	
 $(document).ready(function(){
 	$(".selectabletable").on('click', '.selectablerow', function(event){
 		if($(this).hasClass('table-info'))
@@ -114,12 +113,20 @@ $(document).ready(function(){
 			$("#roomval").val($("#roomid", this).html());
 		}
 		$(this).siblings().removeClass('table-info');
+		$("#submitbtn").removeAttr("disabled");
 	});
 });
-
 </script>
 
 <script type="text/javascript">
+function lookForRooms()
+{
+	if(validatereservation(this))
+	{
+		updateTable();
+	}
+}
+
 function updateTable()
 {
 	var date = document.getElementById("date");

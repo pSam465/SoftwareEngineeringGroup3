@@ -27,7 +27,12 @@ function validatetimes(sid, eid)
 
 	var isValid = false;
 
-	if(stime >= etime)
+	if(stime == "" || etime == "")
+	{
+		message.innerHTML = "Times must be filled out"
+		return false;
+	}
+	else if(stime >= etime)
 	{
 		message.innerHTML = "Start time must occur before the end time";
 		return false;
@@ -46,22 +51,22 @@ function validatedate(id)
 	var res = id.value;
 	var message = document.getElementById("datemsg");
 
-	var resDate = new Date(res);
+	var dateParts = res.split("-");
+	var year = dateParts[0];
+	var month = dateParts[1];
+	var day = dateParts[2];
+
+	var resDate = new Date(res+"T00:00:00");
 	var currentDate = new Date();
-	
-	var currentUTC = new Date(currentDate.toUTCString())
-	var resUTC = new Date(resDate.toUTCString());
 
 	if(res == "")
 	{
 		message.innerHTML = "Date must be filled out";
 		return false;
 	}
-	else if(currentUTC.getTime() > resUTC.getTime())
+	else if(currentDate.getTime() > resDate.getTime())
 	{
-		message.innerHTML = currentDate.toString() + resDate.toString();
-		message.innerHTML += "Current time: "+currentUTC.getTime()+" Res time: "+resUTC.getTime();
-		//message.innerHTML = "Reservation date must be past the current date";
+		message.innerHTML = "Reservation date must be past the current date";
 		return false;
 	}
 	else
@@ -69,9 +74,6 @@ function validatedate(id)
 		message.innerHTML = "";
 		return true;
 	}
-
-	//message.innerHTML = currentUTC.toString();
-	//message.innerHTML += resUTC.toUTCString();
 
 	return true;
 }
