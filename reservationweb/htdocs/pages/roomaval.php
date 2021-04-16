@@ -6,83 +6,6 @@ defaultHeader();
 
 $date = $starttime = $endtime = $askquery = "";
 
-
-if($_SERVER["REQUEST_METHOD"] == "POST")
-{
-	global $date;
-	global $starttime;
-	global $endtime;
-	global $askquery;
-	
-	//Set all of the submitted variales
-	if(!empty($_POST['date']))
-	{
-		$date = $_POST['date'];
-	}
-	if(!empty($_POST['starttime']))
-	{
-		$starttime = $_POST['starttime'];
-	}
-	if(!empty($_POST['endtime']))
-	{
-		$endtime = $_POST['endtime'];
-	}
-	if(!empty($_POST['askquery']))
-	{
-		$askquery = $_POST['askquery'];
-	}
-}
-
-function showrooms()
-{
-	$query = generatequery();
-	if(!empty($query))
-	{
-		$conn = connectDB();
-		if(!$conn)
-		{
-			exit("Unable to connect to DB");
-		}
-		$result = $conn->query($query);
-			if(!$result) die("Error.");
-		$rows=$result->num_rows;
-		if($rows>0)
-		{
-			echo "<tbody id=\"tablebody\">";
-			for($i=0; $i<$rows; $i++)
-			{
-				$row = $result->fetch_array(MYSQLI_ASSOC);
-				$room = $row['building'] . " " . $row['roomNum'];
-				$id = $row['roomID'];
-				echo<<<_END
-				<tr class="selectablerow">
-				<td>$room</td>
-				<td hidden id="roomid">$id</td>
-				<td><input type="button" value="Room Information" id="roomInfoBtn"></td>
-				</tr>
-				_END;
-			}
-			echo "</tbody>";
-		}
-	}
-}
-
-function generatequery()
-{
-	global $date;
-	global $starttime;
-	global $endtime;
-	$query = "";
-
-	if(!(empty($date) && empty($starttime) && empty($endtime)))
-	{
-		$startdate = $date." ".$starttime.":00";
-		$enddate = $date." ".$endtime.":00";
-		$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '$startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart);";
-	}
-	return $query;
-}
-
 ?>
 
 <html lang="en">
@@ -226,8 +149,8 @@ function updateTable()
 
 <script type="text/javascript">
 
-$(".roomInfoBtn").on('click', function() {
-	alert("Button was clicked.")
+$(".roomInfoBtn").on('click', ".description", function() {
+	alert($(this).html())
 });
 
 </script>
