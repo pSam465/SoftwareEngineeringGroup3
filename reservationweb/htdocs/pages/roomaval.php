@@ -102,6 +102,10 @@ $date = $starttime = $endtime = $askquery = "";
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".selectabletable").on('click', '.roomInfoBtn', function(event){
+		alert($(this).find(".description").html());
+	});	
+
 	$(".selectabletable").on('click', '.selectablerow', function(event){
 		if($(this).hasClass('table-info'))
 		{
@@ -145,14 +149,6 @@ function updateTable()
 	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}`, true);
 	xhttp.send();
 }
-</script>
-
-<script type="text/javascript">
-
-$(".roomInfoBtn").on('click', ".description", function() {
-	alert($(this).html())
-});
-
 </script>
 
 </html>

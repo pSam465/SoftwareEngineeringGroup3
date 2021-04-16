@@ -43,10 +43,13 @@ function showrooms()
 					$desc = $row['roomID'];
 					echo<<<_END
 					<tr class="selectablerow">
-					<td>$room</td>
-					<td hidden id="roomid">$id</td>
-					<td><input type="button" value="Room Information" id="roomInfoBtn"></td>
-					<td hidden id="roomDesc" class="description">$desc</td>
+						<td>$room</td>
+						<td hidden id="roomid">$id</td>
+						<td> <button type="button" id="roomInfoBtn" class="roomInfoBtn"> 
+							Room Information 
+							<p hidden class="description">$desc</p> 
+							</button> 
+						</td>
 					</tr>
 					_END;
 				}
