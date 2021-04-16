@@ -57,7 +57,7 @@ function showrooms()
 				<tr class="selectablerow">
 				<td>$room</td>
 				<td hidden id="roomid">$id</td>
-				<input type="button> value="Room Information" id="roomInfoPop">
+				<td><input type="button" value="Room Information" id="roomInfoBtn"></td>
 				</tr>
 				_END;
 			}
@@ -191,7 +191,7 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
-$("#roomInfoPop").click(function(){
+$("#roomInfoBtn").on('click', function() {
 	alert("Button was clicked.")
 });
 
