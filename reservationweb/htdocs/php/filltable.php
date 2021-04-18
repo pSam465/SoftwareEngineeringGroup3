@@ -40,10 +40,17 @@ function showrooms()
 					$row = $result->fetch_array(MYSQLI_ASSOC);
 					$room = $row['building'] . " " . $row['roomNum'];
 					$id = $row['roomID'];
+					$desc = $row['roomDesc'];
 					echo<<<_END
 					<tr class="selectablerow">
-					<td>$room</td>
-					<td hidden id="roomid">$id</td>
+						<td>$room</td>
+						<td hidden id="roomid">$id</td>
+						<td> <button type="button" id="roomInfoBtn" class="roomInfoBtn"> 
+							Room Information
+							<p hidden class="roomInfo">$room</p> 
+							<p hidden class="description">$desc</p> 
+							</button> 
+						</td>
 					</tr>
 					_END;
 				}

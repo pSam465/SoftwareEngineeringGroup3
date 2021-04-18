@@ -5,6 +5,7 @@ require_once("../php/connect.php");
 defaultHeader();
 
 $date = $starttime = $endtime = $askquery = "";
+
 ?>
 
 <html lang="en">
@@ -101,6 +102,10 @@ $date = $starttime = $endtime = $askquery = "";
 
 <script type="text/javascript">
 $(document).ready(function(){
+	$(".selectabletable").on('click', '.roomInfoBtn', function(event){
+		alert($(this).find(".roomInfo").html() + "\n" + $(this).find(".description").html());
+	});	
+
 	$(".selectabletable").on('click', '.selectablerow', function(event){
 		if($(this).hasClass('table-info'))
 		{
