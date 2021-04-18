@@ -1,54 +1,69 @@
--- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: project
--- ------------------------------------------------------
--- Server version	8.0.23
+-- Host: 127.0.0.1
+-- Generation Time: Apr 18, 2021 at 04:42 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `project`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `room`
 --
 
-DROP TABLE IF EXISTS `room`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room` (
-  `roomID` int NOT NULL,
+  `roomID` int(11) NOT NULL,
   `roomType` char(100) NOT NULL,
   `building` char(100) NOT NULL,
-  `roomNum` int NOT NULL,
+  `roomNum` int(11) NOT NULL,
   `roomAvailability` tinyint(1) NOT NULL,
-  PRIMARY KEY (`roomID`)
+  `roomDesc` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `room`
 --
 
-LOCK TABLES `room` WRITE;
-/*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (100,'Study Room','Ina Dillard Russel Library',324,1),(101,'Lecture Hall','Arts and Science',264,1),(102,'Computer Lab','Arts and Science',234,1),(103,'Computer Lab','Atkinson',104,1),(104,'Lecture Hall','Atkinson',215,1),(105,'Study Room','Ina Dillard Russel Library',403,1),(106,'Large Lecture Hall','Arts and Science',354,1),(107,'Study Room','Ina Dillard Russel Library',234,1),(108,'Study Room','Ina Dillard Russel Library',252,1),(109,'Study Room','Ina Dillard Russel Library',234,1);
-/*!40000 ALTER TABLE `room` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `room` (`roomID`, `roomType`, `building`, `roomNum`, `roomAvailability`, `roomDesc`) VALUES
+(100, 'Study Room', 'Ina Dillard Russel Library', 324, 1, 'test data ina 324'),
+(101, 'Lecture Hall', 'Arts and Science', 264, 1, 'test data a&s 264'),
+(102, 'Computer Lab', 'Arts and Science', 234, 1, 'test data a&s 234'),
+(103, 'Computer Lab', 'Atkinson', 104, 1, 'test data stk 104'),
+(104, 'Lecture Hall', 'Atkinson', 215, 1, 'test data atk 215'),
+(105, 'Study Room', 'Ina Dillard Russel Library', 403, 1, 'test data ina 403'),
+(106, 'Large Lecture Hall', 'Arts and Science', 354, 1, 'test data a&s 354'),
+(107, 'Study Room', 'Ina Dillard Russel Library', 234, 1, 'test data ina 234'),
+(108, 'Study Room', 'Ina Dillard Russel Library', 252, 1, 'test data in 252'),
+(109, 'Study Room', 'Ina Dillard Russel Library', 234, 1, 'test data ina 234 v2');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `room`
+--
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`roomID`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-02-18 23:05:34
