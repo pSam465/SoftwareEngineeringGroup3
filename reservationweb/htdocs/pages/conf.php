@@ -119,8 +119,6 @@
 								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
-						mail($user,"Reservation Confirmation",
-							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 1:
 						$repeat = "daily";
@@ -129,8 +127,6 @@
 								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
-						mail($user,"Reservation Confirmation",
-							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 2:
 						$repeat = "weekly";
@@ -139,8 +135,6 @@
 								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br>An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
-						mail($user,"Reservation Confirmation",
-							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 3:
 						$repeat = "monthly";
@@ -149,8 +143,6 @@
 								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
-						mail($user,"Reservation Confirmation",
-							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 					case 4:
 						$repeat = "yearly";
@@ -159,8 +151,6 @@
 								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
 							</p>
 						</div>";
-						mail($user,"Reservation Confirmation",
-							"Room Type: $output\nDate:$startDate\nTime:$startTiempo-$endTiempo\nRoom Number: $roomNum\nRepeating:$repeat","From: reservations@irissoln.com");
 						break;
 				}
 			?>
