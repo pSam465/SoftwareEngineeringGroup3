@@ -21,26 +21,23 @@ require_once("./php/checksession.php");
 
     	?>
 		<br> <br> <br>
-    	<div class="container">
+    	<div class="container-fluid">
     		
   			<div class="row align-items-center">
-    			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='./pages/roomaval.php'">Reserve a Room</button>
+    			<div class="col-4 " >
+    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/roomRes.php'">Reserve a Room</button>
+    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/equipRes.php'">Reserve Equipment</button>
+          </div>
+    			<div class="col-4 ">
+    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/userInfo.php'">Account Details</button>
     			</div>
-    			<div class="w-100"></div>
-    			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='default.asp'">Reserve Equipment</button>
-    			<div class="w-100"></div>
-    			<div class="col align-self-center">
-    				<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="document.location='./pages/userCancelRes.php'">Account Details</button>
-    			</div>
+          <div class="col-4 ">
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/pastResViews.php'">View Past Reservations</button>
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/removeRes.php'">Remove a Reservations</button>
+          </div>
     		
   			</div>
-		</div>
-
-
-
-
+		  </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -49,17 +46,23 @@ require_once("./php/checksession.php");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
   <footer>
-    <?php
-    if(!isset($_SESSION['valid']))
-    {
-      echo "<a href=\"./pages/userlogin.php\">Login</a><br>";
-    }
-    else
-    {
-      echo "<a href=\"./php/logout.php\">Logout</a><br>";
-    }
-  	
-    ?>
-	<a href="phpmyadmin">PHP Admin</a>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <?php
+          if(!isset($_SESSION['valid']))
+          {
+            echo "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick=\"document.location='./pages/userlogin.php'\">Log In</button>";
+          }
+          else
+          {
+            echo "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick=\"document.location='./php/utlogo.php'\">Log Out</button>";
+          }
+        	
+          ?>
+          <button type="button" class="btn btn-primary btn-xs" onclick="document.location='./pages/adminmain.php'">Admin Page</button>
+        </div>
+      </div>
+    </div>
   </footer>
 </html>
