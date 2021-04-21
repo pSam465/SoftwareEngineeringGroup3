@@ -18,14 +18,13 @@ require_once("./php/checksession.php");
 		<?php
     		require_once './php/default.php';
     		defaultHeader();
-
     	?>
 		<br> <br> <br>
     	<div class="container-fluid">
     		
   			<div class="row align-items-center">
     			<div class="col-4 " >
-    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/roomRes.php'">Reserve a Room</button>
+    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/roomAval.php'">Reserve a Room</button>
     				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/equipRes.php'">Reserve Equipment</button>
           </div>
     			<div class="col-4 ">
@@ -60,7 +59,7 @@ require_once("./php/checksession.php");
           }
         	
           ?>
-          <button type="button" class="btn btn-primary btn-xs" onclick="document.location='./pages/adminmain.php'">Admin Page</button>
+          <button type="button" class="btn btn-primary btn-xs" onclick="document.location='./pages/admincontrols.php'">Admin Page</button>
         </div>
       </div>
     </div>

@@ -45,7 +45,7 @@ function showrooms()
 					<tr class="selectablerow">
 						<td>$room</td>
 						<td hidden id="roomid">$id</td>
-						<td> <button type="button" id="roomInfoBtn" class="roomInfoBtn"> 
+						<td> <button type="button" id="roomInfoBtn" class="roomInfoBtn btn btn-outline-secondary"> 
 							Room Information
 							<p hidden class="roomInfo">$room</p> 
 							<p hidden class="description">$desc</p> 
