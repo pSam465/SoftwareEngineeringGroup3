@@ -32,7 +32,7 @@ require_once("./php/checksession.php");
     			</div>
           <div class="col-4 ">
             <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/pastResViews.php'">View Past Reservations</button>
-            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/removeRes.php'">Remove a Reservations</button>
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/userCancelRes.php'">Cancel a Reservation</button>
           </div>
     		
   			</div>
@@ -55,7 +55,7 @@ require_once("./php/checksession.php");
           }
           else
           {
-            echo "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick=\"document.location='./php/utlogo.php'\">Log Out</button>";
+            echo "<button type=\"button\" class=\"btn btn-primary btn-xs\" onclick=\"document.location='./php/logout.php'\">Log Out</button>";
           }
         	
           ?>

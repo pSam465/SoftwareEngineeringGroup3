@@ -38,7 +38,6 @@ $roomRN = "";
 		?>
 	</div>
 </body>
-
 </html>
 
 <?php
