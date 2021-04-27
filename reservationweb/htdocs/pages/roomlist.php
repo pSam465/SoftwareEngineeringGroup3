@@ -32,6 +32,7 @@ require_once("../php/connect.php");
 					<th scope="col">Room Number</th>
 					<th scope="col">Building</th>
 					<th scope="col">Room Type</th>
+					<th scope="col">Description</th>
 					<th scope="col">Availability</th>
 				<thead>
 					<?php
@@ -57,6 +58,7 @@ require_once("../php/connect.php");
 							$building = $row['building'];
 							$roomNum = $row['roomNum'];
 							$avail = $row['roomAvailability'];
+							$desc = $row['roomDesc'];
 
 							echo<<<_END
 							<tr>
@@ -65,6 +67,7 @@ require_once("../php/connect.php");
 								<td id='roomnum'><input type="number" value=$roomNum></td>
 								<td id='building'><input type="text" value=$building></td>
 								<td id='roomtype'><input type="text" value=$type></td>
+								<td id='description'><input type="text" value=$desc></td>
 								<td id='availability'><input type="number" value=$avail placeholder="This should be 1 (available) or 0 (unavailable)."></td>
 							</tr>
 							_END;
