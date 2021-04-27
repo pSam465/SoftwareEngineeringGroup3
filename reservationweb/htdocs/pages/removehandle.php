@@ -28,5 +28,5 @@ if(isset($_POST['removeThese']))
 		}
 	}
 }
-header("Location: http://localhost/pages/removeres.php");
+header("Location: http://localhost/pages/admincontrols.php");
 ?>

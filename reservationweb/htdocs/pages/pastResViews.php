@@ -1,3 +1,9 @@
+  <?php
+    include_once('../php/default.php');
+    require_once('../php/checksession.php');
+    require_once("../php/connect.php");
+    defaultHeader();
+  ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,25 +14,19 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/default.css">
-    <title>Room's Available to Reserve</title>
+    <title>Confirmed Reservations</title>
   </head>
 <style>
 body
 {
   background-color: #1C4F9C;
 }
-tr
-{
-  border:2px solid #1C5438;
 
+.centerContainedOutput
+{
+  height: auto !important;
 }
 </style>
-  
-  <?php
-    include_once('../php/default.php');
-    defaultHeader();
-  ?>
-
   <body>
     <div class="centerForm" style="text-align: center;">
       <div class="containOutput">
@@ -50,16 +50,18 @@ tr
               $building = array();
               $roomNum = array();
               $available = array();
+              $roomType = array();
+              $userIdent = $_SESSION['uid'];
 
-              $numRowsQuery = $connect->query("SELECT COUNT(*) FROM roomreservation");
+              $numRowsQuery = $connect->query("SELECT COUNT(*) FROM roomreservation WHERE userID = \"$userIdent\"");
               $numRowsArr = $numRowsQuery->fetch_assoc();
-
               
 
               $numRows =$numRowsArr['COUNT(*)'];
               for ($i=0; $i < $numRows; $i++)
               {
-                $row = $result->fetch_assoc(); 
+                $row = $result->fetch_assoc();
+                
                 array_push($roomID, $row["roomID"]);
                 array_push($roomType, $row["roomType"]);
                 array_push($building,$row["building"]);
@@ -73,15 +75,12 @@ tr
                         <th>Room Type</th>
                         <th>Building</th>
                         <th>Room Number</th>
-                        <th>Availability</th>
-                        <th>Select</th>
+                        <th>Time and Date</th>
                       </tr>";
               for($i = 0; $i <sizeof($roomID);$i++)
               {
                   echo"
                       <tr>
-                        <form action=\"roomRes.php\">
-
                           <td>$roomType[$i]</td>
 
                           <td>$building[$i]</td>
@@ -90,8 +89,6 @@ tr
 
                           <td>$available[$i]</td>
 
-                          <td><input type=\"submit\" name=\"roomSelection\" value=\"Select\"></td>
-
                           <input type=\"hidden\" id=\"roomNum\" name=\"roomIdent\"value =\"$roomID[$i]\">
 
                           <input type=\"hidden\" id=\"roomNum\" name=\"roomNum\"value =\"$roomNum[$i]\">
@@ -99,11 +96,9 @@ tr
                           <input type=\"hidden\" id=\"roomType\" name=\"roomType\"value =\"$roomType[$i]\">
 
                           <input type=\"hidden\" id=\"building\" name=\"building\"value =\"$building[$i]\">
-                        </form>
                       </tr>";
               }
               echo "</table>";
-              $result->free();
     ?>
     </div>
   </div>
