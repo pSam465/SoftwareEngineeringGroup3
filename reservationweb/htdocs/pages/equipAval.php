@@ -28,7 +28,6 @@ defaultHeader();
 					<div class="col-sm d-flex justify-content-center">
 					<div class="container scrollable">
 						<table class="table table-hover table-fixed selectabletable" id="filtertable">
-							<thead><th scope="col">Equipment</th><thead>
 						</table>
 					</div>
 					</div>
@@ -143,7 +142,7 @@ function updateTable()
 			document.getElementById("filtertable").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}`, true);
+	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}&type=equipment`, true);
 	xhttp.send();
 }
 </script>
