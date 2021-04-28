@@ -7,17 +7,17 @@ function searchtable()
 
 	for(i=0; i<rows.length; i++)
 	{
-		row = rows[i].getElementsByTagName("td")[0];
-		if(row)
+		nameCol = rows[i].getElementsByTagName("td")[0];
+		if(nameCol)
 		{
-			var text = row.innerText;
+			var text = nameCol.innerText;
 			if(text.toLowerCase().indexOf(search) > -1)
 			{
-				row.style.display = "";
+				rows[i].style.display = "";
 			}
 			else
 			{
-				row.style.display = "none";
+				rows[i].style.display = "none";
 			}
 		}
 	}
