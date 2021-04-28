@@ -3,7 +3,7 @@
 	include_once ('../php/connect.php');
 	$dataConnect = connectDB();
 	//$fromSesId= 111;
-	$fromSesId= $_SESSION["email"];
+	$fromSesId= $_SESSION["uid"];
 	$emailQ= "SELECT email, userID, position, fName, lName FROM user WHERE email = ". $fromSesId;
 	$result= $dataConnect->query($emailQ);
 	$output= $result->fetch_assoc();

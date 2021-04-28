@@ -65,9 +65,9 @@ require_once("../php/connect.php");
 								<td><input type="checkbox" name="roomUpdate[]" value="$id"></td>
 								<td id='roomid'>$id</td>
 								<td id='roomnum'><input type="number" value=$roomNum></td>
-								<td id='building'><input type="text" value=$building></td>
-								<td id='roomtype'><input type="text" value=$type></td>
-								<td id='description'><input type="text" value=$desc></td>
+								<td id='building'><input type="text" value='$building'></td>
+								<td id='roomtype'><input type="text" value='$type'></td>
+								<td id='description'><input type="text" value='$desc'></td>
 								<td id='availability'><input type="number" value=$avail placeholder="This should be 1 (available) or 0 (unavailable)."></td>
 							</tr>
 							_END;
