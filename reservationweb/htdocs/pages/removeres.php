@@ -48,19 +48,19 @@ function removeReservation()
 	$numRowsQuery = $conn->query("SELECT * FROM roomreservation");
 	
 	$numRows = $numRowsQuery->num_rows;
-	echo "<form action=\"removehandle.php\" method=\"POST\">
+	echo "<form action=\"/php/removehandle.php\" method=\"POST\">
 	<table class = \"table\" style=\"width:100%; text-align:left;\">
-				<thead>
-				<tr>
-					<th scope=\"col\">Select</th>
-					<th scope=\"col\">Reservation Number</th>
-					<th scope=\"col\">Room ID</th>
-					<th scope=\"col\">Start Time</th>
-					<th scope=\"col\">End Time</th>
-					<th scope=\"col\">User ID</th>
-				</tr>
-				</thead>
-				<tbody>";
+		<thead>
+		<tr>
+			<th scope=\"col\">Select</th>
+			<th scope=\"col\">Reservation Number</th>
+			<th scope=\"col\">Room ID</th>
+			<th scope=\"col\">Start Time</th>
+			<th scope=\"col\">End Time</th>
+			<th scope=\"col\">User ID</th>
+		</tr>
+		</thead>
+		<tbody>";
 	for($i = 0; $i < $numRows; $i++)
 	{
 		$numRowsArr = $numRowsQuery->fetch_assoc();
@@ -79,16 +79,14 @@ function removeReservation()
 			<td>$st</td>
 			<td>$et</td>
 			<td>$uID</td>
-		</tr>
-		</form>";
+		</tr>";
 	}
 	echo "</tbody>
 	</table>";
 	echo "
 	<div class=\"positonRemoveButton\">
-			<button type=\"submit\" style = \"font-weight: bold;\" name = \"removeThese\">Remove Reservation(s) From DB</button>
+		<button type=\"submit\" style=\"font-weight: bold;\" name=\"removeThese\">Remove Reservation(s) From DB</button>
 	</div>
 	</form>";
-
 }
 ?>
