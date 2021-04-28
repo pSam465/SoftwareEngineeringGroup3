@@ -42,7 +42,7 @@
       padding: 1vh;
       background-color: white;
       width: 550px;
-      height: 700px;
+      height: auto;
       text-align: center;
     }
     .redFont
