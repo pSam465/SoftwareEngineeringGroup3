@@ -31,7 +31,7 @@ require_once("./php/checksession.php");
     				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/userInfo.php'">Account Details</button>
     			</div>
           <div class="col-4 ">
-            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/pastResViews.php'">View Past Reservations</button>
+            <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/pastResViews.php'">View Confirmed Reservations</button>
             <button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/userCancelRes.php'">Cancel a Reservation</button>
           </div>
     		

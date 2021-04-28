@@ -25,8 +25,9 @@ body
 .centerContainedOutput
 {
   position: absolute;
-  left: 32%;
+  left: 25%;
   height: auto !important;
+  width: 50vw !important;
 }
 </style>
   <body>
@@ -57,8 +58,17 @@ body
 
               $numRowsQuery = $connect->query("SELECT COUNT(*) FROM roomreservation WHERE userID = \"$userIdent\"");
               $numRowsArr = $numRowsQuery->fetch_assoc();
-              
 
+              $getTime = $connect->query("SELECT reservationStart,reservationEnd FROM roomreservation WHERE userID = \"$userIdent\"");
+              $times  = array();
+
+              for($i = 0;$i<$numRowsArr['COUNT(*)'];$i++)
+              {
+                $out = $getTime->fetch_assoc();
+                array_push($times,$out['reservationStart']." "."to"." ".$out['reservationEnd']);
+              }
+
+            
               $numRows =$numRowsArr['COUNT(*)'];
               for ($i=0; $i < $numRows; $i++)
               {
@@ -70,6 +80,8 @@ body
                 array_push($roomNum,$row["roomNum"]);
                 array_push($available,$row["roomAvailability"]);
               }
+
+
 
               echo "
               <table style=\"width:100%;\" >
@@ -89,7 +101,7 @@ body
 
                           <td>$roomNum[$i]</td>
 
-                          <td>$available[$i]</td>
+                          <td>$times[$i]</td>
 
                           <input type=\"hidden\" id=\"roomNum\" name=\"roomIdent\"value =\"$roomID[$i]\">
 
