@@ -19,7 +19,7 @@ div .centerContainedOutput
   padding: 1vh;
   background-color: white;
   width: 550px;
-  height: 550px;
+  height: auto;
   text-align: center;
 }
 

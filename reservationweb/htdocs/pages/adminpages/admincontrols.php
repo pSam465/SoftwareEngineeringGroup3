@@ -29,6 +29,10 @@ defaultHeader();
 					<p onclick="loadcontent('../pages/roomaval.php')" style="cursor: pointer;">Sub Links</p>
 					<p onclick="loadcontent('../pages/removeres.php')" style="cursor: pointer;">Sub Links</p>
 				</div>
+				<h5 class="links" style="cursor: pointer;">Room Management</h5>
+				<div class="hideable">
+					<p onclick="loadcontent('../pages/roomlist.php')" style="cursor: pointer;">Room List</p>
+				</div>
 			</div>
 			<div class="col-md content-block">
 				<div id="content-display">
