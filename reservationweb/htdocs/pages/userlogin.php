@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				$result = $conn->query($query);
 				if($row['position'] == "admin")
 				{
-					header("Location: ../pages/adminmain.php");
+					header("Location: ../pages/admincontrols.php");
 				}
 				else
 				{
