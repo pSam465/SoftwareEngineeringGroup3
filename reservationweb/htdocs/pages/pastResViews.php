@@ -24,6 +24,8 @@ body
 
 .centerContainedOutput
 {
+  position: absolute;
+  left: 32%;
   height: auto !important;
 }
 </style>
