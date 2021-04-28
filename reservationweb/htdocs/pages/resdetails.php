@@ -9,9 +9,11 @@ $room = $date = $starttime = $endtime = $repeattype = $endrepeat = $roominfo = "
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
 	global $room;
+	global $equipment;
 	global $date;
 	global $starttime;
 	global $endtime;
+	global $type;
 
 	if(isset($_POST['room']))
 	{
@@ -27,6 +29,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			$roominfo = $row['building']." ".$row['roomNum'];
 		}
 	}
+	else if(isset($_POST['equipment']))
+	{
+		$equipment = $_POST['equipment'];
+
+		$conn = connectDB();
+		$query = "SELECT * FROM `equipment` WHERE equipID = $equipment;";
+		$result = $conn->query($query);
+		if(!$result) die("Could not get equipment details");
+		if(($result->num_rows)>0)
+		{
+			$row = $result->fetch_array(MYSQLI_ASSOC);
+			$equipinfo = $row['equipName'];
+		}
+	}
 	if(isset($_POST['date']))
 	{
 		$date = $_POST['date'];
@@ -38,6 +54,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(isset($_POST['endtime']))
 	{
 		$endtime = $_POST['endtime'];
+	}
+	if(isset($_POST['type']))
+	{
+		$type = $_POST['type'];
 	}
 }
 
@@ -60,7 +80,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 			<div>
 				<h3>Reservation Details</h3>
 					<div>
-						<span><h5>Room: </h5><?php echo $roominfo; ?></span>
+						<?php
+						if($type == "room")
+						{
+							echo "<span><h5>Room: </h5> {$roominfo} </span>";
+						}
+						else if($type == "equipment")
+						{
+							echo "<span><h5>Equipment: </h5> {$equipinfo} </span>";
+						}
+						?>
 						<p><h5>Date: </h5><?php echo $date; ?></p>
 						<p><h5>Start Time: </h5><?php echo $starttime; ?></p>
 						<p><h5>End Time: </h5><?php echo $endtime; ?></p>
@@ -86,7 +115,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				</div>
 				<button type="submit" class="btn btn-primary btn-lg btn-block form-control mt-3">Reserve Room</button>
 			</div>
-				<input type="hidden" name="room" value="<?php global $room; echo $room; ?>">
+				<?php
+					if($type == "room")
+					{
+						echo '<input type="hidden" name="room" value="<?php global $room; echo $room; ?>">';
+					}
+					else if($type == "equipment")
+					{
+						echo '<input type="hidden" name="equipment" value="<?php global $equipment; echo $equipment; ?>">';
+					}
+				?>
 				<input type="hidden" name="date" value="<?php global $date; echo $date; ?>">
 				<input type="hidden" name="starttime" value="<?php global $starttime; echo $starttime; ?>">
 				<input type="hidden" name="endtime" value="<?php global $endtime; echo $endtime; ?>">

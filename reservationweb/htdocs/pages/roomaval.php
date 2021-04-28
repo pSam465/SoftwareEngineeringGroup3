@@ -82,6 +82,7 @@ defaultHeader();
 						<input hidden name="starttime" id="starttimesubmit">
 						<input hidden name="endtime" id="endtimesubmit">
 						<input hidden name="room" id="roomval">
+						<input hidden name="type" id="type" value="room">
 						<div class="col d-flex justify-content-center">
 							<button type="submit" id="submitbtn" class="btn btn-primary btn-lg btn-block" disabled>Apply for Room</button>
 						</div>
