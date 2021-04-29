@@ -1,12 +1,16 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 include_once('../php/default.php');
 require_once('../php/checksession.php');
 require_once("../php/connect.php");
 
-$room = $starttime = $endtime =  $startdate = $enddate = $repeattype = $uid = "";
+$starttime = $endtime =  $startdate = $enddate = $repeattype = $uid = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
+	global $equipment;
 	global $room;
 	global $starttime;
 	global $endtime;
@@ -19,6 +23,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$room = $_POST['room'];
 	}
+	else if(isset($_POST['equipment']))
+	{
+		$equipment = $_POST['equipment'];
+	}
+	
 	if(isset($_POST['starttime']))
 	{
 		$starttime = $_POST['starttime'];
@@ -43,16 +52,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	{
 		$uid = $_SESSION['uid'];
 	}
-
+	
 	$conn = connectDB();
 	if(!$conn)
 	{
 		exit("Unable to connect to DB");
 	}
 	
-	reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn, $uid);
-	sendToConf($room,$starttime,$endtime,$startdate,$enddate,$repeattype);
-
+	if(isset($room))
+	{
+		reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $room, $conn, $uid, "room");
+		sendToConf($room,$starttime,$endtime,$startdate,$enddate,$repeattype, "room");
+	}
+	else if(isset($equipment))
+	{
+		reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $equipment, $conn, $uid,"equipment");
+		sendToConf($equipment,$starttime,$endtime,$startdate,$enddate,$repeattype,"equipment");
+	}
+	$conn->close();
 	//header('Location:../pages/conf.php');
 }
 /*else
@@ -60,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	header('Location:../index.php');
 }*/
 
-function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomid, $conn, $uid)
+function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $id, $conn, $uid, $type)
 {
 	$repeatnum = $repeatinterval = "";
 	$sd = date_create($startdate);
@@ -99,10 +116,17 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 		$reservestart = $date->format('y-m-d')." ".$starttime.":00";
 		$reserveend = $date->format('y-m-d')." ".$endtime.":00";
 
-
-		if(checkifavailable($reservestart, $reserveend, $roomid, $conn))
+		if(checkifavailable($reservestart, $reserveend, $id, $conn, $type))
 		{
-			$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$roomid', '$reservestart', '$reserveend', '$uid')"; //REPLACE UID
+			if($type == "room")
+			{
+				$query = "INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$id', '$reservestart', '$reserveend', '$uid')"; //REPLACE UID
+			}
+			else if($type == "equipment")
+			{
+				$query = "INSERT INTO `equipreservation` (`eReservationNum`, `equipID`, `reservationStart`, `reservationEnd`, `userID`) VALUES (NULL, '$id', '$reservestart', '$reserveend', '$uid')"; //REPLACE UID
+			}
+
 			$result = $conn->query($query);
 			//echo "<br />Room reserved on ".$date->format('y-m-d');
 		}
@@ -113,9 +137,17 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $roomi
 	}
 }
 
-function checkifavailable($stime, $etime, $roomid, $conn)
+function checkifavailable($stime, $etime, $id, $conn, $type)
 {
-	$query = "SELECT * FROM `roomreservation` WHERE roomID = $roomid AND '$stime' >= reservationStart AND '$etime' <= reservationEnd";
+	if($type == "room")
+	{
+		$query = "SELECT * FROM `roomreservation` WHERE roomID = $id AND '$stime' >= reservationStart AND '$etime' <= reservationEnd";
+	}
+	if($type == "equipment")
+	{
+		$query = "SELECT * FROM `equipreservation` WHERE equipID = $id AND '$stime' >= reservationStart AND '$etime' <= reservationEnd";
+	}
+
 	$result = $conn->query($query);
 	if(!$result) die("Error.");
 	
@@ -130,17 +162,28 @@ function checkifavailable($stime, $etime, $roomid, $conn)
 	}
 }
 
-function sendToConf($r,$st,$et,$sd,$ed,$rt)
+function sendToConf($r,$st,$et,$sd,$ed,$rt,$type)
 {
 	$repeating = 0;
 	$conn = connectDB();
 	$user = $_SESSION['email'];
-	$result = $conn->query("SELECT `roomNum`,`roomType` FROM `room` WHERE roomID = $r");
-	$outputResult = $result->fetch_assoc();
-	$output = $outputResult['roomNum'];
-	$roomSelected = $outputResult['roomType'];
+	if($type == "room")
+	{
+		$result = $conn->query("SELECT `roomNum`,`roomType`, `building` FROM `room` WHERE roomID = $r");
 
-	echo $output;
+		$outputResult = $result->fetch_assoc();
+		$output = $outputResult['roomNum'];
+		$building = $outputResult['building'];
+		$roomSelected = $outputResult['roomType'];
+	}
+	else if($type == "equipment")
+	{
+		$result = $conn->query("SELECT `equipName` FROM `equipment` WHERE equipID = $r");
+		$outputResult = $result->fetch_assoc();
+		$equipName = $outputResult['equipName'];
+		$equipType = $outputResult['equipType'];
+	}
+	
 
 	switch ($rt) 
 	{
@@ -161,20 +204,39 @@ function sendToConf($r,$st,$et,$sd,$ed,$rt)
 			break;
 	}
 
-	echo "
-	<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
-		<input type = \"hidden\" name = \"room1\" value = \"$r\">
-		<input type = \"hidden\" name = \"start\" value = \"$st\">
-		<input type = \"hidden\" name = \"end\" value = \"$et\">
-		<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
-		<input type = \"hidden\" name = \"edate\" value = \"$ed\">
-		<input type = \"hidden\" name = \"rep\" value = \"$rt\">
-	</form>
-	<script type = \"text/javascript\">
-		document.getElementById('form1').submit();
-	  </script>";
+	if($type == "room")
+	{
+		echo "
+		<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
+			<input type = \"hidden\" name = \"room1\" value = \"$r\">
+			<input type = \"hidden\" name = \"start\" value = \"$st\">
+			<input type = \"hidden\" name = \"end\" value = \"$et\">
+			<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
+			<input type = \"hidden\" name = \"edate\" value = \"$ed\">
+			<input type = \"hidden\" name = \"rep\" value = \"$rt\">
+		</form>
+		<script type = \"text/javascript\">
+			document.getElementById('form1').submit();
+		</script>";
 
-	  mail($user,"Reservation Confirmation",
-			"Room Type: $roomSelected\nDate: $sd\nTime: $st-$et\nRoom Number: $output\nRepeating:$repeating","From: reservations@irissoln.com");
+		mail($user,"Reservation Confirmation", "Room Type: $roomSelected\nDate: $sd\nTime: $st-$et\nRoom Number: $building $output\nRepeating:$repeating","From: reservations@irissoln.com");
+	}
+	else if($type == "equipment")
+	{
+		echo "
+		<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
+			<input type = \"hidden\" name = \"equipment\" value = \"$r\">
+			<input type = \"hidden\" name = \"start\" value = \"$st\">
+			<input type = \"hidden\" name = \"end\" value = \"$et\">
+			<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
+			<input type = \"hidden\" name = \"edate\" value = \"$ed\">
+			<input type = \"hidden\" name = \"rep\" value = \"$rt\">
+		</form>
+		<script type = \"text/javascript\">
+			document.getElementById('form1').submit();
+		</script>";
+
+		mail($user,"Reservation Confirmation", "Equipment Type: $equipType\nDate: $sd\nTime: $st-$et\nEquipment: $equipName\nRepeating:$repeating","From: reservations@irissoln.com");
+	}
 }
 ?>

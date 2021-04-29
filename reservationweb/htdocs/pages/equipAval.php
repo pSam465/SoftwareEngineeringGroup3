@@ -13,7 +13,7 @@ defaultHeader();
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="../css/reserve.css">
 	
-	<title>Room Reservation</title>
+	<title>Equipment Reservation</title>
 </head>
 <body>
 	<div class="container-fluid">
@@ -21,7 +21,7 @@ defaultHeader();
 			<div class="col-md content-block">
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">	
-						<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for a room" style="width: 100%;" onkeyup="searchtable(this)">
+						<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for equipment" style="width: 100%;" onkeyup="searchtable(this)">
 					</div>
 				</div>
 				<div class="row">
@@ -72,7 +72,7 @@ defaultHeader();
 				<hr class="rounded">
 				<div class="row">
 					<div class="col d-flex justify-content-center">
-						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForRooms()">Find a Room</button>
+						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForEquipment()">Find Equpment</button>
 					</div>
 				</div>
 				</div>
@@ -81,10 +81,10 @@ defaultHeader();
 						<input hidden name="date" id="datesubmit">
 						<input hidden name="starttime" id="starttimesubmit">
 						<input hidden name="endtime" id="endtimesubmit">
-						<input hidden name="room" id="roomval">
-						<input hidden name="type" id="type" value="room">
+						<input hidden name="equipment" id="equipval">
+						<input hidden name="type" id="type" value="equipment">
 						<div class="col d-flex justify-content-center">
-							<button type="submit" id="submitbtn" class="btn btn-primary btn-lg btn-block" disabled>Apply for Room</button>
+							<button type="submit" id="submitbtn" class="btn btn-primary btn-lg btn-block" disabled>Apply for Equipment</button>
 						</div>
 					</div>
 				</form>
@@ -99,20 +99,20 @@ defaultHeader();
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".selectabletable").on('click', '.roomInfoBtn', function(event){
-		alert($(this).find(".roomInfo").html() + "\n" + $(this).find(".description").html());
+	$(".selectabletable").on('click', '.equipInfoBtn', function(event){
+		alert($(this).find(".equipInfo").html() + "\n" + $(this).find(".description").html());
 	});	
 
 	$(".selectabletable").on('click', '.selectablerow', function(event){
 		if($(this).hasClass('table-info'))
 		{
 			$(this).removeClass('table-info');
-			$("#roomval").val(null);
+			$("#equipval").val(null);
 		}
 		else
 		{
 			$(this).addClass('table-info');
-			$("#roomval").val($("#roomid", this).html());
+			$("#equipval").val($("#equipid", this).html());
 		}
 		$(this).siblings().removeClass('table-info');
 		$("#submitbtn").removeAttr("disabled");
@@ -121,7 +121,7 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function lookForRooms()
+function lookForEquipment()
 {
 	if(validatereservation(this))
 	{
@@ -143,7 +143,7 @@ function updateTable()
 			document.getElementById("filtertable").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}&type=room`, true);
+	xhttp.open("GET", `../php/filltable.php?date=${date.value}&starttime=${starttime.value}&endtime=${endtime.value}&type=equipment`, true);
 	xhttp.send();
 }
 </script>
