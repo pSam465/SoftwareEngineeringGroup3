@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	include_once ('../php/connect.php');
-	$dataConnect = connectDB();
+	$dataConnect = connectDB() or die();
 	//$fromSesId= 111;
 	$fromSesId= $_SESSION["uid"];
 
@@ -45,6 +45,8 @@
       width: 550px;
       height: auto;
       text-align: center;
+      position: absolute;
+      left: 32vw;
     }
     .redFont
     {
