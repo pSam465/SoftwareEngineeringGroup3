@@ -119,8 +119,9 @@ function generatequery($date, $starttime, $endtime, $type)
 		if($type == "room")
 			$query = "SELECT * FROM `room` WHERE room.roomID NOT IN(SELECT roomreservation.roomID FROM roomreservation WHERE '$startdate' <= roomreservation.reservationEnd AND NOT '$enddate' <= roomreservation.reservationStart);";
 		if($type == "equipment")
-			$query = "SELECT * FROM `equipment` WHERE equipment.equipID NOT IN(SELECT equipment.equipID FROM equipreservation WHERE '$startdate' <= equipreservation.reservationEnd AND NOT '$enddate' <= equipreservation.reservationStart);";
+			$query = "SELECT * FROM `equipment` WHERE equipment.equipID NOT IN(SELECT equipreservation.equipID FROM equipreservation WHERE '$startdate' <= equipreservation.reservationEnd AND NOT '$enddate' <= equipreservation.reservationStart);";
 	}
+	
 	return $query;
 }
 

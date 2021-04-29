@@ -4,7 +4,7 @@ require_once('../php/checksession.php');
 require_once("../php/connect.php");
 defaultHeader();
 
-$room = $date = $starttime = $endtime = $repeattype = $endrepeat = $roominfo = "";
+$room = $equipment = $date = $starttime = $endtime = $repeattype = $endrepeat = $roominfo = $type = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -118,11 +118,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 				<?php
 					if($type == "room")
 					{
-						echo '<input type="hidden" name="room" value="<?php global $room; echo $room; ?>">';
+						global $room;
+						echo '<input type="hidden" name="room" value="'.$room.'">';
 					}
 					else if($type == "equipment")
 					{
-						echo '<input type="hidden" name="equipment" value="<?php global $equipment; echo $equipment; ?>">';
+						global $equipment;
+						echo '<input type="hidden" name="equipment" value="'.$equipment.'">';
 					}
 				?>
 				<input type="hidden" name="date" value="<?php global $date; echo $date; ?>">

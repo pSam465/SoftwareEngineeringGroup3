@@ -41,7 +41,7 @@ defaultHeader();
 							<h3>Select a Date</h3>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" onblur="validatedate(this)" />
+							<input type="date" class="form-control" id="date" name="date" onblur="validatedate(this)" />
 						</div>
 					</div>
 				</div>

@@ -41,7 +41,7 @@ defaultHeader();
 							<h3>Select a Date</h3>
 						</div>
 						<div class="form-group">
-							<input type="date" class="form-control" id="date" name="date" value="<?php echo $date ?>" onblur="validatedate(this)" />
+							<input type="date" class="form-control" id="date" name="date" onblur="validatedate(this)" />
 						</div>
 					</div>
 				</div>
@@ -72,7 +72,7 @@ defaultHeader();
 				<hr class="rounded">
 				<div class="row">
 					<div class="col d-flex justify-content-center">
-						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForRooms()">Find Equpment</button>
+						<button class="btn btn-outline-info btn-lg btn-block" onclick="lookForEquipment()">Find Equpment</button>
 					</div>
 				</div>
 				</div>
@@ -121,7 +121,7 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-function lookForRooms()
+function lookForEquipment()
 {
 	if(validatereservation(this))
 	{
