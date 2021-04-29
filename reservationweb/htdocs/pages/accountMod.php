@@ -1,7 +1,7 @@
 <?php
 require_once("../php/connect.php");
 include_once("../php/default.php");
-
+include_once("../php/checksession.php");
 ?>
 
 <!doctype html>
@@ -10,17 +10,15 @@ include_once("../php/default.php");
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-	<title>UserInfo</title>
+
+  <link rel="stylesheet" href="../css/reserve.css">
+  <title>UserInfo</title>
 </head>
 <style>
     .centerForm
     {
       text-align: center;
       margin: auto;
-    }
-    body
-    {
-      background-color: #1C4F9C;
     }
     .containOutput
     {
