@@ -36,7 +36,12 @@
 			<h1 style="text-align: center;">Your Room Is Reserved</h1>
 			<?php
 				$conn = connectDB();
-				$roomID = $_POST['room1'];
+
+				if(isset($_POST['room1']))
+					$roomID = $_POST['room1'];
+				else if(isset($_POST['equipment']))
+					$equipID = $_POST['equipment'];	
+								
 				$startTiempo = $_POST['start'];
 				$endTiempo = $_POST['end'];
 				$startDate = $_POST['sdate'];
@@ -45,12 +50,27 @@
 				$user = $_SESSION['email'];
 				$repeat = null;
 
-				$findRoomType = "SELECT `roomType`,`roomNum` FROM `room` WHERE roomID = $roomID";
-				$result = $conn->query($findRoomType);
+				if(isset($roomID))
+				{
+					$findType = "SELECT `roomType`,`roomNum` FROM `room` WHERE roomID = $roomID";
+				}
+				else if(isset($equipID))
+				{
+					$findType = "SELECT `equipType`,`equipName` FROM `equipment` WHERE equipID = $equipID";
+				}
+				$result = $conn->query($findType);
 				$outputResult = $result->fetch_assoc();
-				$output = $outputResult['roomType'];
-
-				$roomNum = $outputResult['roomNum'];
+				
+				if(isset($roomID))
+				{
+					$output = $outputResult['roomType'];
+					$roomNum = $outputResult['roomNum'];
+				}
+				else if(isset($equipID))
+				{
+					$output = $outputResult['equipType'];
+					$equipment = $outputResult['equipName'];
+				}
 				$output = strtolower($output);
 
 
@@ -110,48 +130,97 @@
 					}
 				}
 				
-				switch ($rpType) 
+				if(isset($roomID))
 				{
-					case 0:
-						$repeat = "daily";
-						echo "<div>
-							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
-							</p>
-						</div>";
-						break;
-					case 1:
-						$repeat = "daily";
-						echo "<div>
-							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
-							</p>
-						</div>";
-						break;
-					case 2:
-						$repeat = "weekly";
-						echo "<div>
-							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br>An Email Has Been Sent Confirming This Reservation.
-							</p>
-						</div>";
-						break;
-					case 3:
-						$repeat = "monthly";
-						echo "<div>
-							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
-							</p>
-						</div>";
-						break;
-					case 4:
-						$repeat = "yearly";
-						echo "<div>
-							<p>The $output is reserved under 
-								$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
-							</p>
-						</div>";
-						break;
+					switch ($rpType) 
+					{
+						case 0:
+							$repeat = "daily";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 1:
+							$repeat = "daily";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 2:
+							$repeat = "weekly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br>An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 3:
+							$repeat = "monthly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 4:
+							$repeat = "yearly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your room number is $roomNum.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+					}
+				}
+				else if(isset($equipID))//I seriously cannot belive I am writing code of this quality in a senior level class.....
+				{
+					switch ($rpType) 
+					{
+						case 0:
+							$repeat = "daily";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo. Your equipment is $equipment.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 1:
+							$repeat = "daily";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your equipment is $equipment.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 2:
+							$repeat = "weekly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your equipment is $equipment.<br>An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 3:
+							$repeat = "monthly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your equipment is $equipment.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+						case 4:
+							$repeat = "yearly";
+							echo "<div>
+								<p>The $output is reserved under 
+									$user on $americanizedDate at $startTiempo until $endTiempo and will repeat $repeat until $endDate. Your equipment is $equipment.<br> An Email Has Been Sent Confirming This Reservation.
+								</p>
+							</div>";
+							break;
+					}
 				}
 			?>
 			<button id ="butt" type="button" class="btn btn-success" style="margin: 0;margin-left:20vw;position: relative;">Return to Home Page</button>

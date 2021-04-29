@@ -22,7 +22,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	if(isset($_POST['room']))
 	{
 		$room = $_POST['room'];
-		echo "</br> Room: $room </br>";
 	}
 	else if(isset($_POST['equipment']))
 	{
@@ -68,9 +67,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	else if(isset($equipment))
 	{
 		reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $equipment, $conn, $uid,"equipment");
-		//sendToConf($equipment,$starttime,$endtime,$startdate,$enddate,$repeattype,"equipment");
+		sendToConf($equipment,$starttime,$endtime,$startdate,$enddate,$repeattype,"equipment");
 	}
-
+	$conn->close();
 	//header('Location:../pages/conf.php');
 }
 /*else
@@ -117,7 +116,6 @@ function reserve($startdate, $enddate, $starttime, $endtime, $repeattype, $id, $
 		$reservestart = $date->format('y-m-d')." ".$starttime.":00";
 		$reserveend = $date->format('y-m-d')." ".$endtime.":00";
 
-		echo $type;
 		if(checkifavailable($reservestart, $reserveend, $id, $conn, $type))
 		{
 			if($type == "room")
@@ -156,12 +154,10 @@ function checkifavailable($stime, $etime, $id, $conn, $type)
 	$rows=$result->num_rows;
 	if($rows>0)
 	{
-		echo "</ br> false </ br>";
 		return false;
 	}
 	else
 	{
-		echo "</ br> true </ br>";
 		return true;
 	}
 }
@@ -173,18 +169,21 @@ function sendToConf($r,$st,$et,$sd,$ed,$rt,$type)
 	$user = $_SESSION['email'];
 	if($type == "room")
 	{
-		$result = $conn->query("SELECT `roomNum`,`roomType, building` FROM `room` WHERE roomID = $r");
+		$result = $conn->query("SELECT `roomNum`,`roomType`, `building` FROM `room` WHERE roomID = $r");
+
+		$outputResult = $result->fetch_assoc();
+		$output = $outputResult['roomNum'];
+		$building = $outputResult['building'];
+		$roomSelected = $outputResult['roomType'];
 	}
 	else if($type == "equipment")
 	{
-		$result = $conn->query("SELECT `equipmentName` FROM `equipment` WHERE equipID = $r");
+		$result = $conn->query("SELECT `equipName` FROM `equipment` WHERE equipID = $r");
+		$outputResult = $result->fetch_assoc();
+		$equipName = $outputResult['equipName'];
+		$equipType = $outputResult['equipType'];
 	}
-	$outputResult = $result->fetch_assoc();
-	$output = $outputResult['roomNum'];
-	$building = $outputResult['building'];
-	$roomSelected = $outputResult['roomType'];
-
-	echo $output;
+	
 
 	switch ($rt) 
 	{
@@ -205,19 +204,39 @@ function sendToConf($r,$st,$et,$sd,$ed,$rt,$type)
 			break;
 	}
 
-	echo "
-	<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
-		<input type = \"hidden\" name = \"room1\" value = \"$r\">
-		<input type = \"hidden\" name = \"start\" value = \"$st\">
-		<input type = \"hidden\" name = \"end\" value = \"$et\">
-		<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
-		<input type = \"hidden\" name = \"edate\" value = \"$ed\">
-		<input type = \"hidden\" name = \"rep\" value = \"$rt\">
-	</form>
-	<script type = \"text/javascript\">
-		document.getElementById('form1').submit();
-	  </script>";
+	if($type == "room")
+	{
+		echo "
+		<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
+			<input type = \"hidden\" name = \"room1\" value = \"$r\">
+			<input type = \"hidden\" name = \"start\" value = \"$st\">
+			<input type = \"hidden\" name = \"end\" value = \"$et\">
+			<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
+			<input type = \"hidden\" name = \"edate\" value = \"$ed\">
+			<input type = \"hidden\" name = \"rep\" value = \"$rt\">
+		</form>
+		<script type = \"text/javascript\">
+			document.getElementById('form1').submit();
+		</script>";
 
-	mail($user,"Reservation Confirmation", "Room Type: $roomSelected\nDate: $sd\nTime: $st-$et\nRoom Number: $building $output\nRepeating:$repeating","From: reservations@irissoln.com");
+		mail($user,"Reservation Confirmation", "Room Type: $roomSelected\nDate: $sd\nTime: $st-$et\nRoom Number: $building $output\nRepeating:$repeating","From: reservations@irissoln.com");
+	}
+	else if($type == "equipment")
+	{
+		echo "
+		<form action = \"../pages/conf.php\" method = \"POST\" id = \"form1\">
+			<input type = \"hidden\" name = \"equipment\" value = \"$r\">
+			<input type = \"hidden\" name = \"start\" value = \"$st\">
+			<input type = \"hidden\" name = \"end\" value = \"$et\">
+			<input type = \"hidden\" name = \"sdate\" value = \"$sd\">
+			<input type = \"hidden\" name = \"edate\" value = \"$ed\">
+			<input type = \"hidden\" name = \"rep\" value = \"$rt\">
+		</form>
+		<script type = \"text/javascript\">
+			document.getElementById('form1').submit();
+		</script>";
+
+		mail($user,"Reservation Confirmation", "Equipment Type: $equipType\nDate: $sd\nTime: $st-$et\nEquipment: $equipName\nRepeating:$repeating","From: reservations@irissoln.com");
+	}
 }
 ?>
