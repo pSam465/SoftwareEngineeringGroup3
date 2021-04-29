@@ -40,11 +40,6 @@ include_once("../php/checksession.php");
       color:red;
     }
   </style>
-<?php
-    include_once('../php/default.php');
-    defaultHeader();
-    $var= "hello";
-  ?>
   <body>
   <div class="centerForm" style="text-align: center;">
       <div class="containOutput">

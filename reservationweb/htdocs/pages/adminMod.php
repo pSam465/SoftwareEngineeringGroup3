@@ -28,10 +28,6 @@
       text-align: center;
       margin: auto;
     }
-    body
-    {
-      background-color: #1C4F9C;
-    }
     .containOutput
     {
       margin: auto;
@@ -52,10 +48,6 @@
       color:red;
     }
   </style>
-<?php
-    include_once('../php/default.php');
-    defaultHeader();
-  ?>
 <body>
 	<div class="centerForm" style="text-align: center;">
       <div class="containOutput">

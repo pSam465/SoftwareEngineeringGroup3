@@ -1,7 +1,6 @@
 <?php
 
 require_once("../php/connect.php");
-include_once("../php/default.php");
 require_once("../php/checksession.php");
 $storage=  array();
 if(isset($_POST['removeThese']))

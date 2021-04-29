@@ -1,8 +1,6 @@
 <?php
 require_once("../php/checksession.php");
 include_once("../php/default.php");
-defaultHeader();
-defaultBody();
 ?>
 
 <!DOCTYPE html>

@@ -113,7 +113,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 						<input type="date" class="form-control" name="enddate" />
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary btn-lg btn-block form-control mt-3">Reserve Room</button>
+				<button type="submit" class="btn btn-primary btn-lg btn-block form-control mt-3">Reserve</button>
 			</div>
 				<?php
 					if($type == "room")

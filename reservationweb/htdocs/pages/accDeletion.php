@@ -1,10 +1,8 @@
 <?php
 require_once("../php/connect.php");
-include_once("../php/default.php");
 
 //include_once('../php/checksession.php');					//currently commented out due to not having access to checksession
-defaultHeader();
-defaultBody();
+
 function IsChecked($chkname,$value)
     {
         if(!empty($_POST[$chkname]))
@@ -59,7 +57,7 @@ function IsChecked($chkname,$value)
     .delButton
     {
         text-align: bottom;
-        onclick: ;
+        /*onclick: ;*/
 
     }
 </style>
