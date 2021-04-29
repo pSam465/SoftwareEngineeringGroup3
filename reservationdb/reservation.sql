@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2021 at 09:54 PM
+-- Generation Time: Apr 29, 2021 at 06:48 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.26
 
@@ -69,7 +69,27 @@ INSERT INTO `equipreservation` (`eReservationNum`, `equipID`, `reservationStart`
 (141, 213, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 114),
 (142, 211, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 116),
 (143, 214, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 112),
-(144, 214, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 117);
+(144, 214, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 117),
+(145, 212, '2021-04-29 22:57:00', '2021-04-29 23:57:00', 112),
+(147, 211, '2021-04-29 18:26:00', '2021-04-29 23:35:00', 112),
+(148, 211, '2021-04-30 18:26:00', '2021-04-30 23:35:00', 112),
+(149, 211, '2021-05-01 18:26:00', '2021-05-01 23:35:00', 112),
+(150, 211, '2021-05-02 18:26:00', '2021-05-02 23:35:00', 112),
+(151, 211, '2021-05-03 18:26:00', '2021-05-03 23:35:00', 112),
+(152, 211, '2021-05-04 18:26:00', '2021-05-04 23:35:00', 112),
+(153, 211, '2021-05-05 18:26:00', '2021-05-05 23:35:00', 112),
+(154, 211, '2021-05-06 18:26:00', '2021-05-06 23:35:00', 112),
+(155, 211, '2021-05-07 18:26:00', '2021-05-07 23:35:00', 112),
+(156, 211, '2021-05-08 18:26:00', '2021-05-08 23:35:00', 112),
+(157, 213, '2021-04-30 18:26:00', '2021-04-30 23:35:00', 112),
+(158, 214, '2021-04-30 01:44:00', '2021-04-30 05:44:00', 112),
+(159, 214, '2021-05-01 01:44:00', '2021-05-01 05:44:00', 112),
+(160, 214, '2021-05-02 01:44:00', '2021-05-02 05:44:00', 112),
+(161, 214, '2021-05-03 01:44:00', '2021-05-03 05:44:00', 112),
+(162, 214, '2021-05-04 01:44:00', '2021-05-04 05:44:00', 112),
+(163, 214, '2021-05-05 01:44:00', '2021-05-05 05:44:00', 112),
+(164, 214, '2021-05-06 01:44:00', '2021-05-06 05:44:00', 112),
+(165, 215, '2021-05-05 00:46:00', '2021-05-05 02:46:00', 112);
 
 -- --------------------------------------------------------
 
@@ -82,47 +102,25 @@ CREATE TABLE `room` (
   `roomType` char(100) NOT NULL,
   `building` char(100) NOT NULL,
   `roomNum` int(11) NOT NULL,
-  `roomAvailability` tinyint(1) NOT NULL
+  `roomAvailability` tinyint(1) NOT NULL,
+  `roomDesc` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`roomID`, `roomType`, `building`, `roomNum`, `roomAvailability`) VALUES
-(1, 'Classroom', 'Arts and Sciences', 310, 1),
-(100, 'Study Room', 'Ina Dillard Russel Library', 324, 1),
-(101, 'Lecture Hall', 'Arts and Science', 264, 1),
-(102, 'Computer Lab', 'Arts and Science', 234, 1),
-(103, 'Computer Lab', 'Atkinson', 104, 1),
-(104, 'Lecture Hall', 'Atkinson', 215, 1),
-(105, 'Study Room', 'Ina Dillard Russel Library', 403, 1),
-(106, 'Large Lecture Hall', 'Arts and Science', 354, 1),
-(107, 'Study Room', 'Ina Dillard Russel Library', 234, 1),
-(108, 'Study Room', 'Ina Dillard Russel Library', 252, 1),
-(109, 'Study Room', 'Ina Dillard Russel Library', 234, 1),
-(110, 'Classroom', 'Arts and Sciences', 110, 1),
-(112, 'Classroom', 'Arts and Sciences', 110, 1),
-(113, 'Classroom', 'Arts and Sciences', 111, 1),
-(114, 'Classroom', 'Arts and Sciences', 112, 1),
-(115, 'Classroom', 'Arts and Sciences', 113, 1),
-(116, 'Classroom', 'Arts and Sciences', 114, 1),
-(117, 'Classroom', 'Arts and Sciences', 115, 1),
-(118, 'Classroom', 'Arts and Sciences', 116, 1),
-(119, 'Classroom', 'Arts and Sciences', 117, 1),
-(120, 'Classroom', 'Arts and Sciences', 118, 1),
-(121, 'Classroom', 'Arts and Sciences', 119, 1),
-(122, 'Classroom', 'Arts and Sciences', 120, 1),
-(124, 'Classroom', 'Arts and Sciences', 111, 1),
-(125, 'Classroom', 'Arts and Sciences', 112, 1),
-(126, 'Classroom', 'Arts and Sciences', 113, 1),
-(127, 'Classroom', 'Arts and Sciences', 114, 1),
-(128, 'Classroom', 'Arts and Sciences', 115, 1),
-(129, 'Classroom', 'Arts and Sciences', 116, 1),
-(130, 'Classroom', 'Arts and Sciences', 117, 1),
-(131, 'Classroom', 'Arts and Sciences', 118, 1),
-(132, 'Classroom', 'Arts and Sciences', 119, 1),
-(133, 'Classroom', 'Arts and Sciences', 120, 1);
+INSERT INTO `room` (`roomID`, `roomType`, `building`, `roomNum`, `roomAvailability`, `roomDesc`) VALUES
+(100, 'Study Room', 'Ina Dillard Russel Library', 324, 1, 'test data ina 324'),
+(101, 'Lecture Hall', 'Arts and Science', 264, 1, 'test data a&s 264'),
+(102, 'Computer Lab', 'Arts and Science', 234, 1, 'test data a&s 234'),
+(103, 'Computer Lab', 'Atkinson', 104, 1, 'test data stk 104'),
+(104, 'Lecture Hall', 'Atkinson', 215, 1, 'test data atk 215'),
+(105, 'Study Room', 'Ina Dillard Russel Library', 403, 1, 'test data ina 403'),
+(106, 'Large Lecture Hall', 'Arts and Science', 354, 1, 'test data a&s 354'),
+(107, 'Study Room', 'Ina Dillard Russel Library', 234, 1, 'test data ina 234'),
+(108, 'Study Room', 'Ina Dillard Russel Library', 252, 1, 'test data in 252'),
+(109, 'Study Room', 'Ina Dillard Russel Library', 234, 1, 'test data ina 234 v2');
 
 -- --------------------------------------------------------
 
@@ -148,21 +146,16 @@ INSERT INTO `roomreservation` (`roomResNum`, `roomID`, `reservationStart`, `rese
 (153, 106, '2021-03-15 11:00:00', '2021-03-15 12:30:00', 111),
 (154, 103, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 116),
 (155, 103, '2021-03-15 09:00:00', '2021-03-15 10:30:00', 117),
-(1234, 113, '2021-03-15 08:00:00', '2021-03-15 09:00:00', NULL),
-(12346, 113, '2021-03-15 08:00:00', '2021-03-15 09:00:00', NULL),
-(12422, 1, '2021-04-15 11:00:00', '2021-04-15 15:15:00', 110),
-(12423, 1, '2021-04-16 11:00:00', '2021-04-16 15:15:00', 110),
-(12424, 1, '2021-04-17 11:00:00', '2021-04-17 15:15:00', 110),
-(12425, 100, '2021-04-07 11:00:00', '2021-04-07 14:30:00', 112),
-(12426, 100, '2021-04-08 11:00:00', '2021-04-08 14:30:00', 112),
-(12427, 100, '2021-04-09 11:00:00', '2021-04-09 14:30:00', 112),
-(12428, 100, '2021-04-10 11:00:00', '2021-04-10 14:30:00', 112),
-(12429, 100, '2021-04-11 11:00:00', '2021-04-11 14:30:00', 112),
-(12430, 100, '2021-04-12 11:00:00', '2021-04-12 14:30:00', 112),
-(12431, 100, '2021-04-13 11:00:00', '2021-04-13 14:30:00', 112),
-(12432, 100, '2021-04-14 11:00:00', '2021-04-14 14:30:00', 112),
-(12433, 100, '2021-04-15 11:00:00', '2021-04-15 14:30:00', 112),
-(12434, 100, '2021-04-16 11:00:00', '2021-04-16 14:30:00', 112);
+(156, 100, '2021-04-29 21:28:00', '2021-04-29 22:28:00', 112),
+(157, 101, '2021-04-29 21:39:00', '2021-04-29 23:45:00', 112),
+(158, 101, '2021-04-30 21:39:00', '2021-04-30 23:45:00', 112),
+(159, 101, '2021-05-01 21:39:00', '2021-05-01 23:45:00', 112),
+(160, 101, '2021-05-02 21:39:00', '2021-05-02 23:45:00', 112),
+(161, 101, '2021-05-03 21:39:00', '2021-05-03 23:45:00', 112),
+(162, 101, '2021-05-04 21:39:00', '2021-05-04 23:45:00', 112),
+(163, 101, '2021-05-05 21:39:00', '2021-05-05 23:45:00', 112),
+(164, 101, '2021-05-06 21:39:00', '2021-05-06 23:45:00', 112),
+(165, 105, '2021-04-29 19:24:00', '2021-04-29 23:46:00', 112);
 
 -- --------------------------------------------------------
 
@@ -239,16 +232,16 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `room`
+-- AUTO_INCREMENT for table `equipreservation`
 --
-ALTER TABLE `room`
-  MODIFY `roomID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+ALTER TABLE `equipreservation`
+  MODIFY `eReservationNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `roomreservation`
 --
 ALTER TABLE `roomreservation`
-  MODIFY `roomResNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12435;
+  MODIFY `roomResNum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- Constraints for dumped tables
@@ -264,7 +257,8 @@ ALTER TABLE `equipreservation`
 -- Constraints for table `roomreservation`
 --
 ALTER TABLE `roomreservation`
-  ADD CONSTRAINT `roomID` FOREIGN KEY (`roomID`) REFERENCES `room` (`roomID`);
+  ADD CONSTRAINT `roomreservation_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `roomreservation_ibfk_2` FOREIGN KEY (`roomID`) REFERENCES `room` (`roomID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
