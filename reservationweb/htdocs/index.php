@@ -25,7 +25,7 @@ require_once("./php/checksession.php");
   			<div class="row align-items-center">
     			<div class="col-4 " >
     				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/roomAval.php'">Reserve a Room</button>
-    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/equipRes.php'">Reserve Equipment</button>
+    				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/equipAval.php'">Reserve Equipment</button>
           </div>
     			<div class="col-4 ">
     				<button type="button" class="btn btn-default btn-lg btn-block" onclick="document.location='./pages/userInfo.php'">Account Details</button>
