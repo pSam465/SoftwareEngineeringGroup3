@@ -144,10 +144,17 @@ include_once("../php/checksession.php");
             {
               echo" <p> something went wrong </p>";
             }
-
           ?>
+		<button class="btn btn-primary" onclick="headBack()">Back</button>
         </div>
       </div>
   </div>
 </body>
+
+<script>
+function headBack()
+{
+	location.href = "../pages/admincontrols.php";
+}
+</script>
 </html>
