@@ -1,4 +1,4 @@
-function searchtable()
+function searchtable(row)
 {
 	var searchBar = document.getElementById("searchbar");
 	search = searchBar.value.toLowerCase();
@@ -7,7 +7,7 @@ function searchtable()
 
 	for(i=0; i<rows.length; i++)
 	{
-		nameCol = rows[i].getElementsByTagName("td")[0];
+		nameCol = rows[i].getElementsByTagName("td")[row];
 		if(nameCol)
 		{
 			var text = nameCol.innerText;
