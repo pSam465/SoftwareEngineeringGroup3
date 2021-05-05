@@ -74,8 +74,9 @@ include_once('../php/checksession.php');
 							array_push($lName, $row["lName"]);
 						}
 
+						echo '<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for a user by email" style="width: 100%;" onkeyup="searchtable(1)">';
 						echo "
-							<table style=\"width:100%;\">
+							<table id=filtertable style=\"width:100%;\">
 								<tr>
 									<th>User ID</th>
 									<th>Email</th>
@@ -89,32 +90,32 @@ include_once('../php/checksession.php');
 						for($i=0; $i < sizeof($userID); $i++)
 						{
 							echo"
-	                      <tr style=\"text-align:center\">
-	                        <form action=\"./accDeletion.php\" method = \"post\">
+							<tr style=\"text-align:center\">
+							<form action=\"./accDeletion.php\" method = \"post\">
 
-	                          <td>$userID[$i]</td>
+								<td>$userID[$i]</td>
 
-	                          <td>$userEmail[$i]</td>
+								<td>$userEmail[$i]</td>
 
-	                          <td>$userPosition[$i]</td>
+								<td>$userPosition[$i]</td>
 
-	                          <td>$fName[$i]</td>
+								<td>$fName[$i]</td>
 
-	                          <td>$lName[$i]</td>
+								<td>$lName[$i]</td>
 
-	                          <td><input type=\"checkbox\" value=\"$userID[$i]\" name=\"idInput[]\"><td>
+								<td><input type=\"checkbox\" value=\"$userID[$i]\" name=\"idInput[]\"><td>
 
-	                          <input type=\"hidden\" id=\"userID\" name=\"userID\"value =\"$userID[$i]\">
+								<input type=\"hidden\" id=\"userID\" name=\"userID\"value =\"$userID[$i]\">
 
-	                          <input type=\"hidden\" id=\"userEmail\" name=\"userEmail\"value =\"$userEmail[$i]\">
+								<input type=\"hidden\" id=\"userEmail\" name=\"userEmail\"value =\"$userEmail[$i]\">
 
-	                          <input type=\"hidden\" id=\"userPosition\" name=\"userPosition\"value =\"$userPosition[$i]\">
+								<input type=\"hidden\" id=\"userPosition\" name=\"userPosition\"value =\"$userPosition[$i]\">
 
-	                          <input type=\"hidden\" id=\"fName\" name=\"fName\"value =\"$fName[$i]\">
+								<input type=\"hidden\" id=\"fName\" name=\"fName\"value =\"$fName[$i]\">
 
-	                          <input type=\"hidden\" id=\"lName\" name=\"lName\"value =\"$lName[$i]\">
-	                      </tr>
-	                   ";
+								<input type=\"hidden\" id=\"lName\" name=\"lName\"value =\"$lName[$i]\">
+							</tr>
+					  	";
 						}
 						
 					}

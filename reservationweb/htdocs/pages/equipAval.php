@@ -21,7 +21,7 @@ defaultHeader();
 			<div class="col-md content-block">
 				<div class="row">
 					<div class="col-sm d-flex justify-content-center">	
-						<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for equipment" style="width: 100%;" onkeyup="searchtable(this)">
+						<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for equipment" style="width: 100%;" onkeyup="searchtable(0)">
 					</div>
 				</div>
 				<div class="row">
