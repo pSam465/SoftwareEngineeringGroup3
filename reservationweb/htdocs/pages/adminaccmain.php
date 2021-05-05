@@ -1,11 +1,6 @@
 <?php
 require_once("../php/connect.php");
-include_once("../php/default.php");
 include_once('../php/checksession.php');
-
-defaultHeader();
-defaultBody();
-
 ?>
 
 <!DOCTYPE html>

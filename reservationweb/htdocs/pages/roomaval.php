@@ -100,7 +100,7 @@ defaultHeader();
 <script type="text/javascript">
 $(document).ready(function(){
 	$(".selectabletable").on('click', '.roomInfoBtn', function(event){
-		alert($(this).find(".roomInfo").html() + "\n" + $(this).find(".description").html());
+		alert($(this).find(".roomInfo").html() + "\n" + $(this).find(".roomType").html() + "\n" + $(this).find(".description").html());
 	});	
 
 	$(".selectabletable").on('click', '.selectablerow', function(event){

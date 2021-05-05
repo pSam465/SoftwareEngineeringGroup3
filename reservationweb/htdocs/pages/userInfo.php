@@ -1,10 +1,11 @@
 <?php
 	session_start();
 	include_once ('../php/connect.php');
-	$dataConnect = connectDB();
+	$dataConnect = connectDB() or die();
 	//$fromSesId= 111;
 	$fromSesId= $_SESSION["uid"];
-	$emailQ= "SELECT email, userID, position, fName, lName FROM user WHERE userID = ". $fromSesId;
+
+	$emailQ= "SELECT email, userID, position, fName, lName FROM user WHERE userID = \"$fromSesId\"";
 	$result= $dataConnect->query($emailQ);
 	$output= $result->fetch_assoc();
 	$Email= $output['email'];
@@ -44,6 +45,8 @@
       width: 550px;
       height: auto;
       text-align: center;
+      position: absolute;
+      left: 32vw;
     }
     .redFont
     {

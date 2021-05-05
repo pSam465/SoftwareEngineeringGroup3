@@ -33,7 +33,7 @@
 <body>
 	<div class="body">
 		<div class = "whiteBG">
-			<h1 style="text-align: center;">Your Reservation is Submitted</h1>
+			<h1 style="text-align: center;">Your Reservation has been Confirmed</h1>
 			<?php
 				$conn = connectDB();
 
