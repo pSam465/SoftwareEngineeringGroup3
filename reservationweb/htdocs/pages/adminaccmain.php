@@ -77,9 +77,9 @@ include_once('../php/checksession.php');
 
 						echo '<input type="text" type="form-control" name="roomsearch" id="searchbar" placeholder="Search for a user by email" style="width: 100%;" onkeyup="searchtable(1)">';
 						echo "
+							<form action=\"./accDeletion.php\" method=\"post\">
+
 							<table id=filtertable style=\"width:100%;\">
-							
-						<form action=./accDeletion.php method = post>
 								<tr>
 									<th>User ID</th>
 									<th>Email</th>
@@ -94,7 +94,6 @@ include_once('../php/checksession.php');
 						{
 							echo"
 							<tr style=\"text-align:center\">
-							<form action=\"./accDeletion.php\" method = \"post\">
 
 								<td>$userID[$i]</td>
 
@@ -110,7 +109,6 @@ include_once('../php/checksession.php');
 	                      </tr>
 	                   ";
 						}
-						
 					}
 				?>
 			</div>
@@ -119,7 +117,7 @@ include_once('../php/checksession.php');
 </table>
  
  	 
-	<input type="submit" class="movethebutton"  value= "Delete selected Accounts" name ="formSubmit">
+	<input type="submit" class="movethebutton"  value="Delete selected Accounts" name="formSubmit">
 	</form>
 
 </body>
