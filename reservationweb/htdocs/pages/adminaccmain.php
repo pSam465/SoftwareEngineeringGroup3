@@ -34,6 +34,7 @@ include_once('../php/checksession.php');
 	.movethebutton
 	{
 		top:10vh;
+		margin-top: 1vh;
 	}
 	
 </style>
@@ -121,6 +122,7 @@ include_once('../php/checksession.php');
 			</div>
 		</div>
 	</div>
+</table>
 	<input type="submit" class="movethebutton" onclick= "location.href='./accDeletion.php'" value= "Delete selected Accounts" name ="formSubmit">
 	</form>
 
