@@ -6,7 +6,6 @@ include_once('../php/checksession.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="../css/default.css">
 	<title>Account Management</title>
 </head>
 <style>
@@ -17,7 +16,6 @@ include_once('../php/checksession.php');
 	.centerForm
 	{
 	  text-align: center;
-	  margin: auto;
 	}
 	.containOutput
 	{
@@ -26,21 +24,20 @@ include_once('../php/checksession.php');
 	}
 	.centerContainedOutput
 	{
-	  margin: 1vh;
+	  margin-left: -15vw;
 	  border: 5px solid #1C5438;
-	  padding: 10px;
 	  background-color: white;
-	  width: 550px;
+	  width: 50vw;
 	  height: auto;
 	  text-align: center;
+	}
+	.movethebutton
+	{
+		top:10vh;
 	}
 	
 </style>
 <body>
-	<div class="centerForm">
-		<button class="buttonWidth" onclick="location.href='./accountCreation.php'">New Account</button>
-	</div>
-	
 	<div class="centerForm">
 		<div class="containOutput">
 			<div class="centerContainedOutput">
@@ -84,8 +81,7 @@ include_once('../php/checksession.php');
 									<th>Position</th>
 									<th>First Name</th>
 									<th>Last Name</th>
-									<th>Manage</th>
-									<th>Multi Select</th>
+									<th>Select</th>
 								</tr>
 						";
 
@@ -105,8 +101,6 @@ include_once('../php/checksession.php');
 
 	                          <td>$lName[$i]</td>
 
-	                          <td><input type=\"submit\" name=\"accountManage\" value=\"Select\"></td>
-
 	                          <td><input type=\"checkbox\" value=\"$userID[$i]\" name=\"idInput[]\"><td>
 
 	                          <input type=\"hidden\" id=\"userID\" name=\"userID\"value =\"$userID[$i]\">
@@ -118,23 +112,17 @@ include_once('../php/checksession.php');
 	                          <input type=\"hidden\" id=\"fName\" name=\"fName\"value =\"$fName[$i]\">
 
 	                          <input type=\"hidden\" id=\"lName\" name=\"lName\"value =\"$lName[$i]\">
-
-	                      </tr>";
-
+	                      </tr>
+	                   ";
 						}
-						echo" <input type=\"submit\"  onclick=\"location.href='./accDeletion.php'\"   value= \"Delete selected Accounts\" name =\"formSubmit\" >
-	                        </form>";
 						
-
 					}
 				?>
-				
 			</div>
-			
-				 
 		</div>
-		
 	</div>
+	<input type="submit" class="movethebutton" onclick= "location.href='./accDeletion.php'" value= "Delete selected Accounts" name ="formSubmit">
+	</form>
 
 </body>
 
