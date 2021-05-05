@@ -30,6 +30,7 @@ if(isset($_POST['submit']))
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="../css/default.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 	<title>Account Confirmation</title>
 </head>
 <body>
@@ -42,10 +43,8 @@ if(isset($_POST['submit']))
 			 		$conn->query($insert);
 
 			 		echo "$position account for $firstName $lastName has been created with email, $email, and password, $password.";
-			 	?>
-			 	<form action="adminaccmain.php">
-			 		<input style = "margin: 10vh; border: 1px solid black; height: 50px; font-size: 70%;" type="submit" value="Back to account list">
-			 	</form>
+			 	?>			
+				<button class="btn btn-primary" onclick="location.href = '../pages/admincontrols.php';">Return</button>
 			</h1>
 		</div>
 	</div>

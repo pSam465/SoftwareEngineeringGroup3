@@ -145,7 +145,7 @@ include_once("../php/checksession.php");
               echo" <p> something went wrong </p>";
             }
           ?>
-		<button class="btn btn-primary" onclick="headBack()">Back</button>
+		<button class="btn btn-primary" onclick="headBack()">Return</button>
         </div>
       </div>
   </div>
