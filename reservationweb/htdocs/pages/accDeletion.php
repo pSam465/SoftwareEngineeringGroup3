@@ -70,12 +70,9 @@ function IsChecked($chkname,$value)
         <div class="containOutput">
             <div class="centerContainedOutput">
                 <?php
-                //echo" got here";
                 if(isset($_POST["formSubmit"])) 
                     {
                         $aDoor = $_POST['idInput'];
-                        //echo "formSubmit not empty ";
-                        
                         
                         if(empty($aDoor)) 
                         {
@@ -107,11 +104,7 @@ function IsChecked($chkname,$value)
                             }
                             
                         }
-                    }
-                    else
-                    {
-                        echo" formSubmit is empty";
-                    }
+                    }          
                     ?>
             </div>
 			<button class="btn btn-primary" onclick="location.href = '../pages/admincontrols.php';">Return</button>

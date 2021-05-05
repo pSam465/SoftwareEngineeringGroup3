@@ -73,8 +73,8 @@ include_once('../php/checksession.php');
 							array_push($fName, $row["fName"]);
 							array_push($lName, $row["lName"]);
 						}
-
 						echo "
+						<form action=./accDeletion.php method = post>
 							<table style=\"width:100%;\">
 								<tr>
 									<th>User ID</th>
@@ -90,7 +90,7 @@ include_once('../php/checksession.php');
 						{
 							echo"
 	                      <tr style=\"text-align:center\">
-	                        <form action=\"./accDeletion.php\" method = \"post\">
+	                       
 
 	                          <td>$userID[$i]</td>
 
@@ -101,18 +101,8 @@ include_once('../php/checksession.php');
 	                          <td>$fName[$i]</td>
 
 	                          <td>$lName[$i]</td>
+	                          <td><input type=checkbox value=$userID[$i] name=idInput[]></td>
 
-	                          <td><input type=\"checkbox\" value=\"$userID[$i]\" name=\"idInput[]\"><td>
-
-	                          <input type=\"hidden\" id=\"userID\" name=\"userID\"value =\"$userID[$i]\">
-
-	                          <input type=\"hidden\" id=\"userEmail\" name=\"userEmail\"value =\"$userEmail[$i]\">
-
-	                          <input type=\"hidden\" id=\"userPosition\" name=\"userPosition\"value =\"$userPosition[$i]\">
-
-	                          <input type=\"hidden\" id=\"fName\" name=\"fName\"value =\"$fName[$i]\">
-
-	                          <input type=\"hidden\" id=\"lName\" name=\"lName\"value =\"$lName[$i]\">
 	                      </tr>
 	                   ";
 						}
@@ -123,7 +113,9 @@ include_once('../php/checksession.php');
 		</div>
 	</div>
 </table>
-	<input type="submit" class="movethebutton" onclick= "location.href='./accDeletion.php'" value= "Delete selected Accounts" name ="formSubmit">
+ 
+ 	 
+	<input type="submit" class="movethebutton"  value= "Delete selected Accounts" name ="formSubmit">
 	</form>
 
 </body>
