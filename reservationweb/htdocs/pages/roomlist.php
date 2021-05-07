@@ -27,7 +27,6 @@ require_once("../php/connect.php");
 			<table class="table table-hover table-fixed selectabletable" id="filtertable">
 				<h3 align="center">Update Room Information</h3>
 				<thead>
-					<th scope="col"></th>
 					<th scope="col">Room ID</th>
 					<th scope="col">Room Number</th>
 					<th scope="col">Building</th>
@@ -61,22 +60,23 @@ require_once("../php/connect.php");
 							$desc = $row['roomDesc'];
 
 							echo<<<_END
+							<form action="../php/updatehandler.php" method="GET">
 							<tr>
-								<td><input type="checkbox" name="roomUpdate[]" value="$id"></td>
-								<td id='roomid'>$id</td>
-								<td id='roomnum'><input type="number" value=$roomNum></td>
-								<td id='building'><input type="text" value='$building'></td>
-								<td id='roomtype'><input type="text" value='$type'></td>
-								<td id='description'><input type="text" value='$desc'></td>
-								<td id='availability'><input type="number" value=$avail placeholder="This should be 1 (available) or 0 (unavailable)."></td>
+								<td id='roomid' name="roomID">$id</td>
+								<td id='roomnum'><input name="roomNum" type="number" value=$roomNum></td>
+								<td id='building'><input name="building" type="text" value='$building'></td>
+								<td id='roomtype'><input name="roomType" type="text" value='$type'></td>
+								<td id='description'><input name="desc" type="text" value='$desc'></td>
+								<td id='availability'><input name="avail" type="number" value=$avail placeholder="This should be 1 (available) or 0 (unavailable)."></td>
+								<td><input type="submit" name="roomUpdate" value="Update Room" ></td>
 							</tr>
+							</form>
 							_END;
 						}
 						echo "</tbody>";
 					}
 					?>
 			</table>
-			<input type="submit" name="roomUpdate" value="Update Rooms">
 		</div>
 		</div>
 	</div>
