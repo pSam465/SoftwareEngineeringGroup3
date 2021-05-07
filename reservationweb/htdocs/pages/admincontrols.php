@@ -21,7 +21,6 @@ defaultHeader();
 			<div class="col-md-2 content-block">
 				<h5 class="links" style="cursor: pointer;">Reservation Management</h5>
 				<div class="hideable">
-					<p onclick="loadcontent('../pages/roomaval.php')" style="cursor: pointer;">Sub Links</p>
 					<p onclick="loadcontent('../pages/removeres.php')" style="cursor: pointer;">Remove Reservations</p>
 				</div>
 				<h5 class="links" style="cursor: pointer;">User Management</h5>
